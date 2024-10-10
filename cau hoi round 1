@@ -1,0 +1,570 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
+using System.ComponentModel;
+
+namespace UEHGreen
+{
+    internal class Program
+    {
+        static List<UehQuestion> questions = new List<UehQuestion>()
+        {
+        new UehQuestion(
+            "Giấy nên được phân loại vào thùng nào theo mô hình 3 thùng?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác tái chế", "C) Thùng rác không tái chế", "D) Thùng rác thực phẩm" }, "B"),
+        new UehQuestion(
+            "Rác thải thực phẩm được phân vào thùng nào trong mô hình 3 thùng?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác tái chế", "C) Thùng rác không tái chế", "D) Thùng rác điện tử" }, "A"),
+        new UehQuestion(
+            "Những loại rác không thể tái chế, như băng keo hoặc nhựa dẻo, được bỏ vào thùng nào?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác tái chế", "C) Thùng rác không tái chế", "D) Thùng rác kim loại" }, "C"),
+        new UehQuestion(
+            "Chai nhựa hoặc lon nước có thể phân loại vào thùng nào?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác tái chế", "C) Thùng rác không tái chế", "D) Thùng rác điện tử" }, "B"),
+        new UehQuestion(
+            "Rác thải điện tử như pin hay đồ điện tử nhỏ được bỏ vào thùng nào theo mô hình 7 thùng?",
+            new string[] { "A) Thùng rác giấy", "B) Thùng rác kim loại", "C) Thùng rác điện tử", "D) Thùng rác thực phẩm" }, "C"),
+        new UehQuestion(
+            "Chất thải thực phẩm nên được phân vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác giấy", "C) Thùng rác không tái chế", "D) Thùng rác thực phẩm" }, "D"),
+        new UehQuestion(
+            "Lon nước bằng kim loại thuộc vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác giấy", "B) Thùng rác kim loại", "C) Thùng rác nhựa", "D) Thùng rác thực phẩm" }, "B"),
+        new UehQuestion(
+            "Túi ni lông nên được phân vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác nhựa", "B) Thùng rác thực phẩm", "C) Thùng rác hữu cơ", "D) Thùng rác không tái chế" }, "A"),
+        new UehQuestion(
+            "Những loại rác nào nên được phân vào thùng rác giấy trong mô hình 7 thùng?",
+            new string[] { "A) Giấy viết, sách vở cũ", "B) Hộp sữa giấy", "C) Túi ni lông", "D) Đồ ăn thừa" }, "A"),
+        new UehQuestion(
+            "Thức ăn thừa thuộc vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác thực phẩm", "B) Thùng rác hữu cơ", "C) Thùng rác nhựa", "D) Thùng rác giấy" }, "A"),
+        new UehQuestion(
+            "Giấy gói quà thuộc vào thùng nào theo mô hình 7 thùng?",
+            new string[] { "A) Thùng rác giấy", "B) Thùng rác nhựa", "C) Thùng rác không tái chế", "D) Thùng rác hữu cơ" }, "A"),
+        new UehQuestion(
+            "Các sản phẩm bằng thủy tinh nên được phân loại vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác thực phẩm", "B) Thùng rác thủy tinh", "C) Thùng rác nhựa", "D) Thùng rác giấy" }, "B"),
+        new UehQuestion(
+            "Hộp sữa bằng giấy (Tetra Pak) nên phân vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác giấy", "B) Thùng rác nhựa", "C) Thùng rác không tái chế", "D) Thùng rác hữu cơ" }, "A"),
+        new UehQuestion(
+            "Các sản phẩm nhựa mềm như màng bọc thực phẩm được phân vào thùng nào?",
+            new string[] { "A) Thùng rác nhựa", "B) Thùng rác giấy", "C) Thùng rác hữu cơ", "D) Thùng rác không tái chế" }, "A"),
+        new UehQuestion(
+            "Thức ăn thừa và vỏ trái cây nên được phân loại vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác thực phẩm", "B) Thùng rác giấy", "C) Thùng rác nhựa", "D) Thùng rác kim loại" }, "A")
+        };
+
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
+            //Giao diện bắt đầu chơi 
+
+            string[] myArray = Bangmota();
+            foreach (string item in myArray)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.SetCursorPosition(Console.WindowWidth / 5, Console.WindowHeight / 3);
+            Console.WriteLine("Ueher hãy nhập ngay tên bạn để lưu danh!");
+            Console.SetCursorPosition(Console.WindowWidth / 5, Console.WindowHeight / 3 + 1);
+            Console.Write("Bút danh: ");
+            string YourName = Console.ReadLine();
+
+
+            Console.Clear();
+
+            string[] runningAnimation =
+                {
+	#region Frames
+	// 0
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"  __O  " + '\n' +
+    @" / /\_," + '\n' +
+    @"__/\   " + '\n' +
+    @"    \  ",
+	// 1
+	@"       " + '\n' +
+    @"   UEH  " + '\n' +
+    @"   _O  " + '\n' +
+    @"  |/|_ " + '\n' +
+    @"  /\   " + '\n' +
+    @" /  |  ",
+	// 2
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"    O  " + '\n' +
+    @"  </L  " + '\n' +
+    @"   \   " + '\n' +
+    @"   /|  ",
+	// 3
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"   O   " + '\n' +
+    @"   |_  " + '\n' +
+    @"   |>  " + '\n' +
+    @"  /|   ",
+	// 4
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"   O   " + '\n' +
+    @"  <|L  " + '\n' +
+    @"   |_  " + '\n' +
+    @"   |/  ",
+	// 5
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"   O   " + '\n' +
+    @"  L|L  " + '\n' +
+    @"   |_  " + '\n' +
+    @"  /  | ",
+	// 6
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"  _O   " + '\n' +
+    @" | |L  " + '\n' +
+    @"   /-- " + '\n' +
+    @"  /   |",
+                #endregion
+            };
+
+            string[] jumpingAnimation =
+            {
+                #region Frames
+                // 0
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"   _O  " + '\n' +
+    @"  |/|_ " + '\n' +
+    @"  /\   " + '\n' +
+    @" /  |  ",
+	// 1
+	@"       " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"    O  " + '\n' +
+    @"  </L  " + '\n' +
+    @"   /|  ",
+	// 2
+	@"       " + '\n' +
+    @"    /O/" + '\n' +
+    @"    /  " + '\n' +
+    @"   //  " + '\n' +
+    @"  //   " + '\n' +
+    @"       ",
+	// 3
+	@"  O" + '\n' +
+    @" /     " + '\n' +
+    @"//     " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 4
+	@"  __   " + '\n' +
+    @" // \O " + '\n' +
+    @"     \\" + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 5
+	@"  __   " + '\n' +
+    @" //_O\ " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 6
+	@"  __\  " + '\n' +
+    @" _O/   " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 7
+	@" \O\__ " + '\n' +
+    @"     \\" + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 8
+	@"       " + '\n' +
+    @"       " + '\n' +
+    @"   O   " + '\n' +
+    @"  L|L  " + '\n' +
+    @"   |_  " + '\n' +
+    @"  /  | ",
+                #endregion
+            };
+            string hurdleFrame =
+            #region Frame
+
+               @"  bin  " + '\n' +
+               @" ----- " + '\n' +
+               @" | ^ | " + '\n' +
+               @" |< >|  ";
+            #endregion
+            int position = 0;
+            int? runningFrame = 0;
+            int? jumpingFrame = null;
+            int hurdlePosition = 50;
+
+            bool isStopped = false;
+            const int stopDistance = 10; // Khoảng cách dừng lại trước vật cản
+
+
+            Console.CursorVisible = false;
+            try
+            {
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    int maxWidth = 120;
+                    int maxHeight = 20;
+
+                    Console.SetWindowSize(
+                        Math.Min(Console.LargestWindowWidth, maxWidth),
+                        Math.Min(Console.LargestWindowHeight, maxHeight));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Không thể thay đổi kích thước cửa sổ console: " + ex.Message);
+            }
+            Console.Clear();
+
+            // Shuffle the list using Fisher-Yates algorithm
+            Shuffle(questions);
+            int score = 0;
+            int wrongAnswers = 0;
+
+
+
+            while (true)
+            {
+                string playerFrame =
+                    jumpingFrame.HasValue ? jumpingAnimation[jumpingFrame.Value] :
+                    runningAnimation[runningFrame.GetValueOrDefault()];
+                //Kiểm tra phím nhấn 
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey(true).Key;
+                    if (key == ConsoleKey.Escape)
+                    {
+                        Console.Clear();
+                        Console.Write("TRÒ CHƠI KẾT THÚC!");
+                        Console.ReadKey();
+                        return;
+                    }
+                }
+                //Dừng lại trước vật cản 
+                if (position >= hurdlePosition - stopDistance && position < hurdlePosition)
+                {
+                    runningFrame = 7;
+                    isStopped = true;
+                    position = hurdlePosition - stopDistance;
+
+                    // Lượt qua các câu hỏi  
+
+                    foreach (var question in questions.ToList())
+                    {
+                        if (wrongAnswers == 3)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("\nTRÒ CHƠI KẾT THÚC! Bạn đã trả lời sai 3 câu.");
+                            Console.WriteLine($"Số điểm cuối cùng của bạn là: {score}");
+                            SaveAchievement(YourName, score);
+                            Console.ReadKey();
+                            return; // Exit the game
+                        }
+
+                        //Hiển thị câu hỏi và đáp án ở phía dưới màn hình
+                        PositionAtBottom();
+
+                        Console.WriteLine("\nQuestion: " + question.Question);
+                        foreach (var choice in question.Choices)
+                        {
+                            Console.WriteLine(choice);
+                        }
+
+                        int questionCursorTop = Console.CursorTop - (question.Choices.Length + 1);
+
+                        string userAnswer = "";
+                        bool isValidAnswer = false; // Flag for valid input
+
+                        while (!isValidAnswer) // Continue until valid input is provided
+                        {
+                            try
+                            {
+                                // Ask the player to input their answer
+                                Console.Write("Điền A, B, C, hoặc D để trả lời: ");
+
+                                // Get player input
+                                userAnswer = Console.ReadKey().KeyChar.ToString().ToUpper();
+
+                                // Check if input is valid
+                                if (!new[] { "A", "B", "C", "D" }.Contains(userAnswer))
+                                {
+                                    // If invalid input, throw an exception
+                                    throw new InvalidOperationException("Phím không hợp lệ. Vui lòng nhập A, B, C, hoặc D.");
+                                }
+
+                                // If valid input, set the flag to true to exit the loop
+                                isValidAnswer = true;
+                            }
+                            catch (InvalidOperationException ex)
+                            {
+                                // Handle invalid input exception
+                                Console.WriteLine($"\n{ex.Message}");
+
+                                // Move cursor up to avoid clutter from repeated invalid input
+                                Console.SetCursorPosition(0, Console.CursorTop - 2);
+                            }
+                        }
+
+                        ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1);  // Clear the entire screen
+                        //Xử lí đáp án 
+                        if (userAnswer == question.CorrectAnswer)
+                        {
+                            Console.SetCursorPosition(0, 0); // Di chuyển con trỏ về đầu màn hình
+
+                            Console.WriteLine("Chính xác!");
+                            score++;
+
+                            Console.WriteLine($"Số điểm bạn đạt được là: {score}");
+
+                            Console.ReadKey();
+                            jumpingFrame = 0;
+                            runningFrame = null;
+                            isStopped = false;
+                            position = hurdlePosition + 1;
+                            hurdlePosition += 50;
+
+                            questions.Remove(question);
+                            Console.Clear();
+
+                        }
+
+                        else
+                        {
+                            // Clear the previous question and answer text without clearing the whole screen
+                            ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1); // Adjust +1 for the question
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine();
+
+                            Console.WriteLine($"Câu trả lời đúng là {question.CorrectAnswer}");
+                            wrongAnswers++;
+                            Console.WriteLine($"Bạn có {wrongAnswers} câu trả lời sai. Nếu trả lời sai 3 câu bạn sẽ thua. ");
+                            questions.Remove(question);
+                        }
+                        ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1);
+
+                        break;
+                    }
+                    // Chiến thắng trò chơi
+                    if (score == 10)
+                    {
+                        Console.Clear();
+
+                        Console.WriteLine("CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG!");
+                        SaveAchievement(YourName, score);
+                        Console.ReadKey();
+                        return; // Exit the game
+                    }
+                    // Kết thúc trò chơi 
+
+                }
+                else
+                {
+                    isStopped = false;
+                }
+
+                // Xác định khung hình 
+                Console.SetCursorPosition(4, 3);
+                Render(playerFrame, true);
+                RenderHurdles(true);
+
+
+                if (position % 50 < 3)
+                {
+                    Console.SetCursorPosition(4, 3);
+                    Render(playerFrame, false);
+                    RenderHurdles(false);
+                }
+                else
+                {
+                    RenderHurdles(false);
+                    Console.SetCursorPosition(4, 3);
+                    Render(playerFrame, false);
+                }
+
+                // Cập nhật trạng thái 
+                runningFrame = runningFrame.HasValue
+                    ? (runningFrame + 1) % runningAnimation.Length
+                    : runningFrame;
+
+                jumpingFrame = jumpingFrame.HasValue
+                    ? jumpingFrame + 1
+                    : jumpingFrame;
+
+                if (jumpingFrame >= jumpingAnimation.Length)
+                {
+                    jumpingFrame = null;
+                    runningFrame = 2;
+
+                }
+
+
+                // Move the character if not stopped
+                if (!isStopped)
+                {
+                    position++;
+                }
+
+                Thread.Sleep(TimeSpan.FromMilliseconds(80));
+            }
+
+            void Render(string @string, bool renderEnter)
+            {
+                int x = Console.CursorLeft;
+                int y = Console.CursorTop;
+                foreach (char c in @string)
+                    if (c == '\n')
+                        Console.SetCursorPosition(x, ++y);
+                    else if (c != ' ' || renderEnter)
+                        Console.Write(c);
+                    else
+                        Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
+            }
+
+            void RenderHurdles(bool renderEnter)
+            {
+                // Xóa các vị trí cũ của vật cản trên màn hình
+                Console.SetCursorPosition(0, 5);
+                Console.Write(new string(' ', Console.WindowWidth));
+
+                // Vẽ vật cản ở các vị trí hiện tại
+                if (position + 50 >= hurdlePosition && position <= hurdlePosition + 10)
+                {
+                    int hurdleOffset = hurdlePosition - position;
+                    // Đảm bảo hurdleOffset không âm và không vượt quá kích thước của cửa sổ
+                    hurdleOffset = Math.Max(0, Math.Min(Console.WindowWidth - hurdleFrame.Length, hurdleOffset));
+                    Console.SetCursorPosition(hurdleOffset, 5);
+                    Render(hurdleFrame, renderEnter);
+
+                }
+            }
+        }
+
+        static void SaveAchievement(string Name, int score)
+        {
+            if (Name != "" && !String.IsNullOrWhiteSpace(Name))
+            {
+                bool ContainName = false;
+                string filePath = "UEHer.txt";
+
+                // Tạo file nếu chưa tồn tại
+                if (!File.Exists(filePath))
+                {
+                    File.Create(filePath).Close(); // Tạo và đóng file
+                }
+                string[] OpenSaveFile = File.ReadAllLines(filePath);
+
+                for (int i = 0; i < OpenSaveFile.Length / 3; i += 3)
+                {
+                    if (OpenSaveFile[i * 3].Contains(Name))
+                    {
+                        if (score > int.Parse(OpenSaveFile[i + 1]))
+                        {
+
+                            OpenSaveFile[i * 3 + 1] = score.ToString();
+                            OpenSaveFile[i * 3 + 2] = DateTime.Now.ToString("HH:mm dd/MM/yyyy");
+                        }
+                        ContainName = true;
+                    }
+                    if (ContainName) break;
+                }
+                if (!ContainName)
+                {
+                    string newEntry = $"{Name} - {score} - {DateTime.Now:HH:mm dd/MM/yyyy}\n";
+                    File.AppendAllText(filePath, newEntry);
+                }
+                else
+                {
+                    File.WriteAllLines(filePath, OpenSaveFile);
+                }
+            }
+        }
+        static string[] Bangmota()
+        {
+            string[] bangmota = new string[]
+            {
+                @"                                   BẢNG MÔ TẢ GAME                                  ",
+                @"  |━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━|  ",
+                @"  |Round 1: Chiến thắng khi bạn trả lời đúng 10 câu hỏi về UEH Green             |  ",
+                @"  |         Trò chơi sẽ kết thúc khi bạn trả lời sai 3 câu                       |  ",
+                @"  |Round 2: Chiến thắng khi bạn trả lời đúng 10 câu hỏi về phân loại rác         |  ",
+                @"  |                                                                              |  ",
+                @"  |━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━|  ",
+            };
+            return bangmota;
+        }
+
+        public static void Shuffle(List<UehQuestion> list)
+        {
+            Random random = new Random();
+            int n = list.Count;
+
+            for (int i = n - 1; i > 0; i--)
+            {
+                int k = random.Next(0, i + 1);
+                UehQuestion temp = list[i];
+                list[i] = list[k];
+                list[k] = temp;
+            }
+        }
+
+        public static void ClearQuestionAndAnswer(int startLine, int lineCount)
+        {
+            for (int i = 0; i < lineCount; i++)
+            {
+                Console.SetCursorPosition(0, startLine + i);
+                Console.Write(new string(' ', Console.WindowWidth));
+            }
+            Console.SetCursorPosition(0, startLine);
+        }
+
+        public static void PositionAtBottom()
+        {
+            int windowHeight = Console.WindowHeight;
+            int bottomPosition = windowHeight = 10;
+
+            Console.SetCursorPosition(0, bottomPosition);
+        }
+    }
+
+
+    public class UehQuestion
+    {
+        public string Question { get; set; }
+        public string[] Choices { get; set; }
+        public string CorrectAnswer { get; set; }
+
+        public UehQuestion(string question, string[] choices, string correctAnswer)
+        {
+            Question = question;
+            Choices = choices;
+            CorrectAnswer = correctAnswer;
+        }
+    }
+}
