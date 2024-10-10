@@ -394,7 +394,7 @@ namespace UEHGreen
                         break;
                     }
                     // Chiến thắng trò chơi
-                    if (score == 1)
+                    if (score == 10)
                     {
                         Console.Clear();
                         PrintArt(Console.WindowWidth / 5, Console.WindowHeight / 5);
