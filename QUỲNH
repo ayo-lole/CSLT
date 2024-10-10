@@ -64,7 +64,6 @@ namespace UEHGreen
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
-            
             //Giao diện bắt đầu chơi 
 
             string[] myArray = Bangmota();
@@ -99,6 +98,51 @@ namespace UEHGreen
 
 
             Console.Clear();
+            string filePath = "UEHer.txt";
+
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Chưa có người chơi nào.");
+                return;
+            }
+            Console.WriteLine("LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer");
+            string[] lines = File.ReadAllLines(filePath);
+            int linesPerPage = Console.WindowHeight - 2;
+            int currentPage = 0;
+
+            while (true)
+            {
+                Console.Clear();
+                int startLine = currentPage * linesPerPage;
+                int endLine = Math.Min(startLine + linesPerPage, lines.Length);
+
+                for (int i = startLine; i < endLine; i++)
+                {
+                    Console.WriteLine(lines[i]);
+                }
+
+                Console.WriteLine("\nNhấn PgUp để cuộn lên, PgDown để cuộn xuống, Esc để thoát.");
+
+                var key = Console.ReadKey(true).Key;
+                if (key == ConsoleKey.PageUp)
+                {
+                    if (currentPage > 0)
+                    {
+                        currentPage--;
+                    }
+                }
+                else if (key == ConsoleKey.PageDown)
+                {
+                    if (startLine + linesPerPage < lines.Length)
+                    {
+                        currentPage++;
+                    }
+                }
+                else if (key == ConsoleKey.Escape)
+                {
+                    break; // Thoát khỏi hiển thị nội dung file
+                }
+            }
 
             string[] runningAnimation =
                 {
@@ -225,22 +269,19 @@ namespace UEHGreen
             string hurdleFrame =
             #region Frame
 
-               @"  bin  " + '\n' +
-               @" ----- " + '\n' +
-               @" | ^ | " + '\n' +
-               @" |< >|  ";
+
+              @"   BIN   " + '\n' +
+              @"  ____  " + '\n' +
+              @"  ║♻️║ " + '\n' +
+              @"  \__/   ";
             #endregion
             int position = 0;
             int? runningFrame = 0;
             int? jumpingFrame = null;
             int hurdlePosition = 50;
-
             bool isStopped = false;
             const int stopDistance = 10; // Khoảng cách dừng lại trước vật cản
 
-            int health = 3; // Số lượng cục máu tối đa
-            const int MaxHealth = 3;
-            
 
             Console.CursorVisible = false;
             try
@@ -248,7 +289,7 @@ namespace UEHGreen
                 if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                 {
                     int maxWidth = 120;
-                    int maxHeight = 20;
+                    int maxHeight = 27;
 
                     Console.SetWindowSize(
                         Math.Min(Console.LargestWindowWidth, maxWidth),
@@ -266,8 +307,11 @@ namespace UEHGreen
             int score = 0;
             int wrongAnswers = 0;
 
+            int health = 3; // Số lượng cục máu tối đa
+            const int MaxHealth = 3;
 
 
+            DrawHealthBar(health, MaxHealth);
             while (true)
             {
                 string playerFrame =
@@ -292,9 +336,8 @@ namespace UEHGreen
                     isStopped = true;
                     position = hurdlePosition - stopDistance;
 
-                    DrawHealthBar(health, MaxHealth);
-
                     // Lượt qua các câu hỏi  
+
                     foreach (var question in questions.ToList())
                     {
                         if (wrongAnswers == 3)
@@ -356,12 +399,13 @@ namespace UEHGreen
                         if (userAnswer == question.CorrectAnswer)
                         {
                             Console.SetCursorPosition(0, 0); // Di chuyển con trỏ về đầu màn hình
+
                             Console.WriteLine("Chính xác!");
                             score++;
+
                             Console.WriteLine($"Số điểm bạn đạt được là: {score}");
 
                             Console.ReadKey();
-
                             jumpingFrame = 0;
                             runningFrame = null;
                             isStopped = false;
@@ -370,8 +414,9 @@ namespace UEHGreen
 
                             questions.Remove(question);
                             Console.Clear();
-                            
+
                         }
+
                         else
                         {
                             // Clear the previous question and answer text without clearing the whole screen
@@ -385,8 +430,8 @@ namespace UEHGreen
 
                             Console.WriteLine($"Câu trả lời đúng là {question.CorrectAnswer}");
                             wrongAnswers++;
-                            Console.WriteLine($"Bạn có {wrongAnswers} câu trả lời sai. Nếu trả lời sai 3 câu bạn sẽ thua. ");
                             health--;
+                            Console.WriteLine($"Bạn có {wrongAnswers} câu trả lời sai. Nếu trả lời sai 3 câu bạn sẽ thua. ");
                             questions.Remove(question);
                         }
                         ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1);
@@ -397,13 +442,13 @@ namespace UEHGreen
                     if (score == 10)
                     {
                         Console.Clear();
-                        PrintArt(Console.WindowWidth / 5, Console.WindowHeight / 5);
+
+                        Console.WriteLine("CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG!");
                         SaveAchievement(YourName, score);
                         Console.ReadKey();
                         return; // Exit the game
                     }
                     // Kết thúc trò chơi 
-
 
                 }
                 else
@@ -412,21 +457,21 @@ namespace UEHGreen
                 }
 
                 // Xác định khung hình 
-                Console.SetCursorPosition(4, 3);
+                Console.SetCursorPosition(4, 8);
                 Render(playerFrame, true);
                 RenderHurdles(true);
 
 
                 if (position % 50 < 3)
                 {
-                    Console.SetCursorPosition(4, 3);
+                    Console.SetCursorPosition(4, 8);
                     Render(playerFrame, false);
                     RenderHurdles(false);
                 }
                 else
                 {
                     RenderHurdles(false);
-                    Console.SetCursorPosition(4, 3);
+                    Console.SetCursorPosition(4, 8);
                     Render(playerFrame, false);
                 }
 
@@ -445,6 +490,8 @@ namespace UEHGreen
                     runningFrame = 2;
 
                 }
+
+
                 // Move the character if not stopped
                 if (!isStopped)
                 {
@@ -470,7 +517,7 @@ namespace UEHGreen
             void RenderHurdles(bool renderEnter)
             {
                 // Xóa các vị trí cũ của vật cản trên màn hình
-                Console.SetCursorPosition(0, 5);
+                Console.SetCursorPosition(0, 10);
                 Console.Write(new string(' ', Console.WindowWidth));
 
                 // Vẽ vật cản ở các vị trí hiện tại
@@ -479,41 +526,11 @@ namespace UEHGreen
                     int hurdleOffset = hurdlePosition - position;
                     // Đảm bảo hurdleOffset không âm và không vượt quá kích thước của cửa sổ
                     hurdleOffset = Math.Max(0, Math.Min(Console.WindowWidth - hurdleFrame.Length, hurdleOffset));
-                    Console.SetCursorPosition(hurdleOffset, 5);
+                    Console.SetCursorPosition(hurdleOffset, 10);
                     Render(hurdleFrame, renderEnter);
 
                 }
             }
-        }
-        static void PrintArt(int x, int y)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            string[] art = new string[]
-            {
-                @"                  cccc@@@\                ",
-    		@"      c@@@@@@@@\ /ccccc@@@|               ",
-        	@"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
-        	@"    cccccccccccc@@\@@@/cccccccccc@\       ",
-        	 "    cccccccccccccc@|/ccccccccccc@@@       ",
-        	@"     \ccccccccccccc@|ccccccc@@@@@@/       ",
-        	@"           \ccccccc@|ccc@@@@@@@@@/        ",
-        	 "            ccccccccccccc@@               ",
-        	 "            |             |               ",
-        	@"           /*   >     <   *\              ",
-        	@"          /**      0      **\             ",
-        	 "          |***           ***|             ",
-        	 "||--------------------------------------||",
-        	 "|| CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
-        	 "||______________________________________||",
-            };
-
-            // Đặt con trỏ tại vị trí (x, y)
-            for (int i = 0; i < art.Length; i++)
-            {
-                Console.SetCursorPosition(x, y + i);
-                Console.WriteLine(art[i]);
-            }
-            Console.ResetColor();
         }
         static void DrawHealthBar(int health, int maxHealth)
         {
@@ -522,16 +539,15 @@ namespace UEHGreen
             {
                 if (i < health)
                 {
-                    Console.Write("♥ "); // Hiển thị cục máu
+                    Console.Write("💩 "); // Hiển thị cục máu
                 }
                 else
                 {
-                    Console.Write("🖤 "); // Hiển thị cục máu đã mất
+                    Console.Write("🍔 "); // Hiển thị cục máu đã mất
                 }
             }
             Console.WriteLine();
         }
-
         static void SaveAchievement(string Name, int score)
         {
             if (Name != "" && !String.IsNullOrWhiteSpace(Name))
@@ -571,8 +587,37 @@ namespace UEHGreen
                 }
             }
         }
+        static void PrintArt(int x, int y)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string[] art = new string[]
+            {
+                "                ████████                  ",
+                "   ███████████  ██████   ███████████████  ",
+                "  █████████████  ████  █████████████████  ",
+                "    ███████████████████████████████████   ",
+                "      /   , ████████████████████████ )    ",
+                "      `__,`__█████████████--..--..__/     ",
+                "            **  >     <  **               ",
+                "           ****    0    ****              ",
+                "          *******************             ",
+                "||--------------------------------------||",
+                "|| CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
+                "||_____________________________________ ||",
+
+            };
+
+            // Đặt con trỏ tại vị trí (x, y)
+            for (int i = 0; i < art.Length; i++)
+            {
+                Console.SetCursorPosition(x, y + i);
+                Console.WriteLine(art[i]);
+            }
+            Console.ResetColor();
+        }
         static string[] Bangmota()
         {
+            
             string[] bangmota = new string[]
             {
                 @"                                   BẢNG MÔ TẢ GAME                                                  ",
@@ -614,11 +659,13 @@ namespace UEHGreen
         public static void PositionAtBottom()
         {
             int windowHeight = Console.WindowHeight;
-            int bottomPosition = windowHeight = 10;
+            int bottomPosition = windowHeight = 18;
 
             Console.SetCursorPosition(0, bottomPosition);
         }
     }
+
+
     public class UehQuestion
     {
         public string Question { get; set; }
