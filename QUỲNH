@@ -14,50 +14,50 @@ namespace UEHGreen
         static List<UehQuestion> questions = new List<UehQuestion>()
         {
         new UehQuestion(
-            "Dự án đầu tiên mở đầu cho dự án \"UEH Zero Waste Campus\" có tên là gì?",
-            new string[] { "A) UEH Green Community", "B) Rethink & Be Green", "C) Reduce - Reuse - Recycle", "D) Keep The Earth Green" }, "B"),
+            "Giấy nên được phân loại vào thùng nào theo mô hình 3 thùng?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác tái chế", "C) Thùng rác không tái chế", "D) Thùng rác thực phẩm" }, "B"),
         new UehQuestion(
-            "Dự án \"UEH Zero Waste Campus\" đang trong giai đoạn thứ mấy?",
-            new string[] { "A) 4", "B) 5", "C) 3", "D) 6" }, "A"),
+            "Rác thải thực phẩm được phân vào thùng nào trong mô hình 3 thùng?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác tái chế", "C) Thùng rác không tái chế", "D) Thùng rác điện tử" }, "A"),
         new UehQuestion(
-            "Loại rác thải nào sau đây không có trong mô hình 7?",
-            new string[] { "A) Đinh ốc", "B) Bìa Carton", "C) Pin", "D) Thực phẩm thừa" }, "C"),
+            "Những loại rác không thể tái chế, như băng keo hoặc nhựa dẻo, được bỏ vào thùng nào?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác tái chế", "C) Thùng rác không tái chế", "D) Thùng rác kim loại" }, "C"),
         new UehQuestion(
-            "UEH Green Campus hợp tác với tổ chức nào để thúc đẩy sáng kiến không rác thải?",
-            new string[] { "A) World Bank", "B) Vietnam Zero Waste Alliance", "C) UNEP (Chương trình Môi trường Liên Hợp Quốc)", "D) GreenPeace" }, "B"),
+            "Chai nhựa hoặc lon nước có thể phân loại vào thùng nào?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác tái chế", "C) Thùng rác không tái chế", "D) Thùng rác điện tử" }, "B"),
         new UehQuestion(
-            "Cuộc thi nào đã giúp UEH Green Campus trở thành quán quân quốc tế?",
-            new string[] { "A) \"Thách thức Thành phố Không Rác Thải\"", "B) \"Thách thức Sáng tạo Đại học xanh\"", "C) \"Thách thức Năng lượng Tái tạo\"", "D) \"Thách thức Bảo vệ môi trường quốc tế\"" }, "A"),
+            "Rác thải điện tử như pin hay đồ điện tử nhỏ được bỏ vào thùng nào theo mô hình 7 thùng?",
+            new string[] { "A) Thùng rác giấy", "B) Thùng rác kim loại", "C) Thùng rác điện tử", "D) Thùng rác thực phẩm" }, "C"),
         new UehQuestion(
-            "UEH Green Campus có kế hoạch giảm bao nhiêu phần trăm lượng rác thải được chôn lấp?",
-            new string[] { "A) 50%", "B) 65%", "C) 70%", "D) 80%" }, "B"),
+            "Chất thải thực phẩm nên được phân vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác hữu cơ", "B) Thùng rác giấy", "C) Thùng rác không tái chế", "D) Thùng rác thực phẩm" }, "D"),
         new UehQuestion(
-            "Sự kiện \"UEH Green Day\" thường niên có chủ đề chính là gì?",
-            new string[] { "A) \"Tái chế rác thải nhựa\"", "B) \"Sống mới với cũ\"", "C) \"Bảo vệ nguồn nước\"", "D) \"Giảm thiểu khí thải CO2\"" }, "B"),
+            "Lon nước bằng kim loại thuộc vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác giấy", "B) Thùng rác kim loại", "C) Thùng rác nhựa", "D) Thùng rác thực phẩm" }, "B"),
         new UehQuestion(
-            "Mục tiêu chính của dự án UEH Green Campus là gì?",
-            new string[] { "A) Tăng số lượng sinh viên đăng ký", "B) Xây dựng khuôn viên xanh, bền vững", "C) Mở rộng quy mô trường đại học", "D) Thúc đẩy tiêu thụ năng lượng tái tạo" }, "B"),
+            "Túi ni lông nên được phân vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác nhựa", "B) Thùng rác thực phẩm", "C) Thùng rác hữu cơ", "D) Thùng rác không tái chế" }, "A"),
         new UehQuestion(
-            "Hoạt động nào của sinh viên UEH trong chương trình \"Công dân Xanh UEH\" được nhắc đến?",
-            new string[] { "A) Trao đổi rác lấy quà tặng xanh", "B) Thiết kế trang phục thời trang", "C) Chạy đua bảo vệ môi trường", "D) Mua sắm vật dụng xanh" }, "A"),
+            "Những loại rác nào nên được phân vào thùng rác giấy trong mô hình 7 thùng?",
+            new string[] { "A) Giấy viết, sách vở cũ", "B) Hộp sữa giấy", "C) Túi ni lông", "D) Đồ ăn thừa" }, "A"),
         new UehQuestion(
-            "Trong năm 2023, mục tiêu của dự án UEH Green Campus là gì?",
-            new string[] { "A) Không có thay đổi nào", "B) Tăng tiêu thụ nhựa dùng một lần", "C) Giảm thiểu rác thải và thay đổi hành vi cộng đồng", "D) Xây dựng thêm các khuôn viên mới" }, "C"),
+            "Thức ăn thừa thuộc vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác thực phẩm", "B) Thùng rác hữu cơ", "C) Thùng rác nhựa", "D) Thùng rác giấy" }, "A"),
         new UehQuestion(
-            "\"Công dân Xanh UEH\" là gì?",
-            new string[] { "A) Một sự kiện thể thao", "B) Một chương trình đào tạo", "C) Một cuộc thi sáng tạo xanh", "D) Một sáng kiến xây dựng thói quen sống xanh và bền vững" }, "D"),
+            "Giấy gói quà thuộc vào thùng nào theo mô hình 7 thùng?",
+            new string[] { "A) Thùng rác giấy", "B) Thùng rác nhựa", "C) Thùng rác không tái chế", "D) Thùng rác hữu cơ" }, "A"),
         new UehQuestion(
-            "UEH Green Campus tổ chức sự kiện nào để giúp sinh viên tiếp cận với các hoạt động sống xanh?",
-            new string[] { "A) UEH Cultural Festival", "B) UEH Sports Day", "C) UEH Green Day", "D) UEH Job Fair" }, "C"),
+            "Các sản phẩm bằng thủy tinh nên được phân loại vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác thực phẩm", "B) Thùng rác thủy tinh", "C) Thùng rác nhựa", "D) Thùng rác giấy" }, "B"),
         new UehQuestion(
-            "Để thực hiện tốt hơn việc quản lý rác thải, UEH đã tiến hành hoạt động nào sau đây??",
-            new string[] { "A) Nâng cấp các cụm thùng rác thành Trạm thực hành xanh", "B) Mở rộng thêm các bãi rác", "C) Tăng lượng rác thải chôn lấp", "D) Đóng cửa các trạm tái chế" }, "A"),
+            "Hộp sữa bằng giấy (Tetra Pak) nên phân vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác giấy", "B) Thùng rác nhựa", "C) Thùng rác không tái chế", "D) Thùng rác hữu cơ" }, "A"),
         new UehQuestion(
-            "Trạm thực hành xanh (Go Green Station) tại UEH sử dụng mô hình phân loại rác nào?",
-            new string[] { "A) 2 loại", "B) 3 loại và 7 loại", "C) 5 loại", "D) 10 loại" }, "B"),
+            "Các sản phẩm nhựa mềm như màng bọc thực phẩm được phân vào thùng nào?",
+            new string[] { "A) Thùng rác nhựa", "B) Thùng rác giấy", "C) Thùng rác hữu cơ", "D) Thùng rác không tái chế" }, "A"),
         new UehQuestion(
-            "\"Bộ quy tắc Đại học xanh\" của UEH bao gồm thực hành nào sau đây?",
-            new string[] { "A) Tăng tiêu thụ nước đóng chai", "B) Phân loại rác thải", "C) Sử dụng xe ô tô riêng", "D) Mua sắm vật dụng dùng một lần" }, "B")
+            "Thức ăn thừa và vỏ trái cây nên được phân loại vào thùng nào trong mô hình 7 thùng?",
+            new string[] { "A) Thùng rác thực phẩm", "B) Thùng rác giấy", "C) Thùng rác nhựa", "D) Thùng rác kim loại" }, "A")
         };
 
         static void Main(string[] args)
