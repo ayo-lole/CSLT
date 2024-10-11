@@ -543,7 +543,7 @@ namespace UEHGreen
             Console.ForegroundColor = ConsoleColor.Green;
             string[] art = new string[]
             {
-                @"                  cccc@@@\                ",
+            @"                  cccc@@@\                ",
             @"      c@@@@@@@@\ /ccccc@@@|               ",
             @"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
             @"    cccccccccccc@@\@@@/cccccccccc@\       ",
@@ -580,7 +580,7 @@ namespace UEHGreen
             // Hình vẽ ASCII
             string[] art = new string[]
             {
-        @"                cccc@@@\                  ",
+        @"                  cccc@@@\                ",
         @"      c@@@@@@@@\ /ccccc@@@|               ",
         @"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
         @"    cccccccccccc@@\@@@/cccccccccc@\       ",
