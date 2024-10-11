@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.IO;
-using System.ComponentModel;
 
 namespace UEHGreen
 {
@@ -98,51 +91,8 @@ namespace UEHGreen
 
 
             Console.Clear();
-            string filePath = "UEHer.txt";
-
-            if (!File.Exists(filePath))
-            {
-                Console.WriteLine("Chưa có người chơi nào.");
-                return;
-            }
-            Console.WriteLine("LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer");
-            string[] lines = File.ReadAllLines(filePath);
-            int linesPerPage = Console.WindowHeight - 2;
-            int currentPage = 0;
-
-            while (true)
-            {
-                Console.Clear();
-                int startLine = currentPage * linesPerPage;
-                int endLine = Math.Min(startLine + linesPerPage, lines.Length);
-
-                for (int i = startLine; i < endLine; i++)
-                {
-                    Console.WriteLine(lines[i]);
-                }
-
-                Console.WriteLine("\nNhấn PgUp để cuộn lên, PgDown để cuộn xuống, Esc để thoát.");
-
-                var key = Console.ReadKey(true).Key;
-                if (key == ConsoleKey.PageUp)
-                {
-                    if (currentPage > 0)
-                    {
-                        currentPage--;
-                    }
-                }
-                else if (key == ConsoleKey.PageDown)
-                {
-                    if (startLine + linesPerPage < lines.Length)
-                    {
-                        currentPage++;
-                    }
-                }
-                else if (key == ConsoleKey.Escape)
-                {
-                    break; // Thoát khỏi hiển thị nội dung file
-                }
-            }
+            
+            
 
             string[] runningAnimation =
                 {
@@ -337,13 +287,13 @@ namespace UEHGreen
                     position = hurdlePosition - stopDistance;
 
                     // Lượt qua các câu hỏi  
-
+                    
                     foreach (var question in questions.ToList())
                     {
-                        if (wrongAnswers == 3)
+                        if (wrongAnswers == 3)//thua trò chơi
                         {
                             Console.Clear();
-                            Console.WriteLine("\nTRÒ CHƠI KẾT THÚC! Bạn đã trả lời sai 3 câu.");
+                            PrintArtt(20, 10);
                             Console.WriteLine($"Số điểm cuối cùng của bạn là: {score}");
                             SaveAchievement(YourName, score);
                             Console.ReadKey();
@@ -443,12 +393,13 @@ namespace UEHGreen
                     {
                         Console.Clear();
 
-                        Console.WriteLine("CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG!");
+                        PrintArt(50, 10);
                         SaveAchievement(YourName, score);
                         Console.ReadKey();
                         return; // Exit the game
                     }
                     // Kết thúc trò chơi 
+
 
                 }
                 else
@@ -593,20 +544,20 @@ namespace UEHGreen
             string[] art = new string[]
             {
                 @"                  cccc@@@\                ",
-        	@"      c@@@@@@@@\ /ccccc@@@|               ",
-        	@"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
-        	@"    cccccccccccc@@\@@@/cccccccccc@\       ",
-        	@"    cccccccccccccc@|/ccccccccccc@@@       ",
-        	@"     \ccccccccccccc@|ccccccc@@@@@@/       ",
-        	@"           \ccccccc@|ccc@@@@@@@@@/        ",
-        	@"            ccccccccccccc@@               ",
-        	@"            |             |               ",
-        	@"           /*   >     <   *\              ",
-        	@"          /**      0      **\             ",
-        	@"          |***           ***|             ",
-        	@"||--------------------------------------||",
-        	@"|| CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
-        	@"||_____________________________________ ||",
+            @"      c@@@@@@@@\ /ccccc@@@|               ",
+            @"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
+            @"    cccccccccccc@@\@@@/cccccccccc@\       ",
+            @"    cccccccccccccc@|/ccccccccccc@@@       ",
+            @"     \ccccccccccccc@|ccccccc@@@@@@/       ",
+            @"           \ccccccc@|ccc@@@@@@@@@/        ",
+            @"            ccccccccccccc@@               ",
+            @"            |             |               ",
+            @"           /*   >     <   *\              ",
+            @"          /**      0      **\             ",
+            @"          |***           ***|             ",
+            @"||--------------------------------------||",
+            @"|| CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
+            @"||_____________________________________ ||",
             };
 
             // Đặt con trỏ tại vị trí (x, y)
@@ -617,9 +568,48 @@ namespace UEHGreen
             }
             Console.ResetColor();
         }
+        static void PrintArtt(int x, int y)
+        {
+            // Đặt kích thước cửa sổ console đủ lớn để hiển thị hình ảnh
+            Console.SetWindowSize(80, 20);  // Điều chỉnh nếu cần
+            Console.SetBufferSize(80, 30);
+
+            // Thiết lập màu sắc
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            // Hình vẽ ASCII
+            string[] art = new string[]
+            {
+        @"                cccc@@@\                  ",
+        @"      c@@@@@@@@\ /ccccc@@@|               ",
+        @"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
+        @"    cccccccccccc@@\@@@/cccccccccc@\       ",
+        @"    cccccccccccccc@|/ccccccccccc@@@       ",
+        @"     \ccccccccccccc@|ccccccc@@@@@@/       ",
+        @"           \ccccccc@|ccc@@@@@@@@@/        ",
+        @"            ccccccccccccc@@               ",
+        @"            |             |               ",
+        @"           /*   Ụ     Ụ   *\              ",
+        @"          /**      ~      **\             ",
+        @"          |***           ***|             ",
+        @"||------------------------------------------------||",
+        @"|| Ôi! Thua mất rồi! Cố gắng hơn vào lần sau nhé! ||",
+        @"||________________________________________________||"
+            };
+
+            // Đặt con trỏ tại vị trí (x, y)
+            for (int i = 0; i < art.Length; i++)
+            {
+                Console.SetCursorPosition(x, y + i);  // Đặt vị trí dòng tiếp theo
+                Console.WriteLine(art[i]);  // In từng dòng của mảng art
+            }
+
+            // Reset lại màu sắc sau khi in
+            Console.ResetColor();
+        }
         static string[] Bangmota()
         {
-            
+
             string[] bangmota = new string[]
             {
                 @"                                   BẢNG MÔ TẢ GAME                                                  ",
