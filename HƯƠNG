@@ -150,55 +150,77 @@ string[] runningAnimation =
             bool isStopped = false;
             const int stopDistance = 10; // Khoảng cách dừng lại trước vật cản
 
-void RenderHurdles(bool renderEnter)
-{
-    // Xóa các vị trí cũ của vật cản trên màn hình
-    Console.SetCursorPosition(0, 10);
-    Console.Write(new string(' ', Console.WindowWidth));
-
-    // Vẽ vật cản ở các vị trí hiện tại
-    if (position + 50 >= hurdlePosition && position <= hurdlePosition + 10)
-    {
-        int hurdleOffset = hurdlePosition - position;
-        // Đảm bảo hurdleOffset không âm và không vượt quá kích thước của cửa sổ
-        hurdleOffset = Math.Max(0, Math.Min(Console.WindowWidth - hurdleFrame.Length, hurdleOffset));
-        Console.SetCursorPosition(hurdleOffset, 10);
-        Render(hurdleFrame, renderEnter);
-    }
-}
+ // Xác định khung hình 
+                Console.SetCursorPosition(4, 8);
+                Render(playerFrame, true);
+                RenderHurdles(true);
 
 
-           string playerFrame =
-    jumpingFrame.HasValue ? jumpingAnimation[jumpingFrame.Value] :
-    runningAnimation[runningFrame.GetValueOrDefault()];
+                if (position % 50 < 3)
+                {
+                    Console.SetCursorPosition(4, 8);
+                    Render(playerFrame, false);
+                    RenderHurdles(false);
+                }
+                else
+                {
+                    RenderHurdles(false);
+                    Console.SetCursorPosition(4, 8);
+                    Render(playerFrame, false);
+                }
 
-// Xác định khung hình 
-runningFrame = runningFrame.HasValue
-    ? (runningFrame + 1) % runningAnimation.Length
-    : runningFrame;
+                // Cập nhật trạng thái 
+                runningFrame = runningFrame.HasValue
+                    ? (runningFrame + 1) % runningAnimation.Length
+                    : runningFrame;
 
-if (jumpingFrame >= jumpingAnimation.Length)
-{
-    jumpingFrame = null;
-    runningFrame = 2; // Quay lại khung hình chạy
-}
+                jumpingFrame = jumpingFrame.HasValue
+                    ? jumpingFrame + 1
+                    : jumpingFrame;
 
-            catch (Exception ex)
-            {
-                Console.WriteLine("Không thể thay đổi kích thước cửa sổ console: " + ex.Message);
+                if (jumpingFrame >= jumpingAnimation.Length)
+                {
+                    jumpingFrame = null;
+                    runningFrame = 2;
+
+                }
+
+
+                // Move the character if not stopped
+                if (!isStopped)
+                {
+                    position++;
+                }
+
+                Thread.Sleep(TimeSpan.FromMilliseconds(80));
             }
-            Console.Clear();
 
- // Dừng lại trước vật cản 
-if (position >= hurdlePosition - stopDistance && position < hurdlePosition)
-{
-    runningFrame = 7; // Chuyển sang khung hình dừng
-    isStopped = true; // Đánh dấu là đã dừng
-    position = hurdlePosition - stopDistance; // Cập nhật vị trí dừng
-}
-else
-{
-    isStopped = false; // Nếu không, nhân vật tiếp tục chạy
-}
+            void Render(string @string, bool renderEnter)
+            {
+                int x = Console.CursorLeft;
+                int y = Console.CursorTop;
+                foreach (char c in @string)
+                    if (c == '\n')
+                        Console.SetCursorPosition(x, ++y);
+                    else if (c != ' ' || renderEnter)
+                        Console.Write(c);
+                    else
+                        Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
+            }
 
-}
+            void RenderHurdles(bool renderEnter)
+            {
+                // Xóa các vị trí cũ của vật cản trên màn hình
+                Console.SetCursorPosition(0, 10);
+                Console.Write(new string(' ', Console.WindowWidth));
+
+                // Vẽ vật cản ở các vị trí hiện tại
+                if (position + 50 >= hurdlePosition && position <= hurdlePosition + 10)
+                {
+                    int hurdleOffset = hurdlePosition - position;
+                    // Đảm bảo hurdleOffset không âm và không vượt quá kích thước của cửa sổ
+                    hurdleOffset = Math.Max(0, Math.Min(Console.WindowWidth - hurdleFrame.Length, hurdleOffset));
+                    Console.SetCursorPosition(hurdleOffset, 10);
+                    Render(hurdleFrame, renderEnter);
+
+                }
