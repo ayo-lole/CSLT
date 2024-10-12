@@ -11,6 +11,7 @@ namespace UEHGreen
 {
     internal class Program
     {
+ Console.Clear();
 string[] runningAnimation =
                 {
 	#region Frames
