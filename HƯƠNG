@@ -1,0 +1,157 @@
+ string[] runningAnimation =
+                {
+	#region Frames
+	// 0
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"  __O  " + '\n' +
+    @" / /\_," + '\n' +
+    @"__/\   " + '\n' +
+    @"    \  ",
+	// 1
+	@"       " + '\n' +
+    @"   UEH  " + '\n' +
+    @"   _O  " + '\n' +
+    @"  |/|_ " + '\n' +
+    @"  /\   " + '\n' +
+    @" /  |  ",
+	// 2
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"    O  " + '\n' +
+    @"  </L  " + '\n' +
+    @"   \   " + '\n' +
+    @"   /|  ",
+	// 3
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"   O   " + '\n' +
+    @"   |_  " + '\n' +
+    @"   |>  " + '\n' +
+    @"  /|   ",
+	// 4
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"   O   " + '\n' +
+    @"  <|L  " + '\n' +
+    @"   |_  " + '\n' +
+    @"   |/  ",
+	// 5
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"   O   " + '\n' +
+    @"  L|L  " + '\n' +
+    @"   |_  " + '\n' +
+    @"  /  | ",
+	// 6
+	@"       " + '\n' +
+    @"   UEH " + '\n' +
+    @"  _O   " + '\n' +
+    @" | |L  " + '\n' +
+    @"   /-- " + '\n' +
+    @"  /   |",
+                #endregion
+            };
+
+            string[] jumpingAnimation =
+            {
+                #region Frames
+                // 0
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"   _O  " + '\n' +
+    @"  |/|_ " + '\n' +
+    @"  /\   " + '\n' +
+    @" /  |  ",
+	// 1
+	@"       " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"    O  " + '\n' +
+    @"  </L  " + '\n' +
+    @"   /|  ",
+	// 2
+	@"       " + '\n' +
+    @"    /O/" + '\n' +
+    @"    /  " + '\n' +
+    @"   //  " + '\n' +
+    @"  //   " + '\n' +
+    @"       ",
+	// 3
+	@"  O" + '\n' +
+    @" /     " + '\n' +
+    @"//     " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 4
+	@"  __   " + '\n' +
+    @" // \O " + '\n' +
+    @"     \\" + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 5
+	@"  __   " + '\n' +
+    @" //_O\ " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 6
+	@"  __\  " + '\n' +
+    @" _O/   " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 7
+	@" \O\__ " + '\n' +
+    @"     \\" + '\n' +
+    @"       " + '\n' +
+    @"       " + '\n' +
+    @"       ",
+	// 8
+	@"       " + '\n' +
+    @"       " + '\n' +
+    @"   O   " + '\n' +
+    @"  L|L  " + '\n' +
+    @"   |_  " + '\n' +
+    @"  /  | ",
+                #endregion
+            };
+            string hurdleFrame =
+            #region Frame
+
+
+              @"   BIN   " + '\n' +
+              @"  ____  " + '\n' +
+              @"  ║♻️║ " + '\n' +
+              @"  \__/   ";
+            #endregion
+            int position = 0;
+            int? runningFrame = 0;
+            int? jumpingFrame = null;
+            int hurdlePosition = 50;
+            bool isStopped = false;
+            const int stopDistance = 10; // Khoảng cách dừng lại trước vật cản
+
+
+            Console.CursorVisible = false;
+            try
+            {
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    int maxWidth = 120;
+                    int maxHeight = 27;
+
+                    Console.SetWindowSize(
+                        Math.Min(Console.LargestWindowWidth, maxWidth),
+                        Math.Min(Console.LargestWindowHeight, maxHeight));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Không thể thay đổi kích thước cửa sổ console: " + ex.Message);
+            }
+            Console.Clear();
