@@ -300,8 +300,7 @@ namespace UEHGreen
                         if (wrongAnswers == 3)//thua trò chơi
                         {
                             Console.Clear();
-                            PrintArtt(20, 10, score);
-                            Console.WriteLine($"Số điểm cuối cùng của bạn là: {score}");
+                            PrintArtt(Console.WindowWidth/6,Console.WindowHeight/6, score);
                             SaveAchievement(YourName, score);
                             Console.ReadKey();
                             return; // Exit the game
@@ -385,9 +384,9 @@ namespace UEHGreen
                             Console.WriteLine();
                             Console.WriteLine();
 
-                            Console.WriteLine($"Câu trả lời đúng là {question.CorrectAnswer}");
                             wrongAnswers++;
                             health--;
+                            Console.SetCursorPosition(0, 0);
                             Console.WriteLine($"Bạn có {wrongAnswers} câu trả lời sai. Nếu trả lời sai 3 câu bạn sẽ thua. ");
                             questions.Remove(question);
                         }
@@ -400,7 +399,7 @@ namespace UEHGreen
                     {
                         Console.Clear();
 
-                        PrintArt(50, 10);
+                        PrintArt(Console.WindowWidth/6, Console.WindowHeight/6);
                         SaveAchievement(YourName, score);
                         Console.ReadKey();
                         return; // Exit the game
@@ -578,9 +577,6 @@ namespace UEHGreen
         }
         static void PrintArtt(int x, int y, int score)
         {
-            // Đặt kích thước cửa sổ console đủ lớn để hiển thị hình ảnh
-            Console.SetWindowSize(80, 20);  // Điều chỉnh nếu cần
-            Console.SetBufferSize(80, 30);
 
             // Thiết lập màu sắc
             Console.ForegroundColor = ConsoleColor.Green;
@@ -602,7 +598,7 @@ namespace UEHGreen
  @"              |***           ***|             ",
  @"||------------------------------------------------||",
  @"|| Ôi! Thua mất rồi! Cố gắng hơn vào lần sau nhé! ||",
-$@"||  Số điểm cuối cùng của bạn là: {score}               ||",
+$@"||      Số điểm cuối cùng của bạn là: {score}           ||",
  @"||________________________________________________||"
             };
 
