@@ -1,4 +1,17 @@
- string[] runningAnimation =
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
+using System.ComponentModel;
+
+namespace UEHGreen
+{
+    internal class Program
+    {
+string[] runningAnimation =
                 {
 	#region Frames
 	// 0
@@ -155,3 +168,5 @@
                 Console.WriteLine("Không thể thay đổi kích thước cửa sổ console: " + ex.Message);
             }
             Console.Clear();
+	}
+}
