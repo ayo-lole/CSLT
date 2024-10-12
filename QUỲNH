@@ -67,11 +67,13 @@ namespace UEHGreen
             Console.InputEncoding = Encoding.UTF8;
 
             // Giao diện bắt đầu
+            Console.CursorVisible = false;
             GiaoDien intro = new GiaoDien();
             intro.DisplayIntro();
 
             // Wait for user input to continue
             Console.ReadLine();
+            Console.Clear();
 
             //Giao diện giới thiệu game  
 
