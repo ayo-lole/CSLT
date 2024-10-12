@@ -155,3 +155,12 @@
                 Console.WriteLine("Không thể thay đổi kích thước cửa sổ console: " + ex.Message);
             }
             Console.Clear();
+
+ //Dừng lại trước vật cản 
+                if (position >= hurdlePosition - stopDistance && position < hurdlePosition)
+                {
+                    runningFrame = 7;
+                    isStopped = true;
+                    position = hurdlePosition - stopDistance;
+		//sau là lượt qua các câu hỏi
+		}
