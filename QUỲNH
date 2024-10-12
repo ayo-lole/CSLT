@@ -98,8 +98,8 @@ namespace UEHGreen
 
 
             Console.Clear();
-            
-            
+
+
 
             string[] runningAnimation =
                 {
@@ -294,13 +294,13 @@ namespace UEHGreen
                     position = hurdlePosition - stopDistance;
 
                     // Lượt qua các câu hỏi  
-                    
+
                     foreach (var question in questions.ToList())
                     {
                         if (wrongAnswers == 3)//thua trò chơi
                         {
                             Console.Clear();
-                            PrintArtt(20, 10);
+                            PrintArtt(20, 10, score);
                             Console.WriteLine($"Số điểm cuối cùng của bạn là: {score}");
                             SaveAchievement(YourName, score);
                             Console.ReadKey();
@@ -545,26 +545,27 @@ namespace UEHGreen
                 }
             }
         }
+
         static void PrintArt(int x, int y)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             string[] art = new string[]
             {
-            @"                  cccc@@@\                ",
-            @"      c@@@@@@@@\ /ccccc@@@|               ",
-            @"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
-            @"    cccccccccccc@@\@@@/cccccccccc@\       ",
-            @"    cccccccccccccc@|/ccccccccccc@@@       ",
-            @"     \ccccccccccccc@|ccccccc@@@@@@/       ",
-            @"           \ccccccc@|ccc@@@@@@@@@/        ",
-            @"            ccccccccccccc@@               ",
-            @"            |             |               ",
-            @"           /*   >     <   *\              ",
-            @"          /**      0      **\             ",
-            @"          |***           ***|             ",
-            @"||--------------------------------------||",
-            @"|| CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
-            @"||_____________________________________ ||",
+     @"                  cccc@@@\                ",
+     @"      c@@@@@@@@\ /ccccc@@@|               ",
+     @"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
+     @"    cccccccccccc@@\@@@/cccccccccc@\       ",
+     @"    cccccccccccccc@|/ccccccccccc@@@       ",
+     @"     \ccccccccccccc@|ccccccc@@@@@@/       ",
+     @"           \ccccccc@|ccc@@@@@@@@@/        ",
+     @"            ccccccccccccc@@               ",
+     @"            |             |               ",
+     @"           /*   >     <   *\              ",
+     @"          /**      0      **\             ",
+     @"          |***           ***|             ",
+     @"||--------------------------------------||",
+     @"|| CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
+     @"||_____________________________________ ||",
             };
 
             // Đặt con trỏ tại vị trí (x, y)
@@ -575,7 +576,7 @@ namespace UEHGreen
             }
             Console.ResetColor();
         }
-        static void PrintArtt(int x, int y)
+        static void PrintArtt(int x, int y, int score)
         {
             // Đặt kích thước cửa sổ console đủ lớn để hiển thị hình ảnh
             Console.SetWindowSize(80, 20);  // Điều chỉnh nếu cần
@@ -585,18 +586,8 @@ namespace UEHGreen
             Console.ForegroundColor = ConsoleColor.Green;
 
             // Hình vẽ ASCII
-             static void PrintArtt(int x, int y, int score)
- {
-     // Đặt kích thước cửa sổ console đủ lớn để hiển thị hình ảnh
-     Console.SetWindowSize(80, 20);  // Điều chỉnh nếu cần
-     Console.SetBufferSize(80, 30);
-
-     // Thiết lập màu sắc
-     Console.ForegroundColor = ConsoleColor.Green;
-
-     // Hình vẽ ASCII
-     string[] art = new string[]
-     {
+            string[] art = new string[]
+            {
  @"                      cccc@@@\                ",
  @"          c@@@@@@@@\ /ccccc@@@|               ",
  @"         /cccccc@@@@@\@ccc@@/ccccccccc        ",
@@ -613,18 +604,18 @@ namespace UEHGreen
  @"|| Ôi! Thua mất rồi! Cố gắng hơn vào lần sau nhé! ||",
 $@"||  Số điểm cuối cùng của bạn là: {score}               ||",
  @"||________________________________________________||"
-     };
+            };
 
-     // Đặt con trỏ tại vị trí (x, y)
-     for (int i = 0; i < art.Length; i++)
-     {
-         Console.SetCursorPosition(x, y + i);  // Đặt vị trí dòng tiếp theo
-         Console.WriteLine(art[i]);  // In từng dòng của mảng art
-     }
+            // Đặt con trỏ tại vị trí (x, y)
+            for (int i = 0; i < art.Length; i++)
+            {
+                Console.SetCursorPosition(x, y + i);  // Đặt vị trí dòng tiếp theo
+                Console.WriteLine(art[i]);  // In từng dòng của mảng art
+            }
 
-     // Reset lại màu sắc sau khi in
-     Console.ResetColor();
- }
+            // Reset lại màu sắc sau khi in
+            Console.ResetColor();
+        }
         static string[] Bangmota()
         {
 
