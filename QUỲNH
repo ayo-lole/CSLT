@@ -300,7 +300,7 @@ namespace UEHGreen
                         if (wrongAnswers == 3)//thua trò chơi
                         {
                             Console.Clear();
-                            PrintArtt(Console.WindowWidth/6,Console.WindowHeight/6, score);
+                            PrintArtt(Console.WindowWidth / 6, Console.WindowHeight / 6, score);
                             SaveAchievement(YourName, score);
                             Console.ReadKey();
                             return; // Exit the game
@@ -399,7 +399,7 @@ namespace UEHGreen
                     {
                         Console.Clear();
 
-                        PrintArt(Console.WindowWidth/6, Console.WindowHeight/6);
+                        PrintArt(Console.WindowWidth / 6, Console.WindowHeight / 6);
                         SaveAchievement(YourName, score);
                         Console.ReadKey();
                         return; // Exit the game
@@ -496,11 +496,11 @@ namespace UEHGreen
             {
                 if (i < health)
                 {
-                    Console.Write("💩 "); // Hiển thị cục máu
+                    Console.Write("❤️ "); // Hiển thị cục máu
                 }
                 else
                 {
-                    Console.Write("🍔 "); // Hiển thị cục máu đã mất
+                    Console.Write("🗑️ "); // Hiển thị cục máu đã mất
                 }
             }
             Console.WriteLine();
@@ -550,21 +550,28 @@ namespace UEHGreen
             Console.ForegroundColor = ConsoleColor.Green;
             string[] art = new string[]
             {
-     @"                  cccc@@@\                ",
-     @"      c@@@@@@@@\ /ccccc@@@|               ",
-     @"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
-     @"    cccccccccccc@@\@@@/cccccccccc@\       ",
-     @"    cccccccccccccc@|/ccccccccccc@@@       ",
-     @"     \ccccccccccccc@|ccccccc@@@@@@/       ",
-     @"           \ccccccc@|ccc@@@@@@@@@/        ",
-     @"            ccccccccccccc@@               ",
-     @"            |             |               ",
-     @"           /*   >     <   *\              ",
-     @"          /**      0      **\             ",
-     @"          |***           ***|             ",
-     @"||--------------------------------------||",
-     @"|| CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
-     @"||_____________________________________ ||",
+            @"                    cccc@@@\                ",
+            @"        c@@@@@@@@\ /ccccc@@@|               ",
+            @"       /cccccc@@@@@\@ccc@@/ccccccccc        ",
+            @"      cccccccccccc@@\@@@/cccccccccc@\       ",
+            @"      cccccccccccccc@|/ccccccccccc@@@       ",
+            @"       \ccccccccccccc@|ccccccc@@@@@@/       ",
+            @"             \ccccccc@|ccc@@@@@@@@@/        ",
+            @"              ccccccccccccc@@               ",
+            @"              |             |               ",
+            @"             /*   >     <   *\              ",
+            @"            /**      0      **\             ",
+            @"            |***           ***|             ",
+            @" ||--------------------------------------||",
+            @" ||                                      ||",
+            @" || CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
+            @" ||                                      ||",
+            @" ||______________________________________||",
+            @"     ╔════════════════════════════════╗        ",
+            @"     ║                                ║        ",
+            @"     ║   >>Nhấn F để xem lịch sử<<    ║        ",
+            @"     ║                                ║        ",
+            @"     ╚════════════════════════════════╝        ",
             };
 
             // Đặt con trỏ tại vị trí (x, y)
@@ -577,6 +584,9 @@ namespace UEHGreen
         }
         static void PrintArtt(int x, int y, int score)
         {
+            // Đặt kích thước cửa sổ console đủ lớn để hiển thị hình ảnh
+            Console.SetWindowSize(120, 100);  // Điều chỉnh nếu cần
+            Console.SetBufferSize(120, 120);
 
             // Thiết lập màu sắc
             Console.ForegroundColor = ConsoleColor.Green;
@@ -584,22 +594,28 @@ namespace UEHGreen
             // Hình vẽ ASCII
             string[] art = new string[]
             {
- @"                      cccc@@@\                ",
- @"          c@@@@@@@@\ /ccccc@@@|               ",
- @"         /cccccc@@@@@\@ccc@@/ccccccccc        ",
- @"        cccccccccccc@@\@@@/cccccccccc@\       ",
- @"        cccccccccccccc@|/ccccccccccc@@@       ",
- @"         \ccccccccccccc@|ccccccc@@@@@@/       ",
- @"               \ccccccc@|ccc@@@@@@@@@/        ",
- @"                ccccccccccccc@@               ",
- @"                |             |               ",
- @"               /*   Ụ     Ụ   *\              ",
- @"              /**      ~      **\             ",
- @"              |***           ***|             ",
- @"||------------------------------------------------||",
- @"|| Ôi! Thua mất rồi! Cố gắng hơn vào lần sau nhé! ||",
-$@"||      Số điểm cuối cùng của bạn là: {score}           ||",
- @"||________________________________________________||"
+        @"                       cccc@@@\                ",
+        @"           c@@@@@@@@\ /ccccc@@@|               ",
+        @"          /cccccc@@@@@\@ccc@@/ccccccccc        ",
+        @"         cccccccccccc@@\@@@/cccccccccc@\       ",
+        @"         cccccccccccccc@|/ccccccccccc@@@       ",
+        @"          \ccccccccccccc@|ccccccc@@@@@@/       ",
+        @"                \ccccccc@|ccc@@@@@@@@@/        ",
+        @"                 ccccccccccccc@@               ",
+        @"                 |             |               ",
+        @"                /*   Ụ     Ụ   *\              ",
+        @"               /**      ~      **\             ",
+        @"               |***           ***|             ",
+        @"||--------------------------------------------||",
+        @"||                                            ||",
+        @"|| Thua mất rồi! Cố gắng hơn vào lần sau nhé! ||",
+       $@"||      Số điểm cuối cùng của bạn là: {score}       ||",
+        @"||____________________________________________||",
+        @"       ╔════════════════════════════════╗        ",
+        @"       ║                                ║        ",
+        @"       ║   >>Nhấn F để xem lịch sử<<    ║        ",
+        @"       ║                                ║        ",
+        @"       ╚════════════════════════════════╝        ",
             };
 
             // Đặt con trỏ tại vị trí (x, y)
@@ -612,6 +628,7 @@ $@"||      Số điểm cuối cùng của bạn là: {score}           ||",
             // Reset lại màu sắc sau khi in
             Console.ResetColor();
         }
+    
         static string[] Bangmota()
         {
 
