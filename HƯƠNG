@@ -169,5 +169,26 @@ string[] runningAnimation =
                 Console.WriteLine("Không thể thay đổi kích thước cửa sổ console: " + ex.Message);
             }
             Console.Clear();
+
+ //Dừng lại trước vật cản 
+                if (position >= hurdlePosition - stopDistance && position < hurdlePosition)
+                {
+                    runningFrame = 7;
+                    isStopped = true;
+                    position = hurdlePosition - stopDistance;
+
+                    // Lượt qua các câu hỏi  
+                    
+                    foreach (var question in questions.ToList())
+                    {
+                        if (wrongAnswers == 3)//thua trò chơi
+                        {
+                            Console.Clear();
+                            PrintArtt(20, 10);
+                            Console.WriteLine($"Số điểm cuối cùng của bạn là: {score}");
+                            SaveAchievement(YourName, score);
+                            Console.ReadKey();
+                            return; // Exit the game
+                        }
 	}
 }
