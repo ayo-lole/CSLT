@@ -1,0 +1,48 @@
+static List<UehQuestion2> questions = new List<UehQuestion2>()
+{
+new UehQuestion2(
+    "Dự án đầu tiên mở đầu cho dự án \"UEH Zero Waste Campus\" có tên là gì?",
+    new string[] { "A) UEH Green Community", "B) Rethink & Be Green", "C) Reduce - Reuse - Recycle", "D) Keep The Earth Green" }, "B"),
+new UehQuestion2(
+    "Dự án \"UEH Zero Waste Campus\" đang trong giai đoạn thứ mấy?",
+    new string[] { "A) 4", "B) 5", "C) 3", "D) 6" }, "A"),
+new UehQuestion2(
+    "Loại rác thải nào sau đây không có trong mô hình 7?",
+    new string[] { "A) Đinh ốc", "B) Bìa Carton", "C) Pin", "D) Thực phẩm thừa" }, "C"),
+new UehQuestion2(
+    "UEH Green Campus hợp tác với tổ chức nào để thúc đẩy sáng kiến không rác thải?",
+    new string[] { "A) World Bank", "B) Vietnam Zero Waste Alliance", "C) UNEP (Chương trình Môi trường Liên Hợp Quốc)", "D) GreenPeace" }, "B"),
+new UehQuestion2(
+    "Cuộc thi nào đã giúp UEH Green Campus trở thành quán quân quốc tế?",
+    new string[] { "A) \"Thách thức Thành phố Không Rác Thải\"", "B) \"Thách thức Sáng tạo Đại học xanh\"", "C) \"Thách thức Năng lượng Tái tạo\"", "D) \"Thách thức Bảo vệ môi trường quốc tế\"" }, "A"),
+new UehQuestion2(
+    "UEH Green Campus có kế hoạch giảm bao nhiêu phần trăm lượng rác thải được chôn lấp?",
+    new string[] { "A) 50%", "B) 65%", "C) 70%", "D) 80%" }, "B"),
+new UehQuestion2(
+    "Sự kiện \"UEH Green Day\" thường niên có chủ đề chính là gì?",
+    new string[] { "A) \"Tái chế rác thải nhựa\"", "B) \"Sống mới với cũ\"", "C) \"Bảo vệ nguồn nước\"", "D) \"Giảm thiểu khí thải CO2\"" }, "B"),
+new UehQuestion2(
+    "Mục tiêu chính của dự án UEH Green Campus là gì?",
+    new string[] { "A) Tăng số lượng sinh viên đăng ký", "B) Xây dựng khuôn viên xanh, bền vững", "C) Mở rộng quy mô trường đại học", "D) Thúc đẩy tiêu thụ năng lượng tái tạo" }, "B"),
+new UehQuestion2(
+    "Hoạt động nào của sinh viên UEH trong chương trình \"Công dân Xanh UEH\" được nhắc đến?",
+    new string[] { "A) Trao đổi rác lấy quà tặng xanh", "B) Thiết kế trang phục thời trang", "C) Chạy đua bảo vệ môi trường", "D) Mua sắm vật dụng xanh" }, "A"),
+new UehQuestion2(
+    "Trong năm 2023, mục tiêu của dự án UEH Green Campus là gì?",
+    new string[] { "A) Không có thay đổi nào", "B) Tăng tiêu thụ nhựa dùng một lần", "C) Giảm thiểu rác thải và thay đổi hành vi cộng đồng", "D) Xây dựng thêm các khuôn viên mới" }, "C"),
+new UehQuestion2(
+    "\"Công dân Xanh UEH\" là gì?",
+    new string[] { "A) Một sự kiện thể thao", "B) Một chương trình đào tạo", "C) Một cuộc thi sáng tạo xanh", "D) Một sáng kiến xây dựng thói quen sống xanh và bền vững" }, "D"),
+new UehQuestion2(
+    "UEH Green Campus tổ chức sự kiện nào để giúp sinh viên tiếp cận với các hoạt động sống xanh?",
+    new string[] { "A) UEH Cultural Festival", "B) UEH Sports Day", "C) UEH Green Day", "D) UEH Job Fair" }, "C"),
+new UehQuestion2(
+    "Để thực hiện tốt hơn việc quản lý rác thải, UEH đã tiến hành hoạt động nào sau đây??",
+    new string[] { "A) Nâng cấp các cụm thùng rác thành Trạm thực hành xanh", "B) Mở rộng thêm các bãi rác", "C) Tăng lượng rác thải chôn lấp", "D) Đóng cửa các trạm tái chế" }, "A"),
+new UehQuestion2(
+    "Trạm thực hành xanh (Go Green Station) tại UEH sử dụng mô hình phân loại rác nào?",
+    new string[] { "A) 2 loại", "B) 3 loại và 7 loại", "C) 5 loại", "D) 10 loại" }, "B"),
+new UehQuestion2(
+    "\"Bộ quy tắc Đại học xanh\" của UEH bao gồm thực hành nào sau đây?",
+    new string[] { "A) Tăng tiêu thụ nước đóng chai", "B) Phân loại rác thải", "C) Sử dụng xe ô tô riêng", "D) Mua sắm vật dụng dùng một lần" }, "B")
+};
