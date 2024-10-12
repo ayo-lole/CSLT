@@ -1,18 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.IO;
-using System.ComponentModel;
-
-namespace UEHGreen
-{
-    internal class Program
-    {
- Console.Clear();
-string[] runningAnimation =
+ string[] runningAnimation =
                 {
 	#region Frames
 	// 0
@@ -150,77 +136,22 @@ string[] runningAnimation =
             bool isStopped = false;
             const int stopDistance = 10; // Khoảng cách dừng lại trước vật cản
 
- // Xác định khung hình 
-                Console.SetCursorPosition(4, 8);
-                Render(playerFrame, true);
-                RenderHurdles(true);
 
-
-                if (position % 50 < 3)
-                {
-                    Console.SetCursorPosition(4, 8);
-                    Render(playerFrame, false);
-                    RenderHurdles(false);
-                }
-                else
-                {
-                    RenderHurdles(false);
-                    Console.SetCursorPosition(4, 8);
-                    Render(playerFrame, false);
-                }
-
-                // Cập nhật trạng thái 
-                runningFrame = runningFrame.HasValue
-                    ? (runningFrame + 1) % runningAnimation.Length
-                    : runningFrame;
-
-                jumpingFrame = jumpingFrame.HasValue
-                    ? jumpingFrame + 1
-                    : jumpingFrame;
-
-                if (jumpingFrame >= jumpingAnimation.Length)
-                {
-                    jumpingFrame = null;
-                    runningFrame = 2;
-
-                }
-
-
-                // Move the character if not stopped
-                if (!isStopped)
-                {
-                    position++;
-                }
-
-                Thread.Sleep(TimeSpan.FromMilliseconds(80));
-            }
-
-            void Render(string @string, bool renderEnter)
+            Console.CursorVisible = false;
+            try
             {
-                int x = Console.CursorLeft;
-                int y = Console.CursorTop;
-                foreach (char c in @string)
-                    if (c == '\n')
-                        Console.SetCursorPosition(x, ++y);
-                    else if (c != ' ' || renderEnter)
-                        Console.Write(c);
-                    else
-                        Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
-            }
-
-            void RenderHurdles(bool renderEnter)
-            {
-                // Xóa các vị trí cũ của vật cản trên màn hình
-                Console.SetCursorPosition(0, 10);
-                Console.Write(new string(' ', Console.WindowWidth));
-
-                // Vẽ vật cản ở các vị trí hiện tại
-                if (position + 50 >= hurdlePosition && position <= hurdlePosition + 10)
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                 {
-                    int hurdleOffset = hurdlePosition - position;
-                    // Đảm bảo hurdleOffset không âm và không vượt quá kích thước của cửa sổ
-                    hurdleOffset = Math.Max(0, Math.Min(Console.WindowWidth - hurdleFrame.Length, hurdleOffset));
-                    Console.SetCursorPosition(hurdleOffset, 10);
-                    Render(hurdleFrame, renderEnter);
+                    int maxWidth = 120;
+                    int maxHeight = 27;
 
+                    Console.SetWindowSize(
+                        Math.Min(Console.LargestWindowWidth, maxWidth),
+                        Math.Min(Console.LargestWindowHeight, maxHeight));
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Không thể thay đổi kích thước cửa sổ console: " + ex.Message);
+            }
+            Console.Clear();
