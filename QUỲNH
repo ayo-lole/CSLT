@@ -260,10 +260,10 @@ namespace UEHGreen
             int health = 3; // Số lượng cục máu tối đa
             const int MaxHealth = 3;
 
-
-            DrawHealthBar(health, MaxHealth);
             while (true)
             {
+
+                DrawHealthBar(health, MaxHealth);
                 string playerFrame =
                     jumpingFrame.HasValue ? jumpingAnimation[jumpingFrame.Value] :
                     runningAnimation[runningFrame.GetValueOrDefault()];
