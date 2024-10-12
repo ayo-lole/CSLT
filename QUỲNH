@@ -585,35 +585,46 @@ namespace UEHGreen
             Console.ForegroundColor = ConsoleColor.Green;
 
             // Hình vẽ ASCII
-            string[] art = new string[]
-            {
-        @"                  cccc@@@\                ",
-        @"      c@@@@@@@@\ /ccccc@@@|               ",
-        @"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
-        @"    cccccccccccc@@\@@@/cccccccccc@\       ",
-        @"    cccccccccccccc@|/ccccccccccc@@@       ",
-        @"     \ccccccccccccc@|ccccccc@@@@@@/       ",
-        @"           \ccccccc@|ccc@@@@@@@@@/        ",
-        @"            ccccccccccccc@@               ",
-        @"            |             |               ",
-        @"           /*   Ụ     Ụ   *\              ",
-        @"          /**      ~      **\             ",
-        @"          |***           ***|             ",
-        @"||------------------------------------------------||",
-        @"|| Ôi! Thua mất rồi! Cố gắng hơn vào lần sau nhé! ||",
-        @"||________________________________________________||"
-            };
+             static void PrintArtt(int x, int y, int score)
+ {
+     // Đặt kích thước cửa sổ console đủ lớn để hiển thị hình ảnh
+     Console.SetWindowSize(80, 20);  // Điều chỉnh nếu cần
+     Console.SetBufferSize(80, 30);
 
-            // Đặt con trỏ tại vị trí (x, y)
-            for (int i = 0; i < art.Length; i++)
-            {
-                Console.SetCursorPosition(x, y + i);  // Đặt vị trí dòng tiếp theo
-                Console.WriteLine(art[i]);  // In từng dòng của mảng art
-            }
+     // Thiết lập màu sắc
+     Console.ForegroundColor = ConsoleColor.Green;
 
-            // Reset lại màu sắc sau khi in
-            Console.ResetColor();
-        }
+     // Hình vẽ ASCII
+     string[] art = new string[]
+     {
+ @"                      cccc@@@\                ",
+ @"          c@@@@@@@@\ /ccccc@@@|               ",
+ @"         /cccccc@@@@@\@ccc@@/ccccccccc        ",
+ @"        cccccccccccc@@\@@@/cccccccccc@\       ",
+ @"        cccccccccccccc@|/ccccccccccc@@@       ",
+ @"         \ccccccccccccc@|ccccccc@@@@@@/       ",
+ @"               \ccccccc@|ccc@@@@@@@@@/        ",
+ @"                ccccccccccccc@@               ",
+ @"                |             |               ",
+ @"               /*   Ụ     Ụ   *\              ",
+ @"              /**      ~      **\             ",
+ @"              |***           ***|             ",
+ @"||------------------------------------------------||",
+ @"|| Ôi! Thua mất rồi! Cố gắng hơn vào lần sau nhé! ||",
+$@"||  Số điểm cuối cùng của bạn là: {score}               ||",
+ @"||________________________________________________||"
+     };
+
+     // Đặt con trỏ tại vị trí (x, y)
+     for (int i = 0; i < art.Length; i++)
+     {
+         Console.SetCursorPosition(x, y + i);  // Đặt vị trí dòng tiếp theo
+         Console.WriteLine(art[i]);  // In từng dòng của mảng art
+     }
+
+     // Reset lại màu sắc sau khi in
+     Console.ResetColor();
+ }
         static string[] Bangmota()
         {
 
