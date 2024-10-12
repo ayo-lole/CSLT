@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.ComponentModel;
+using UEH_Green;
 
 namespace UEHGreen
 {
@@ -64,7 +65,15 @@ namespace UEHGreen
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
-            //Giao diện bắt đầu chơi 
+
+            // Giao diện bắt đầu
+            GiaoDien intro = new GiaoDien();
+            intro.DisplayIntro();
+
+            // Wait for user input to continue
+            Console.ReadLine();
+
+            //Giao diện giới thiệu game  
 
             string[] myArray = Bangmota();
             foreach (string item in myArray)
