@@ -10,17 +10,13 @@ namespace UEH_Green
         // Hàm tính hạng dựa trên số điểm từ trò chơi chính
         public static string CalculateRank(int score)
         {
-            if (score <= 5)
+            if (score <= 4)
             {
                 return "CS1";
             }
-            else if (score <= 10)
+            else if (score <= 9)
             {
                 return "CS2";
-            }
-            else if (score <= 15)
-            {
-                return "CS3";
             }
             else
             {
