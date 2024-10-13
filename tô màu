@@ -1,4 +1,86 @@
- static void PrintArt(int x, int y)
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UEH_Green
+{
+    internal class GiaoDien
+    {
+        public void DisplayIntro()
+        {
+            static void PrintintroArt(int x, int y)
+            { 
+                string[] introArt = new string[]
+            {
+            @"╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗",
+            @"║                                                                                                                      ║",
+            @"║                                                    @@@@@    @@                               @@@@   @                ║",
+            @"║                                                  @@@   @@@ @@                               @   @@@@                 ║",
+            @"║                                                                                                                      ║",
+            @"║                  @@@@@@@     @@@     @@@   @@@   @@@@@@@@@   @@@@    @@@          @@@@@@@@@    @@@                   ║",
+            @"║                 @@@@@@@@@    @@@     @@@   @@@   @@@         @@@@@   @@@         @@@@@@@@@@@   @@@                   ║",
+            @"║                @@@@      @   @@@     @@@   @@@   @@@         @@@@@@  @@@          @@@@    @@   @@@                   ║",
+            @"║                @@@@          @@@@@@@@@@@   @@@   @@@@@@@@@   @@@ @@@ @@@             @@@       @@@                   ║",
+            @"║                @@@@      @   @@@     @@@   @@@   @@@         @@@  @@@@@@         @@    @@@@    @@@                   ║",
+            @"║                 @@@@@@@@@    @@@     @@@   @@@   @@@         @@@   @@@@@         @@@@@@@@@@@   @@@                   ║",
+            @"║                  @@@@@@@     @@@     @@@   @@@   @@@@@@@@@   @@@    @@@@          @@@@@@@@@    @@@                   ║",
+            @"║                                                                                                                      ║",
+            @"║                                @@@     @@@     @@@@@@@     @@@@    @@@   @@@     @@@                                 ║",
+            @"║                                @@@     @@@    @@@@@@@@@    @@@@@   @@@   @@@     @@@                                 ║",
+            @"║                                 @@@   @@@    @@@     @@@   @@@@@@  @@@   @@@     @@@                                 ║",
+            @"║                                   @@@@@      @@@@@@@@@@@   @@@ @@@ @@@   @@@@@@@@@@@                                 ║",
+            @"║                                 @@@   @@@    @@@     @@@   @@@  @@@@@@   @@@     @@@                                 ║",
+            @"║                                @@@     @@@   @@@     @@@   @@@   @@@@@   @@@     @@@                                 ║",
+            @"║                                @@@     @@@   @@@     @@@   @@@    @@@@   @@@     @@@                                 ║",
+            @"║                                                                                                                      ║",
+            @"║                                               ╔════════════════════════╗                                             ║",
+            @"║                                               ║      >>> Enter <<<     ║                                             ║",
+            @"║                                               ╚════════════════════════╝                                             ║",
+            @"║                                                                                                                      ║",
+            @"║                                                                                                                      ║",
+            @"╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"
+            };
+
+                foreach (string line in introArt)
+                {
+                    Console.WriteLine(line);
+                    for (int i = 0; i < introArt.Length; i++)
+                    {
+                        Console.SetCursorPosition(x, y + i);  // Đặt vị trí dòng tiếp theo
+                        Console.WriteLine(introArt[i]);  // In từng dòng của mảng art
+                        if (introArt[i].Contains("@")) // Đặt màu xanh lá cho phần có chữ 'c'
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+
+                        }
+
+                        else // Đặt màu trắng cho phần còn lại
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+static void PrintArt(int x, int y)
  {
      
      string[] art = new string[]
