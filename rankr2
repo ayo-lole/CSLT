@@ -1,0 +1,25 @@
+using System;
+using System.IO;
+
+namespace UEH_Green
+{
+    class GameRanking
+    {
+        public static string filePath = "xeploaiv2.txt";
+
+        // Hàm tính hạng dựa trên số điểm từ trò chơi chính
+        public static string CalculateRank(int score)
+        {
+            if (score <= 14)
+            {
+                return "CS3";
+            }
+            else if (score <= 19)
+            {
+                return "CS4";
+            }
+            else
+            {
+                return "Invalid score";
+            }
+        }
