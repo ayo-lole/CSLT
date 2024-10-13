@@ -79,7 +79,7 @@ namespace UEHGreen
             // Wait for user input to continue
             Console.ReadLine();
             Console.Clear();
-            
+
             //Giao diện giới thiệu game  
             string[] myArray = Bangmota(10, 1);
             //Bảng điền tên 
@@ -114,7 +114,7 @@ namespace UEHGreen
             void ClearFrame()
             {
                 Console.SetCursorPosition(frameX + 2, frameY + 1);  // Xóa phần sau "BÚT DANH :"
-                Console.Write(new string(' ', Console.WindowWidth-(frameY+1)));  // Chỉ xóa phần nội dung
+                Console.Write(new string(' ', Console.WindowWidth - (frameY + 1)));  // Chỉ xóa phần nội dung
             }
 
             // Gọi hàm vẽ khung
@@ -141,8 +141,19 @@ namespace UEHGreen
             }
             Console.ResetColor();
             Console.Clear();
-            DisplayLeaderboard();
+            string[] banner = new string[]
+{
+            @"╔════════════════════════════╗                          ╔═══════════════════════════════╗",
+            @"║                            ║                          ║                               ║",
+            @"║  >>Nhấn ENTER để CHƠI<<    ║                          ║   >>Nhấn F để XEM LỊCH SỬ<<   ║",
+            @"║                            ║                          ║                               ║",
+            @"╚════════════════════════════╝                          ╚═══════════════════════════════╝",
 
+};
+            Console.ForegroundColor = ConsoleColor.Green;
+            GiaoDien.PrintEnterNFBanner(banner);
+            Console.ResetColor();
+            DisplayLeaderboard();
 
             string[] runningAnimation =
                 {
@@ -397,7 +408,7 @@ namespace UEHGreen
                                     // If invalid input, throw an exception
                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                     throw new InvalidOperationException("Phím không hợp lệ. Vui lòng nhập A, B, C, hoặc D.");
-                                    
+
                                 }
 
                                 // If valid input, set the flag to true to exit the loop
@@ -460,7 +471,6 @@ namespace UEHGreen
                         Console.ReadKey();
                         return; // Exit the game
                     }
-
                 }
                 else
                 {
@@ -657,7 +667,7 @@ namespace UEHGreen
             Console.ResetColor();
             return bangmota;
         }
-        static void SaveAchievement(string Name, int score )
+        static void SaveAchievement(string Name, int score)
         {
             if (Name != "" && !String.IsNullOrWhiteSpace(Name))
             {
@@ -709,43 +719,60 @@ namespace UEHGreen
         {
             string filePath = "UEHer.txt";
             Console.CursorVisible = false;
-            while (true) //cop từ đoạn này
+
+            while (true) // Loop until the user chooses to exit
             {
                 var key = Console.ReadKey(true).Key;
 
-                if (key == ConsoleKey.F)
+                if (key == ConsoleKey.F) // Press F to display the leaderboard
                 {
                     if (!File.Exists(filePath))
                     {
-                        Console.WriteLine("Chưa có người chơi nào.");
-                        continue;
+                        Console.WriteLine("Chưa có người chơi nào."); // No players yet
+                        continue; // Continue to wait for input
                     }
+
                     Console.Clear();
-                    Console.WriteLine("LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer");
-                    string[] lines = File.ReadAllLines(filePath);
-                    int linesPerPage = Console.WindowHeight - 2;
-                    int currentPage = 0;
-
-                    while (true)
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    // Define the box lines in an array
+                    string[] boxLines = new string[]
                     {
-                        Console.Clear();
-                        int startLine = currentPage * linesPerPage;
-                        int endLine = Math.Min(startLine + linesPerPage, lines.Length);
+    "╔════════════════════════════════════════╗",
+    "║ LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer ║",
+    "╚════════════════════════════════════════╝"
+                    };
 
-                        for (int i = startLine; i < endLine; i++)
-                        {
-                            Console.WriteLine(lines[i]);
-                        }
-                        key = Console.ReadKey(true).Key;
-                        if (key == ConsoleKey.Enter)
-                        {
-                            break; // Thoát khỏi hiển thị nội dung file
-                        }
+                    // Calculate the starting position for the box to be printed
+                    int startPositionX = 120 / 4; // Starting X position
+                    int startPositionY = 0; // Starting Y position
+
+                    // Print each line of the box
+                    for (int i = 0; i < boxLines.Length; i++)
+                    {
+                        Console.SetCursorPosition(startPositionX, startPositionY + i); // Set cursor position
+                        Console.WriteLine(boxLines[i]); // Print the line
+                    }
+
+                    Console.ResetColor();
+                    string[] lines = File.ReadAllLines(filePath);
+
+                    // Print all lines from the file
+                    foreach (var line in lines)
+                    {
+                        Console.WriteLine(line);
+                    }
+                    Console.ForegroundColor= ConsoleColor.DarkYellow;
+                    Console.WriteLine("\nNhấn Enter để quay lại."); // Instruction to go back
+                    Console.ResetColor();
+                    key = Console.ReadKey(true).Key;
+                    if (key == ConsoleKey.Enter)
+                    {
+                        break; // Exit the file display
                     }
                 }
-                else if (key == ConsoleKey.Enter)
+                else if (key == ConsoleKey.Enter) // Exit the program
                 {
-                    break; // Exit the program
+                    break;
                 }
             }
         }
