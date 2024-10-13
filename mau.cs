@@ -8,11 +8,11 @@ class GameRanking
     // Hàm tính hạng dựa trên số điểm từ trò chơi chính
     public static string CalculateRank(int score2)
     {
-        if (score2 <= 5)
+        if (score <= 5)
         {
             return "CS3";
         }
-        else if (score2 <= 10)
+        else if (score <= 10)
         {
             return "CS4";
         }
@@ -102,22 +102,5 @@ class GameRanking
                 File.WriteAllLines(achievementFilePath, OpenSaveFile);
             }
         }
-    }
-}
-
-class Programm
-{
-    static void Main(string[] args)
-    {
-        // Đây là nơi gọi hàm và xử lý điểm số từ trò chơi chính
-        string playerName = "Người chơi";  // Thay thế bằng tên người chơi thực tế
-        int playerScore2 = 12; // Thay thế giá trị này bằng số điểm thực tế từ trò chơi
-
-        // Lưu điểm và hạng vào file progress.txt
-        GameRanking.SaveProgress(playerScore2);
-
-        // Lưu thành tích và hạng vào file UEHer.txt
-        GameRanking.SaveAchievement(playerName, playerScore2);
-        GameRanking.DisplayResult();
     }
 }
