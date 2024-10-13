@@ -193,3 +193,52 @@ static void PrintArt(int x, int y)
      // Reset lại màu sắc sau khi in
      Console.ResetColor();
  }
+
+
+
+
+---------------------------------------------------------------------
+
+
+
+
+
+
+  //Hiển thị câu hỏi và đáp án ở phía dưới màn hình
+  PositionAtBottom();
+  Console.ForegroundColor = ConsoleColor.Magenta;
+  Console.WriteLine("\nQuestion: " + question.Question);
+ 
+  Console.ResetColor();
+  foreach (var choice in question.Choices)
+  {
+      
+      Console.WriteLine(choice);
+  }
+
+  int questionCursorTop = Console.CursorTop - (question.Choices.Length + 1);
+
+  string userAnswer = "";
+  bool isValidAnswer = false; // Flag for valid input
+
+  while (!isValidAnswer) // Continue until valid input is provided
+  {
+      try
+      {
+          // Ask the player to input their answer
+          Console.ForegroundColor = ConsoleColor.Yellow;
+          Console.Write("Điền A, B, C, hoặc D để trả lời: ");
+          Console.ResetColor();
+          // Get player input
+          Console.ForegroundColor = ConsoleColor.Cyan;
+          userAnswer = Console.ReadKey().KeyChar.ToString().ToUpper();
+         
+          Console.ResetColor();
+          // Check if input is valid
+          if (!new[] { "A", "B", "C", "D" }.Contains(userAnswer))
+          {
+              // If invalid input, throw an exception
+              
+              throw new InvalidOperationException("Phím không hợp lệ. Vui lòng nhập A, B, C, hoặc D.");
+            
+          }
