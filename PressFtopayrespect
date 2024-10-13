@@ -434,7 +434,7 @@ namespace UEHGreen
 
                         string userAnswer = "";
                         bool isValidAnswer = false; // Flag for valid input
-                       
+
 
                         while (!isValidAnswer) // Continue until valid input is provided
                         {
@@ -447,7 +447,7 @@ namespace UEHGreen
                                 userAnswer = Console.ReadKey().KeyChar.ToString().ToUpper();
                                 Console.WriteLine(); // Move to the next line after reading input
 
-                            
+
                                 // Check if the input is a valid answer
                                 if (!new[] { "A", "B", "C", "D" }.Contains(userAnswer))
                                 {
@@ -513,16 +513,10 @@ namespace UEHGreen
                     if (score == 1)
                     {
                         Console.Clear();
-
-                        Console.WriteLine("CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG!");
-                        string[] myArray2 = PrintArt();
-                        foreach (string item in myArray2)
-                        {
-                            Console.WriteLine(item);
-                        }
+                        SaveAchievement(YourName, score);
+                        PrintArt(40, 5);
                         while (true)
                         {
-                            Console.WriteLine("Nhấn F để xem bảng thành tích.");
                             var key = Console.ReadKey(true).Key;
 
                             if (key == ConsoleKey.F)
@@ -532,9 +526,9 @@ namespace UEHGreen
                                     Console.WriteLine("Chưa có người chơi nào.");
                                     continue;
                                 }
-
                                 Console.Clear();
                                 Console.WriteLine("LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer");
+                                Console.WriteLine("\nNhấn PgUp để cuộn lên, PgDown để cuộn xuống,.");
                                 string[] lines = File.ReadAllLines(filePath);
                                 int linesPerPage = Console.WindowHeight - 2;
                                 int currentPage = 0;
@@ -549,8 +543,6 @@ namespace UEHGreen
                                     {
                                         Console.WriteLine(lines[i]);
                                     }
-
-                                    Console.WriteLine("\nNhấn PgUp để cuộn lên, PgDown để cuộn xuống,.");
 
                                     key = Console.ReadKey(true).Key;
                                     if (key == ConsoleKey.PageUp)
@@ -573,9 +565,8 @@ namespace UEHGreen
                             {
                                 break; // Exit the program
                             }
+                            Console.ReadKey();
                         }
-                        SaveAchievement(YourName, score);
-                        Console.ReadKey();
                         return; // Exit the game
                     }
                     // Kết thúc trò chơi 
@@ -717,35 +708,53 @@ namespace UEHGreen
                 }
             }
         }
-        static string[] PrintArt(int x = 40, int y = 5)
+        static void PrintArt(int x, int y)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             string[] art = new string[]
             {
-                @"                  cccc@@@\                ",
-            @"      c@@@@@@@@\ /ccccc@@@|               ",
-            @"     /cccccc@@@@@\@ccc@@/ccccccccc        ",
-            @"    cccccccccccc@@\@@@/cccccccccc@\       ",
-            @"    cccccccccccccc@|/ccccccccccc@@@       ",
-            @"     \ccccccccccccc@|ccccccc@@@@@@/       ",
-            @"           \ccccccc@|ccc@@@@@@@@@/        ",
-            @"            ccccccccccccc@@               ",
-            @"            |             |               ",
-            @"           /*   >     <   *\              ",
-            @"          /**      0      **\             ",
-            @"          |***           ***|             ",
-            @"||--------------------------------------||",
-            @"|| CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
-            @"||_____________________________________ ||",
+            @"                    cccc@@@\                ",
+            @"        c@@@@@@@@\ /ccccc@@@|               ",
+            @"       /cccccc@@@@@\@ccc@@/ccccccccc        ",
+            @"      cccccccccccc@@\@@@/cccccccccc@\       ",
+            @"      cccccccccccccc@|/ccccccccccc@@@       ",
+            @"       \ccccccccccccc@|ccccccc@@@@@@/       ",
+            @"             \ccccccc@|ccc@@@@@@@@@/        ",
+            @"              ccccccccccccc@@               ",
+            @"              |             |               ",
+            @"             /*   >     <   *\              ",
+            @"            /**      0      **\             ",
+            @"            |***           ***|             ",
+            @" ||--------------------------------------|| ",
+            @" ||                                      || ",
+            @" || CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 || ",
+            @" ||                                      || ",
+            @" ||______________________________________|| ",
+            @"     ╔════════════════════════════════╗     ",
+            @"     ║                                ║     ",
+            @"     ║   >>Nhấn F để xem lịch sử<<    ║     ",
+            @"     ║                                ║     ",
+            @"     ╚════════════════════════════════╝     ",
             };
 
-            // Đặt con trỏ tại vị trí (x, y)
+            // Đặt con trỏ tại vị trí(x, y)
             for (int i = 0; i < art.Length; i++)
             {
+                if (art[i].Contains("c" + "@")) // Đặt màu xanh lá cho phần có chữ 'c'
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+
+                }
+
+                else // Đặt màu trắng cho phần còn lại
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
                 Console.SetCursorPosition(x, y + i);
                 Console.WriteLine(art[i]);
             }
-            Console.ResetColor();    
+            Console.ResetColor();
+            Console.ReadKey();
         }
         static string[] Bangmota()
         {
