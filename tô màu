@@ -1,0 +1,113 @@
+ static void PrintArt(int x, int y)
+ {
+     
+     string[] art = new string[]
+     {
+
+     @"                    cccc@@@\                ",
+     @"        c@@@@@@@@\ /ccccc@@@|               ",
+     @"       /cccccc@@@@@\@ccc@@/ccccccccc        ",
+     @"      cccccccccccc@@\@@@/cccccccccc@\       ",
+     @"      cccccccccccccc@|/ccccccccccc@@@       ",
+     @"       \ccccccccccccc@|ccccccc@@@@@@/       ",
+     @"             \ccccccc@|ccc@@@@@@@@@/        ",
+     @"              ccccccccccccc@@               ",
+     @"              |             |               ",
+     @"             /*   >     <   *\              ",
+     @"            /**      0      **\             ",
+     @"            |***           ***|             ",
+     @" ||--------------------------------------||",
+     @" ||                                      ||",
+     @" || CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 ||",
+     @" ||                                      ||",
+     @" ||______________________________________||",
+     @"     ╔════════════════════════════════╗        ",
+     @"     ║                                ║        ",
+     @"     ║   >>Nhấn F để xem lịch sử<<    ║        ",
+     @"     ║                                ║        ",
+     @"     ╚════════════════════════════════╝        ",
+     };
+
+     // Đặt con trỏ tại vị trí (x, y)
+     for (int i = 0; i < art.Length; i++)
+     {
+         if (art[i].Contains("c" + "@")) // Đặt màu xanh lá cho phần có chữ 'c'
+         {
+             Console.ForegroundColor = ConsoleColor.Green;
+
+         }
+
+         else // Đặt màu trắng cho phần còn lại
+         {
+             Console.ForegroundColor = ConsoleColor.White;
+         }
+         Console.SetCursorPosition(x, y + i);
+         Console.WriteLine(art[i]);
+        
+
+     }
+
+    
+     Console.ResetColor();
+ }
+
+ static void PrintArtt(int x, int y)
+ {
+    
+
+     // Đặt kích thước cửa sổ console đủ lớn để hiển thị hình ảnh
+     Console.SetWindowSize(120, 100);  // Điều chỉnh nếu cần
+     Console.SetBufferSize(120, 120);
+
+     // Thiết lập màu sắc
+     Console.ForegroundColor = ConsoleColor.Green;
+
+     // Hình vẽ ASCII
+     string[] art = new string[]
+     {
+ @"                       cccc@@@\                ",
+ @"           c@@@@@@@@\ /ccccc@@@|               ",
+ @"          /cccccc@@@@@\@ccc@@/ccccccccc        ",
+ @"         cccccccccccc@@\@@@/cccccccccc@\       ",
+ @"         cccccccccccccc@|/ccccccccccc@@@       ",
+ @"          \ccccccccccccc@|ccccccc@@@@@@/       ",
+ @"                \ccccccc@|ccc@@@@@@@@@/        ",
+ @"                 ccccccccccccc@@               ",
+ @"                 |             |               ",
+ @"                /*   Ụ     Ụ   *\              ",
+ @"               /**      ~      **\             ",
+ @"               |***           ***|             ",
+ @"||--------------------------------------------||",
+ @"||                                            ||",
+ @"|| Thua mất rồi! Cố gắng hơn vào lần sau nhé! ||",
+ @"||                                            ||",
+ @"||____________________________________________||",
+ @"       ╔════════════════════════════════╗        ",
+ @"       ║                                ║        ",
+ @"       ║   >>Nhấn F để xem lịch sử<<    ║        ",
+ @"       ║                                ║        ",
+ @"       ╚════════════════════════════════╝        ",
+     };
+
+     // Đặt con trỏ tại vị trí (x, y)
+     for (int i = 0; i < art.Length; i++)
+     {
+         Console.SetCursorPosition(x, y + i);  // Đặt vị trí dòng tiếp theo
+         Console.WriteLine(art[i]);  // In từng dòng của mảng art
+         if (art[i].Contains("c" + "@")) // Đặt màu xanh lá cho phần có chữ 'c'
+         {
+             Console.ForegroundColor = ConsoleColor.Green;
+
+         }
+
+         else // Đặt màu trắng cho phần còn lại
+         {
+             Console.ForegroundColor = ConsoleColor.White;
+         }
+     }
+     
+
+
+     // Reset lại màu sắc sau khi in
+     Console.ResetColor();
+ }
