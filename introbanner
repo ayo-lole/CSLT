@@ -1,0 +1,47 @@
+using System;
+
+class ProgramBanner
+{
+    static void Main(string[] args)
+    {
+        string[] banner = new string[]
+        {
+            @"╔════════════════════════════╗                          ╔═══════════════════════════════╗",
+            @"║                            ║                          ║                               ║",
+            @"║  >>Nhấn ENTER để CHƠI<<    ║                          ║   >>Nhấn F để XEM LỊCH SỬ<<   ║",
+            @"║                            ║                          ║                               ║",
+            @"╚════════════════════════════╝                          ╚═══════════════════════════════╝",
+
+        };
+        Console.ForegroundColor = ConsoleColor.Green;
+        PrintEnterNFBanner(banner);
+        Console.ResetColor();
+    }
+
+    static void PrintEnterNFBanner(string[] banner)
+    {
+        int consoleWidth = Console.WindowWidth;
+        int consoleHeight = Console.WindowHeight;
+
+        // Tính toán vị trí để in banner ra giữa màn hình
+        int xPos = (consoleWidth - banner[0].Length) / 4;
+        int yPos = (consoleHeight - banner.Length) / 4;
+        
+        // In banner ở vị trí đã tính toán
+        for (int i = 0; i < banner.Length; i++)
+        {
+            Console.SetCursorPosition(xPos, yPos + i);
+            Console.WriteLine(banner[i]);
+            if (banner[i].Contains("╔" + "═" + "╚" + "║" + "╝")) // Đặt màu xanh lá cho phần có chữ 'c'
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+
+            }
+
+            else // Đặt màu trắng cho phần còn lại
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+            }
+        }
+    }
+}
