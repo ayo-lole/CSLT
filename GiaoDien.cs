@@ -76,8 +76,7 @@ namespace UEH_Green
             }
             Console.ResetColor();
         }
-        public class BuildingArt {
-    public static void printUEHBuilding() {
+       public static void printUEHBuilding() {
         System.out.println(
             "      ___________________________________________________________________    " + '\n' +
             "     |          ║║ | | | | | | | | | | | | | |║║   ||  ||||  ||||  ||||   |    " + '\n' +
