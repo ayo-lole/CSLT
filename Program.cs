@@ -469,7 +469,8 @@ namespace UEHGreen
                         SaveAchievement(YourName, score);
                         DisplayLeaderboard();
                         Console.ReadKey();
-                        return; // Exit the game
+			Console.Clear();// Xóa màn hình ván cũ và lịch sử
+                        continue; // Exit the game
                     }
                 }
                 else
@@ -616,11 +617,11 @@ namespace UEHGreen
             @" || CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG ROUND 1 || ",
             @" ||                                      || ",
             @" ||______________________________________|| ",
-            @"     ╔════════════════════════════════╗     ",
-            @"     ║                                ║     ",
-            @"     ║   >>Nhấn F để xem lịch sử<<    ║     ",
-            @"     ║                                ║     ",
-            @"     ╚════════════════════════════════╝     ",
+           @" ╔═══════════════════════════════════════════╗     ",
+           @" ║                                           ║     ",
+           @" ║   >>Nhấn F để xem lịch sử và tiếp tục<<   ║     ",
+           @" ║                                           ║     ",
+           @" ╚═══════════════════════════════════════════╝     ",
             };
 
             // Đặt con trỏ tại vị trí(x, y)
