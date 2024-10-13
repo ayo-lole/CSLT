@@ -82,6 +82,7 @@ namespace UEHGreen
 
             //Giao diện giới thiệu game  
             string[] myArray = Bangmota(10, 1);
+            //Bảng điền tên 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(Console.WindowWidth / 3, Console.WindowHeight / 2);
             Console.WriteLine("CHÀO MỪNG BẠN ĐẾN VỚI CHIẾN SĨ XANH!");
@@ -113,7 +114,8 @@ namespace UEHGreen
             void ClearFrame()
             {
                 Console.SetCursorPosition(frameX + 2, frameY + 1);  // Xóa phần sau "BÚT DANH :"
-                Console.Write(new string(' ', frameWidth));  // Chỉ xóa phần nội dung
+                Console.Write(new string(' ', Console.WindowWidth-(frameY+1)));  // Chỉ xóa phần nội dung
+
             }
 
             // Gọi hàm vẽ khung
@@ -362,10 +364,13 @@ namespace UEHGreen
 
                         //Hiển thị câu hỏi và đáp án ở phía dưới màn hình
                         PositionAtBottom();
-
+                        Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine("\nQuestion: " + question.Question);
+
+                        Console.ResetColor();
                         foreach (var choice in question.Choices)
                         {
+
                             Console.WriteLine(choice);
                         }
 
@@ -379,16 +384,21 @@ namespace UEHGreen
                             try
                             {
                                 // Ask the player to input their answer
+                                Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.Write("Điền A, B, C, hoặc D để trả lời: ");
-
+                                Console.ResetColor();
                                 // Get player input
+                                Console.ForegroundColor = ConsoleColor.Cyan;
                                 userAnswer = Console.ReadKey().KeyChar.ToString().ToUpper();
 
+                                Console.ResetColor();
                                 // Check if input is valid
                                 if (!new[] { "A", "B", "C", "D" }.Contains(userAnswer))
                                 {
                                     // If invalid input, throw an exception
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
                                     throw new InvalidOperationException("Phím không hợp lệ. Vui lòng nhập A, B, C, hoặc D.");
+                                    
                                 }
 
                                 // If valid input, set the flag to true to exit the loop
