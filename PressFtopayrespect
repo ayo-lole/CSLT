@@ -1,0 +1,40 @@
+static void DisplayLeaderboard()
+{
+    string filePath = "UEHer.txt";
+    Console.CursorVisible = false;
+
+    while (true) // Loop until the user chooses to exit
+    {
+        var key = Console.ReadKey(true).Key;
+
+        if (key == ConsoleKey.F) // Press F to display the leaderboard
+        {
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Chưa có người chơi nào."); // No players yet
+                continue; // Continue to wait for input
+            }
+
+            Console.Clear();
+            Console.WriteLine("LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer");
+            string[] lines = File.ReadAllLines(filePath);
+
+            // Print all lines from the file
+            foreach (var line in lines)
+            {
+                Console.WriteLine(line);
+            }
+
+            Console.WriteLine("\nNhấn Enter để quay lại."); // Instruction to go back
+            key = Console.ReadKey(true).Key;
+            if (key == ConsoleKey.Enter)
+            {
+                break; // Exit the file display
+            }
+        }
+        else if (key == ConsoleKey.Enter) // Exit the program
+        {
+            break;
+        }
+    }
+}
