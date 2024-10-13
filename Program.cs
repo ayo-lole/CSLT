@@ -79,7 +79,7 @@ namespace UEHGreen
             // Wait for user input to continue
             Console.ReadLine();
             Console.Clear();
-
+            
             //Giao diện giới thiệu game  
             string[] myArray = Bangmota(10, 1);
             //Bảng điền tên 
@@ -115,7 +115,6 @@ namespace UEHGreen
             {
                 Console.SetCursorPosition(frameX + 2, frameY + 1);  // Xóa phần sau "BÚT DANH :"
                 Console.Write(new string(' ', Console.WindowWidth-(frameY+1)));  // Chỉ xóa phần nội dung
-
             }
 
             // Gọi hàm vẽ khung
@@ -142,7 +141,7 @@ namespace UEHGreen
             }
             Console.ResetColor();
             Console.Clear();
-
+            DisplayLeaderboard();
 
 
             string[] runningAnimation =
@@ -357,7 +356,7 @@ namespace UEHGreen
                             Console.Clear();
                             SaveAchievement(YourName, score);
                             SaveGameRanking(YourName, score);
-
+                            DisplayLeaderboard();
                             Console.ReadKey();
                             return; // Exit the game
                         }
@@ -452,11 +451,12 @@ namespace UEHGreen
                         break;
                     }
                     // Chiến thắng trò chơi
-                    if (score == 10)
+                    if (score == 1)
                     {
                         Console.Clear();
                         PrintArt(Console.WindowWidth / 3, Console.WindowHeight / 7);
                         SaveAchievement(YourName, score);
+                        DisplayLeaderboard();
                         Console.ReadKey();
                         return; // Exit the game
                     }
@@ -499,7 +499,6 @@ namespace UEHGreen
                 {
                     jumpingFrame = null;
                     runningFrame = 2;
-
                 }
 
                 // Move the character if not stopped
@@ -507,10 +506,8 @@ namespace UEHGreen
                 {
                     position++;
                 }
-
                 Thread.Sleep(TimeSpan.FromMilliseconds(80));
             }
-
             void Render(string @string, bool renderEnter)
             {
                 int x = Console.CursorLeft;
@@ -523,7 +520,6 @@ namespace UEHGreen
                     else
                         Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
             }
-
             void RenderHurdles(bool renderEnter)
             {
                 // Xóa các vị trí cũ của vật cản trên màn hình
@@ -541,8 +537,6 @@ namespace UEHGreen
 
                 }
             }
-
-
         }
         static void TinhDiem(int score)
         {
@@ -590,9 +584,6 @@ namespace UEHGreen
             for (int i = 0; i < barWidth; i++) Console.Write("═");
             Console.WriteLine("╝");
         }
-
-
-
         static void PrintArt(int x, int y)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -628,7 +619,6 @@ namespace UEHGreen
                 if (art[i].Contains("c" + "@")) // Đặt màu xanh lá cho phần có chữ 'c'
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-
                 }
 
                 else // Đặt màu trắng cho phần còn lại
@@ -640,8 +630,6 @@ namespace UEHGreen
             }
             Console.ResetColor();
         }
-
-
         static string[] Bangmota(int x, int y)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -669,7 +657,6 @@ namespace UEHGreen
             Console.ResetColor();
             return bangmota;
         }
-
         static void SaveAchievement(string Name, int score )
         {
             if (Name != "" && !String.IsNullOrWhiteSpace(Name))
@@ -718,7 +705,50 @@ namespace UEHGreen
             GameRanking.SaveProgress(YourName, score);
 
         }
+        static void DisplayLeaderboard()
+        {
+            string filePath = "UEHer.txt";
+            Console.CursorVisible = false;
+            while (true) //cop từ đoạn này
+            {
+                var key = Console.ReadKey(true).Key;
 
+                if (key == ConsoleKey.F)
+                {
+                    if (!File.Exists(filePath))
+                    {
+                        Console.WriteLine("Chưa có người chơi nào.");
+                        continue;
+                    }
+                    Console.Clear();
+                    Console.WriteLine("LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer");
+                    string[] lines = File.ReadAllLines(filePath);
+                    int linesPerPage = Console.WindowHeight - 2;
+                    int currentPage = 0;
+
+                    while (true)
+                    {
+                        Console.Clear();
+                        int startLine = currentPage * linesPerPage;
+                        int endLine = Math.Min(startLine + linesPerPage, lines.Length);
+
+                        for (int i = startLine; i < endLine; i++)
+                        {
+                            Console.WriteLine(lines[i]);
+                        }
+                        key = Console.ReadKey(true).Key;
+                        if (key == ConsoleKey.Enter)
+                        {
+                            break; // Thoát khỏi hiển thị nội dung file
+                        }
+                    }
+                }
+                else if (key == ConsoleKey.Enter)
+                {
+                    break; // Exit the program
+                }
+            }
+        }
         public static void Shuffle(List<UehQuestion> list)
         {
             Random random = new Random();
@@ -751,8 +781,6 @@ namespace UEHGreen
             Console.SetCursorPosition(0, bottomPosition);
         }
     }
-
-
     public class UehQuestion
     {
         public string Question { get; set; }
