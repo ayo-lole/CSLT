@@ -11,7 +11,7 @@ namespace UEH_Green
     {
         public void DisplayIntro()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            
             string[] introArt = new string[]
             {
             @"╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗",
@@ -27,25 +27,35 @@ namespace UEH_Green
             @"║                 @@@@@@@@@    @@@     @@@   @@@   @@@         @@@   @@@@@         @@@@@@@@@@@   @@@                   ║",
             @"║                  @@@@@@@     @@@     @@@   @@@   @@@@@@@@@   @@@    @@@@          @@@@@@@@@    @@@                   ║",
             @"║                                                                                                                      ║",
-            @"║            @@@     @@@     @@@@@@@     @@@@    @@@   @@@     @@@                          ccc@@\                     ║",
-            @"║            @@@     @@@    @@@@@@@@@    @@@@@   @@@   @@@     @@@                c@@@@@@\ /ccc@@@|                    ║",
-            @"║             @@@   @@@    @@@     @@@   @@@@@@  @@@   @@@     @@@               /ccc@@@@@\@ccc@@/ccc\                 ║",
-            @"║               @@@@@      @@@@@@@@@@@   @@@ @@@ @@@   @@@@@@@@@@@               cccccccc@@\@@@/cccc@@                 ║",
-            @"║             @@@   @@@    @@@     @@@   @@@  @@@@@@   @@@     @@@                \ccccccc@|cccccc@@@/                 ║",
-            @"║            @@@     @@@   @@@     @@@   @@@   @@@@@   @@@     @@@                   \ccccc@ccc@@@/                    ║",
-            @"║            @@@     @@@   @@@     @@@   @@@    @@@@   @@@     @@@                   |           |                     ║",
-            @"║                                                                                   /*  >     <  *\                    ║",
-            @"║                                             ╔════════════════════════╗           |****   0   ****|                   ║",
-            @"║                                             ║      >>> Enter <<<     ║           |***************|                   ║",
-            @"║                                             ╚════════════════════════╝                                               ║",
+            @"║            @@@     @@@     @@@@@@@     @@@@    @@@   @@@     @@@                           ccc@@\                    ║",
+            @"║            @@@     @@@    @@@@@@@@@    @@@@@   @@@   @@@     @@@               cc@@@@@@\ /ccc@@@|                    ║",
+            @"║             @@@   @@@    @@@     @@@   @@@@@@  @@@   @@@     @@@              /ccccc@@@@@\@ccc@@/ccccc\              ║",
+            @"║               @@@@@      @@@@@@@@@@@   @@@ @@@ @@@   @@@@@@@@@@@              cccccccccc@@\@@@/cccc@@@@              ║",
+            @"║             @@@   @@@    @@@     @@@   @@@  @@@@@@   @@@     @@@              \cccccccccc@|cccccc@@@@@/              ║",
+            @"║            @@@     @@@   @@@     @@@   @@@   @@@@@   @@@     @@@                   \ccccc@ccc@@@@@@/                 ║",
+            @"║            @@@     @@@   @@@     @@@   @@@    @@@@   @@@     @@@                    cccccccccc@@                     ║",
+            @"║                                                                                     |          |                     ║",
+            @"║                                             ╔════════════════════════╗             /*  >    <  *\                    ║",
+            @"║                                             ║      >>> Enter <<<     ║            |***   0    ***|                   ║",
+            @"║                                             ╚════════════════════════╝            |**************|                   ║",
             @"║                                                                                                                      ║",
             @"║                                                                                                                      ║",
             @"╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"
             };
 
-            foreach (string line in introArt)
+            // In ra từng dòng của chữ ASCII
+            for (int i = 0; i < introArt.Length; i++)
             {
-                Console.WriteLine(line);
+                if (introArt[i].Contains("c" + "@")) // Đặt màu xanh lá cho phần có chữ 'c'
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+
+                }
+                else // Đặt màu trắng cho phần còn lại
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                Console.WriteLine(introArt[i]);
             }
             Console.ResetColor();
         }
@@ -332,9 +342,9 @@ namespace UEH_Green
              "                     |              ║ ║   ║ ║              |          |  theo hướng trường đại học xanh gần gũi   |    " + '\n' +
              "                     |              ║ ║   ║ ║              |          |  với thiên nhiên.                         |    " + '\n' +
              "                     |           ___║ ║ U ║ ║___           |          |                                           |    " + '\n' +
-             "                     |          ║   ║ ║ E ║ ║   ║          |          | Fun fact: Sinh viên thường phải đi Shuttle|    " + '\n' +
-             "                     |       ___║   ║ ║ H ║ ║   ║___       |          |   Bus UEH để đến cơ sở này vì nó nằm ở tận|    " + '\n' +
-             "                     |      ║   ║   ║ ║   ║ ║   ║   ║      |          |   Nguyễn Văn Linh, Bình Chánh.            |    " + '\n' +
+             "                     |          ║   ║ ║ E ║ ║   ║          |          | Fun fact: Nhiều sinh viên thường sử dụng  |    " + '\n' +
+             "                     |       ___║   ║ ║ H ║ ║   ║___       |          |   UEH Shuttle Bus để đến cơ sở này vì nó  |    " + '\n' +
+             "                     |      ║   ║   ║ ║   ║ ║   ║   ║      |          |   nằm ở tận Nguyễn Văn Linh, Bình Chánh.  |    " + '\n' +
              "                     |      ║   ║   ║ ║   ║ ║   ║   ║      |           -------------------------------------------     " + '\n' +
              "                     |      ║   ║   ║ ║   ║ ║   ║   ║      |                         ╔═══════════════╗                 " + '\n' +
              "                     |   ___║   ║   ║ ╚═══╝ ║   ║   ║___   |                         ║  ______--___  ║                 " + '\n' +
@@ -442,6 +452,58 @@ namespace UEH_Green
                 Console.SetCursorPosition(x, y + i);
                 Console.WriteLine(art[i]);
             }
+            Console.ResetColor();
+        }
+        public void DisplayPrintWinArt()
+        {
+            string[] WinArt = new string[]
+            {
+
+
+            @"╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════╗",
+            @"║ccccccccccccccccc@@@@@@cccccccccccccccccc@@@@@@                                         ██╗                   ║",
+            @"║cccccccccccccccccc@@@@@@cccccccccccccccccc@@@@@                                        ██╔╝                   ║",
+            @"║ccccccccccccccccccc@@@@@@cccccccccccccccccc@@@@                                        ╚═╝                    ║",
+            @"║cccccccccccccccccccc@@@@@@cccccccccccccccccc@@                      ██████╗ ██╗  ██╗██╗   ██╗ ██████╗         ║",
+            @"║ccccccccccccccccccccc@@@@@cccccccccccccc@@@@@@@@@@@@@@@@@@         ██╔═══██╗██║  ██║██║   ██║██╔═══██╗        ║",
+            @"║cccccccccccccccccccccc@@@@@ccccccc@@@@@@ccccccccc@@@@@@@@@@        ██║      ███████║██║   ██║██║              ║",
+            @"║ccccccccccccccccccccccc@@@@cccc@@@ccccccccccccccccccc@@@@@@@       ██║   ██║██╔══██║██║   ██║██║   ██║        ║",
+            @"║@@@@@@@cccccccccccccccc@@@@c@@@ccccccccccccccccccccccc@@@@@@@      ╚██████╔╝██║  ██║╚██████╔╝╚██████╔╝        ║",
+            @"║       @@@cccccccccccccc@@@@ccccccccccccccccccccccccccc@@@@@@@      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝         ║",
+            @"║          @ccccccccccccc@@ccccccccccccccccccccccccccccccc@@@@@@                                               ║",
+            @"║          @cccccccccccc@@ccccccccccccccccccccccccccccccccc@@@@@                ██╗                            ║",
+            @"║          @cccccccccccc@cccccccccccccccccccccccccccccccccc@@@@@                ╚██║                           ║",
+            @"║       @@@@cccccccccccc@ccccccccccccccccccccccccccccccccccc@@@@                 ╚═╝                           ║",
+            @"║    @@@@ccc            @ccccccccccc@@cccccccccccccccccccccc@@@                      ██╗                       ║",
+            @"║ @@**                       cccccc@@  @@@cccccccccccccccccc@@     ███╗   ███╗██╗   ██╔╝███╗   ██╗ ██████╗     ║",
+            @"║@**                           cc@@       @@@ccccccccccc@@@@       ████╗ ████║██║   ██║ ████╗  ██║██╔═══██╗    ║",
+            @"║**                            c@            @@@@@@@@@@@           ██╔████╔██║██║   ██║ ██╔██╗ ██║██║  ███║    ║",
+            @"║*       @                    ***@                                 ██║╚██╔╝██║██║   ██║ ██║╚██╗██║██║   ██║    ║",
+            @"║         @                    ***@                                ██║ ╚═╝ ██║╚██████╔╝ ██║ ╚████║╚██████╔╝    ║",
+            @"║     @@@@@             @@      ***@                               ╚═╝     ╚═╝ ╚═════╝  ╚═╝  ╚═══╝ ╚═════╝     ║",
+            @"║                     @@@@       **@                                                                           ║",
+            @"║             @      @@@@         **@                             CHIẾN SĨ ĐÃ XUẤT SẮC VƯỢT QUA TRÒ CHƠI       ║",
+            @"║                    @@            *@                                                                          ║",
+            @"║                                  *@                                ════  VÌ MỘT TRÁI ĐẤT XANH ════           ║",
+            @"║                                   @                                                                          ║",
+            @"╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════╝",
+            };
+
+
+            // In ra từng dòng của chữ ASCII
+            for (int i = 0; i < WinArt.Length; i++)
+            {
+                if (WinArt[i].Contains("c" + "@")) // Đặt màu xanh lá cho phần có chữ 'c'
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else // Đặt màu trắng cho phần còn lại
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                Console.WriteLine(WinArt[i]);
+            }
+            // Reset lại màu
             Console.ResetColor();
         }
     }
