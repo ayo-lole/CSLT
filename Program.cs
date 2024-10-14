@@ -650,62 +650,104 @@ new UehQuestion(
             GameRanking.SaveProgress(YourName, score);
 
         }
-        static void DisplayLeaderboard()
+                static void DisplayLeaderboard()
         {
             string filePath = "UEHer.txt";
             Console.CursorVisible = false;
+            int consoleWidth = 120;
+            int consoleHeight = 27;
+            int linesPerPage = consoleHeight - 5; // Trừ đi 5 dòng dành cho tiêu đề và chân trang
 
-            while (true) // Loop until the user chooses to exit
+            // Thiết lập kích thước console
+            Console.SetWindowSize(consoleWidth, consoleHeight);
+            Console.SetBufferSize(consoleWidth, consoleHeight);
+
+            while (true) // Vòng lặp cho đến khi người dùng chọn thoát
             {
                 var key = Console.ReadKey(true).Key;
 
-                if (key == ConsoleKey.F) // Press F to display the leaderboard
+                if (key == ConsoleKey.F) // Nhấn phím F để hiển thị bảng xếp hạng
                 {
                     if (!File.Exists(filePath))
                     {
-                        Console.WriteLine("Chưa có người chơi nào."); // No players yet
-                        continue; // Continue to wait for input
+                        Console.WriteLine("Chưa có người chơi nào."); // Chưa có người chơi nào
+                        continue; // Tiếp tục chờ đầu vào
                     }
 
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    // Define the box lines in an array
+
+                    // Định nghĩa các dòng khung trong mảng
                     string[] boxLines = new string[]
                     {
-    "╔════════════════════════════════════════╗",
-    "║ LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer ║",
-    "╚════════════════════════════════════════╝"
+                "╔════════════════════════════════════════╗",
+                "║ LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer ║",
+                "╚════════════════════════════════════════╝"
                     };
+                    // Tính toán vị trí bắt đầu để in khung
+                    int startPositionX = consoleWidth / 4; // Vị trí X bắt đầu
+                    int startPositionY = 0; // Vị trí Y bắt đầu
 
-                    // Calculate the starting position for the box to be printed
-                    int startPositionX = 120 / 4; // Starting X position
-                    int startPositionY = 0; // Starting Y position
-
-                    // Print each line of the box
+                    // In từng dòng của khung
                     for (int i = 0; i < boxLines.Length; i++)
                     {
-                        Console.SetCursorPosition(startPositionX, startPositionY + i); // Set cursor position
-                        Console.WriteLine(boxLines[i]); // Print the line
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.SetCursorPosition(startPositionX, startPositionY + i); // Đặt vị trí con trỏ
+                        Console.WriteLine(boxLines[i]); // In dòng
+                        Console.ResetColor();
                     }
 
-                    Console.ResetColor();
+                    // Đọc nội dung từ file
                     string[] lines = File.ReadAllLines(filePath);
+                    int totalPages = (int)Math.Ceiling((double)lines.Length / linesPerPage);
+                    int currentPage = 1;
 
-                    // Print all lines from the file
-                    foreach (var line in lines)
+                    while (true)
                     {
-                        Console.WriteLine(line);
-                    }
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("\nNhấn Enter để thoát."); // Instruction to go back
-                    Console.ResetColor();
-                    key = Console.ReadKey(true).Key;
-                    if (key == ConsoleKey.Enter)
-                    {
-                        break; // Exit the file display
+                        Console.Clear();
+
+                        // In lại khung
+                        for (int i = 0; i < boxLines.Length; i++)
+                        {
+                            Console.ForegroundColor= ConsoleColor.DarkRed;
+                            Console.SetCursorPosition(startPositionX, startPositionY + i);
+                            Console.WriteLine(boxLines[i]);
+                            Console.ResetColor();
+                        }
+
+                        // Tính toán dòng bắt đầu và kết thúc cho trang hiện tại
+                        int startLine = (currentPage - 1) * linesPerPage;
+                        int endLine = Math.Min(startLine + linesPerPage, lines.Length);
+
+                        // In trang hiện tại của bảng xếp hạng
+                        for (int i = startLine; i < endLine; i++)
+                        {
+                            Console.SetCursorPosition(0, startPositionY + boxLines.Length + (i - startLine));
+                            Console.WriteLine(lines[i]);
+                        }
+
+                        // Chân trang: Hiển thị hướng dẫn điều hướng trang
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.SetCursorPosition(0, consoleHeight - 2);
+                        Console.WriteLine($"Trang {currentPage}/{totalPages} - Nhấn ← hoặc → để chuyển trang, Enter để thoát.");
+                        Console.ResetColor();
+
+                        // Chờ người dùng nhập để điều hướng hoặc thoát
+                        key = Console.ReadKey(true).Key;
+                        if (key == ConsoleKey.RightArrow && currentPage < totalPages)
+                        {
+                            currentPage++;
+                        }
+                        else if (key == ConsoleKey.LeftArrow && currentPage > 1)
+                        {
+                            currentPage--;
+                        }
+                        else if (key == ConsoleKey.Enter)
+                        {
+                            break; // Thoát hiển thị bảng xếp hạng
+                        }
                     }
                 }
-                else if (key == ConsoleKey.Enter) // Exit the program
+                else if (key == ConsoleKey.Enter) // Thoát chương trình
                 {
                     break;
                 }
