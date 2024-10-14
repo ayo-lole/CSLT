@@ -115,7 +115,7 @@ new UehQuestion(
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
-	    //Xử lý ngoại lệ lỗi kích thước màn hình trò chơichơi	
+	    //Xử lý ngoại lệ lỗi kích thước màn hình trò chơi	
             try
             {
                 if (Environment.OSVersion.Platform == PlatformID.Win32NT)
@@ -156,10 +156,10 @@ new UehQuestion(
 	    Console.Clear();
 
             // Giao diện đầu vào trò chơi
-            Console.CursorVisible = false;
+            Console.CursorVisible = false; //Không hiện con trỏ chuột
             GiaoDien intro = new GiaoDien(); //Đoạn mã này tạo ra một đối tượng của lớp GiaoDien và sau đó gọi phương thức DisplayIntro() của đối tượng đó.
             intro.DisplayIntro(); //Thực hiện chức năng
-            Console.ReadLine(); // Đợi ngời dùng nhập tiếp 
+            Console.ReadLine(); // Đợi người dùng nhập tiếp 
             Console.Clear();
 
             //Giao diện giới thiệu game  
@@ -167,7 +167,7 @@ new UehQuestion(
 
             //Bảng điền tên 
             string YourName = GiaoDien.InputPlayerName();
-            // Giao diện chuyển cảnh trước khi bắt đầu trò chơi hỏi xem người chơi có muốn xem lịch sử trước đó khôngkhông 
+            // Giao diện chuyển cảnh trước khi bắt đầu trò chơi hỏi xem người chơi có muốn xem lịch sử trước đó không
             string[] banner = new string[]
 {
             @"╔════════════════════════════╗                          ╔═══════════════════════════════╗",
@@ -325,7 +325,7 @@ new UehQuestion(
 
             Console.CursorVisible = false;
 
-            // Shuffle the list using Fisher-Yates algorithm
+            // Dùng thuật toán Fisher-Yates để trộn câu hỏi
             Shuffle(questions);
             int score = 0;
             int wrongAnswers = 0;
@@ -368,14 +368,14 @@ new UehQuestion(
 
                     foreach (var question in questions.ToList())
                     {
-                        if (wrongAnswers == 3)//thua trò chơi
+                        if (wrongAnswers == 3)// Thua trò chơi
                         {
                             Console.Clear();
                             SaveAchievement(YourName, score);
                             GameRanking.SaveProgress(YourName, score);
                             DisplayLeaderboard();
                             Console.ReadKey();
-                            return; // Exit the game
+                            return; // Thoát trò chơi
                         }
 
                         //Hiển thị câu hỏi và đáp án ở phía dưới màn hình
