@@ -49,6 +49,102 @@ namespace UEH_Green
             }
             Console.ResetColor();
         }
+        public static string[] Bangmota(int x, int y)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            string[] bangmota = new string[]
+            {
+                @"                              HÀNH TRÌNH TRỞ THÀNH CHIẾN SĨ XANH                                    ",
+                @"  |━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━|  ",
+                @"  |Bộ câu hỏi 1:   Chiến thắng khi bạn trả lời đúng 10 câu hỏi về phân loại rác                  |  ",
+                @"  |Bộ câu hỏi 2:   Chiến thắng khi bạn trả lời đúng 10 câu hỏi về UEH Green                      |  ",
+                @"  |                                                                                              |  ",
+                @"  |Luật chơi: Bạn được phép trả lời sai 2 câu. Sai 3 câu trò chơi sẽ kết thúc                    |  ",
+                @"  |           Lưu lại bút danh (tối đa 22 kí tự, không vượt qua khung)                           |  ",
+                @"  |                                               để ghi nhận thành quả hoàn thành Chiến Sĩ Xanh |  ",
+                @"  |                                                                                              |  ",
+                @"  |Xếp loại: CS1(0-4): Tìm hiểu thêm nhé!                                *********************   |  ",
+                @"  |          CS2(5-9): Cố gắng vào lần sau!                              * Hoàn thành 20 câu *   |  ",
+                @"  |          CS3(10-14): Bạn đã có kiến thức cơ bản về UEH Green rồi!    *     Bạn là CSX    *   |  ",
+                @"  |          CS4(15-19): Bạn đã tiến gần đến danh hiệu Chiến Sĩ Xanh!    *********************   |  ",
+                @"  |                                                                                              |  ",
+                @"  |   << Trong quá trình chơi các UEHer sẽ được cung cấp một số thông tin các cơ sở về UEH >>    |  ",
+                @"  |━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━|  ",
+            };
+            for (int i = 0; i < bangmota.Length; i++)
+            {
+                Console.SetCursorPosition(x, y + i);
+                Console.WriteLine(bangmota[i]);
+            }
+            Console.ResetColor();
+            return bangmota;
+        }
+        public static string InputPlayerName()
+        {
+            // Bảng điền tên 
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.SetCursorPosition(Console.WindowWidth / 3, 19);
+            Console.WriteLine("CHÀO MỪNG BẠN ĐẾN VỚI CHIẾN SĨ XANH!");
+            string YourName = "";
+            bool validInput = false;
+
+            // Kích thước khung (tăng chiều rộng)
+            int frameWidth = 40;  // Kéo dài khung ra
+            int frameX = Console.WindowWidth / 3 - 5;  // Dịch khung sang trái
+            int frameY = 19 + 1;
+
+            // Vẽ khung nhập (nằm ngay dưới thông điệp chào mừng)
+            void DrawFrame()
+            {
+                // Vẽ cạnh trên và dưới, đặt khung ngay dưới thông điệp
+                Console.SetCursorPosition(frameX, frameY);
+                Console.Write("+");
+                Console.Write(new string('-', frameWidth));
+                Console.Write("+");
+
+                // Vẽ cạnh dưới (ở đây chúng ta chỉ cần một đường vì không có phần trống bên dưới)
+                Console.SetCursorPosition(frameX, frameY + 2);
+                Console.Write("+");
+                Console.Write(new string('-', frameWidth));
+                Console.Write("+");
+            }
+
+            // Xóa phần nội dung nhập trước
+            void ClearFrame()
+            {
+                Console.SetCursorPosition(frameX + 2, frameY + 1);  // Xóa phần sau "BÚT DANH :"
+                Console.Write(new string(' ', Console.WindowWidth - (frameY + 1)));  // Chỉ xóa phần nội dung
+            }
+
+            // Gọi hàm vẽ khung
+            DrawFrame();
+
+            // Nhập tên với giới hạn 22 ký tự
+            while (!validInput)
+            {
+                Console.SetCursorPosition(frameX + 2, frameY + 1);  // Đặt con trỏ ngay sau "BÚT DANH :"
+                Console.Write("BÚT DANH : ");
+                Console.SetCursorPosition(frameX + 12, frameY + 1);  // Đặt con trỏ ngay sau phần "BÚT DANH :"
+
+                YourName = Console.ReadLine();
+
+                if (YourName.Length <= 22 && !string.IsNullOrWhiteSpace(YourName))
+                {
+                    validInput = true;  // Đầu vào hợp lệ
+                }
+                else
+                {
+                    // Xóa dòng nhập trước đó
+                    ClearFrame();
+                }
+            }
+
+            // Xóa thông tin khung và khôi phục màu nền sau khi nhập
+            Console.ResetColor();
+            Console.Clear();
+
+            return YourName;
+        }
         public static void PrintEnterNFBanner(string[] banner)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -77,7 +173,6 @@ namespace UEH_Green
             }
             Console.ResetColor();
         }
-
         public static void printUEHBuilding1()
         {
             Console.ForegroundColor = ConsoleColor.White;
@@ -257,103 +352,6 @@ namespace UEH_Green
             }
             Console.ResetColor();
         }
-        public static string[] Bangmota(int x, int y)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            string[] bangmota = new string[]
-            {
-                @"                              HÀNH TRÌNH TRỞ THÀNH CHIẾN SĨ XANH                                    ",
-                @"  |━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━|  ",
-                @"  |Bộ câu hỏi 1:   Chiến thắng khi bạn trả lời đúng 10 câu hỏi về phân loại rác                  |  ",
-                @"  |Bộ câu hỏi 2:   Chiến thắng khi bạn trả lời đúng 10 câu hỏi về UEH Green                      |  ",
-                @"  |                                                                                              |  ",
-                @"  |Luật chơi: Bạn được phép trả lời sai 2 câu. Sai 3 câu trò chơi sẽ kết thúc                    |  ",
-                @"  |           Lưu lại bút danh (tối đa 22 kí tự, không vượt qua khung)                           |  ",
-                @"  |                                               để ghi nhận thành quả hoàn thành Chiến Sĩ Xanh |  ",
-                @"  |                                                                                              |  ",
-                @"  |Xếp loại: CS1(0-4): Tìm hiểu thêm nhé!                                *********************   |  ",
-                @"  |          CS2(5-9): Cố gắng vào lần sau!                              * Hoàn thành 20 câu *   |  ",
-                @"  |          CS3(10-14): Bạn đã có kiến thức cơ bản về UEH Green rồi!    *     Bạn là CSX    *   |  ",
-                @"  |          CS4(15-19): Bạn đã tiến gần đến danh hiệu Chiến Sĩ Xanh!    *********************   |  ",
-                @"  |                                                                                              |  ",
-                @"  |   << Trong quá trình chơi các UEHer sẽ được cung cấp một số thông tin các cơ sở về UEH >>    |  ",
-                @"  |━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━|  ",
-            };
-            for (int i = 0; i < bangmota.Length; i++)
-            {
-                Console.SetCursorPosition(x, y + i);
-                Console.WriteLine(bangmota[i]);
-            }
-            Console.ResetColor();
-            return bangmota;
-        }
-        public static string InputPlayerName()
-        {
-            // Bảng điền tên 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.SetCursorPosition(Console.WindowWidth / 3, 19);
-            Console.WriteLine("CHÀO MỪNG BẠN ĐẾN VỚI CHIẾN SĨ XANH!");
-            string YourName = "";
-            bool validInput = false;
-
-            // Kích thước khung (tăng chiều rộng)
-            int frameWidth = 40;  // Kéo dài khung ra
-            int frameX = Console.WindowWidth / 3 - 5;  // Dịch khung sang trái
-            int frameY = 19 + 1;
-
-            // Vẽ khung nhập (nằm ngay dưới thông điệp chào mừng)
-            void DrawFrame()
-            {
-                // Vẽ cạnh trên và dưới, đặt khung ngay dưới thông điệp
-                Console.SetCursorPosition(frameX, frameY);
-                Console.Write("+");
-                Console.Write(new string('-', frameWidth));
-                Console.Write("+");
-
-                // Vẽ cạnh dưới (ở đây chúng ta chỉ cần một đường vì không có phần trống bên dưới)
-                Console.SetCursorPosition(frameX, frameY + 2);
-                Console.Write("+");
-                Console.Write(new string('-', frameWidth));
-                Console.Write("+");
-            }
-
-            // Xóa phần nội dung nhập trước
-            void ClearFrame()
-            {
-                Console.SetCursorPosition(frameX + 2, frameY + 1);  // Xóa phần sau "BÚT DANH :"
-                Console.Write(new string(' ', Console.WindowWidth - (frameY + 1)));  // Chỉ xóa phần nội dung
-            }
-
-            // Gọi hàm vẽ khung
-            DrawFrame();
-
-            // Nhập tên với giới hạn 22 ký tự
-            while (!validInput)
-            {
-                Console.SetCursorPosition(frameX + 2, frameY + 1);  // Đặt con trỏ ngay sau "BÚT DANH :"
-                Console.Write("BÚT DANH : ");
-                Console.SetCursorPosition(frameX + 12, frameY + 1);  // Đặt con trỏ ngay sau phần "BÚT DANH :"
-
-                YourName = Console.ReadLine();
-
-                if (YourName.Length <= 22 && !string.IsNullOrWhiteSpace(YourName))
-                {
-                    validInput = true;  // Đầu vào hợp lệ
-                }
-                else
-                {
-                    // Xóa dòng nhập trước đó
-                    ClearFrame();
-                }
-            }
-
-            // Xóa thông tin khung và khôi phục màu nền sau khi nhập
-            Console.ResetColor();
-            Console.Clear();
-
-            return YourName;
-        }
-
         public static void TinhDiem(int score)
         {
 
