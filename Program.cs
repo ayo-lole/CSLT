@@ -6,14 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.ComponentModel;
-using UEH_Green;
 using System.Data.SqlClient;
 using System.Net;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Xml.Schema;
 
-namespace UEHGreen
+namespace UEH_Green
 {
     internal class Program
     {
