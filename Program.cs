@@ -493,7 +493,6 @@ new UehQuestion(
                     {
                         Console.Clear();
                         GiaoDien.PrintArt(Console.WindowWidth / 3, Console.WindowHeight / 7);
-                        DisplayLeaderboard();
                         Console.ReadKey();
                         Console.Clear();
                         continue;
@@ -505,6 +504,7 @@ new UehQuestion(
                         SaveAchievement(YourName, score);
                         GiaoDien win = new GiaoDien();
                         win.DisplayPrintWinArt();
+			DisplayLeaderboard();
                         Console.ReadKey();    
                         return;
                     }
