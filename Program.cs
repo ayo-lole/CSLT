@@ -468,47 +468,27 @@ new UehQuestion(
                         break;
                     }
                     //Hiện hình các cơ sở của UEH giới thiệu về trường
-                    if(score==5)
-                    {
-                        Console.Clear();
-                        GiaoDien.printUEHBuilding1();
-                        Console.ReadKey();
-                        Console.Clear();
-                        continue;
-                    }
-                    if (score == 8)
-                    {
-                        Console.Clear();
-                        GiaoDien.printUEHBuilding2();
-                        Console.ReadKey();
-                        Console.Clear();
-                        continue;
-
-                    }
-                    if (score == 12)
-                    {
-                        Console.Clear();
-                        GiaoDien.printUEHBuilding3();
-                        Console.ReadKey();
-                        Console.Clear();
-                        continue;
-                    }
-                    if (score == 15)
-                    {
-                        Console.Clear();
-                        GiaoDien.printUEHBuilding4();
-                        Console.ReadKey();
-                        Console.Clear();
-                        continue;
-                    }
-                    if (score == 18)
-                    {
-                        Console.Clear();
-                        GiaoDien.printUEHBuilding5();
-                        Console.ReadKey();
-                        Console.Clear();
-                        continue;
-                    }
+                   //Hiện hình các cơ sở của UEH giới thiệu về trường
+                   if(score == 5)
+                   {
+                       ShowUEHBuilding(GiaoDien.printUEHBuilding1);
+                   }
+                   if (score == 8)
+                   {
+                       ShowUEHBuilding(GiaoDien.printUEHBuilding2);
+                   }
+                   if (score == 12)
+                   {
+                       ShowUEHBuilding(GiaoDien.printUEHBuilding3);
+                   }
+                   if (score == 15)
+                   {
+                       ShowUEHBuilding(GiaoDien.printUEHBuilding4);
+                   }
+                   if (score == 18)
+                   {
+                       ShowUEHBuilding(GiaoDien.printUEHBuilding5);
+                   }
                     // Chiến thắng round1
                     if (score == 10)
                     {
@@ -522,6 +502,11 @@ new UehQuestion(
                     //Kết thúc toàn game
                     if (score == 20)
                     {
+			Console.Clear();
+                        SaveAchievement(YourName, score);
+                        GiaoDien win = new GiaoDien();
+                        win.DisplayPrintWinArt();
+                        Console.ReadKey();    
                         return;
                     }
                 }
@@ -752,6 +737,13 @@ new UehQuestion(
                 list[k] = temp;
             }
         }
+       static void ShowUEHBuilding(Action printBuilding)
+       {
+            Console.Clear();
+            printBuilding(); // Call the passed-in method to print the building
+            Console.ReadKey(); // Wait for a key press
+            Console.Clear(); // Clear the console again
+       } 
     }
     public class UehQuestion
     {
