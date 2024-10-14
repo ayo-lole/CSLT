@@ -329,9 +329,8 @@ new UehQuestion(
             Shuffle(questions);
             int score = 0;
             int wrongAnswers = 0;
-
             int health = 3; // Khai báo trái tim ban đầu mình có
-            const int Mtim
+            const int MaxHealth = 3;
             Console.CursorVisible = false; //Ẩn con trỏ chuột đi để giao diện trông đẹp hơn không bị rối
 
             while (true)
