@@ -506,5 +506,50 @@ namespace UEH_Green
             // Reset lại màu
             Console.ResetColor();
         }
+        public static void DrawFrame(string name)
+        {
+            int width = 50; // Chiều rộng khung
+            int height = 4; // Chiều cao khung
+
+            // Tạo mảng 2 chiều
+            char[,] frame = new char[height, width];
+
+            // Vẽ khung
+            for (int i = 0; i < width; i++)
+            {
+                frame[0, i] = '═'; // Đường trên
+                frame[height - 1, i] = '═'; // Đường dưới
+            }
+
+            // Các góc khung
+            frame[0, 0] = '╔'; // Góc trên trái
+            frame[0, width - 1] = '╗'; // Góc trên phải
+            frame[height - 1, 0] = '╚'; // Góc dưới trái
+            frame[height - 1, width - 1] = '╝'; // Góc dưới phải
+
+            // Đặt tên vào giữa khung (trong dòng thứ 2)
+            string displayName = $"      🌳🌳 || {name} || 🌳🌳";
+            int nameStart = (width - displayName.Length) / 2;
+
+            // Kiểm tra để tránh truy cập ngoài giới hạn mảng
+            if (nameStart >= 0 && nameStart + displayName.Length <= width)
+            {
+                for (int i = 0; i < displayName.Length; i++)
+                {
+                    frame[1, nameStart + i] = displayName[i]; // Dòng thứ 2 chứa tên
+                }
+            }
+
+            // In khung ra console
+            Console.SetCursorPosition(0, 0);
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    Console.Write(frame[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
