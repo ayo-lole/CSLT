@@ -470,7 +470,7 @@ namespace UEHGreen
                         DisplayLeaderboard();
                         Console.ReadKey();
 			Console.Clear();// Xóa màn hình ván cũ và lịch sử
-                        continue; // Exit the game
+                        continue; // Thoát màn hình
                     }
                 }
                 else
