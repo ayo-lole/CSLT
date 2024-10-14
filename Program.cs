@@ -152,6 +152,7 @@ new UehQuestion(
                 Console.WriteLine("Không thể thay đổi kích thước cửa sổ console: " + ex.Message);
                 // Log lỗi chi tiết nếu cần
             }
+	    Console.Clear();
 
             // Giao diện bắt đầu
             Console.CursorVisible = false;
