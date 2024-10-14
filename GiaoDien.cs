@@ -508,7 +508,7 @@ namespace UEH_Green
         }
         public static void DrawFrame(string name)
         {
-            int width = 50; // Chiều rộng khung
+            int width = 64; // Chiều rộng khung
             int height = 4; // Chiều cao khung
 
             // Tạo mảng 2 chiều
@@ -528,7 +528,7 @@ namespace UEH_Green
             frame[height - 1, width - 1] = '╝'; // Góc dưới phải
 
             // Đặt tên vào giữa khung (trong dòng thứ 2)
-            string displayName = $"      🌳🌳 || {name} || 🌳🌳";
+            string displayName = $"              🌳🌳 || {name} || 🌳🌳";
             int nameStart = (width - displayName.Length) / 2;
 
             // Kiểm tra để tránh truy cập ngoài giới hạn mảng
