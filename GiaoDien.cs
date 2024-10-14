@@ -206,7 +206,7 @@ namespace UEH_Green
             "|          ║  ║  ║  ║  ║  ║  ║  ║  ║  ║   ║   ║   ║   ║   ║   ║   ║  |    |    đề, thủ tục liên quan đến hồ sơ giấy tờ |" + '\n' +
             "|__________║__║__║__║__║__║__║  ║  ║  ║   ║___║___║___║___║___║___║__|    |    như cấp giấy chứng nhận sinh viên,...   |" + '\n' +
             "                                                                           --------------------------------------------  " + '\n' +
-            "                          << CỞ SỞ A >>                                                                                 "
+            "                          << CƠ SỞ A >>                                                                                 "
                 };
             foreach (var line in truong1)
             {
@@ -242,7 +242,7 @@ namespace UEH_Green
             "                     |   ║   ║   ║  ║  |                                                                             " + '\n' +
             "                     |___║___║___║__║__|                                                                             " + '\n' +
             "                                                                                                                     " + '\n' +
-            "                        << CỞ SỞ B >>                                                                                "
+            "                        << CƠ SỞ B >>                                                                                "
 
                 };
             foreach (var line in truong2)
@@ -279,7 +279,7 @@ namespace UEH_Green
              "                     |--------|    |   |                                                                             " + '\n' +
              "                     |________|____|___|                                                                             " + '\n' +
              "                                                                                                                     " + '\n' +
-             "                       << CỞ SỞ I >>                                                                                 "
+             "                       << CƠ SỞ I >>                                                                                 "
 
                 };
             foreach (var line in truong3)
@@ -316,7 +316,7 @@ namespace UEH_Green
              "                   |     ║  |           |                 1A Hoàng Diệu, phường 10, Quận Phú Nhuận, TP. Hồ Chí Minh. " + '\n' +
              "                   |_____║__|___________|                                                                            " + '\n' +
              "                                                                                                                     " + '\n' +
-             "                       << CỞ SỞ H >>                                                                                 "
+             "                       << CƠ SỞ H >>                                                                                 "
 
                  };
             foreach (var line in truong4)
@@ -352,7 +352,7 @@ namespace UEH_Green
              "                     |  ║   ║   ║   ║ | | | ║   ║   ║   ║  |                         ║ ------() UEH  ║                 " + '\n' +
              "                     |__║___║___║___║_|_|_|_║___║___║___║__|                         ╚═══════════════╝                 " + '\n' +
              "                                                                                      UEH Shuttle Bus                  " + '\n' +
-             "                                   << CỞ SỞ N >>                                                                       "
+             "                                   << CƠ SỞ N >>                                                                       "
 
 
                  };
