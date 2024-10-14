@@ -338,10 +338,10 @@ new UehQuestion(
             {
                 Console.SetCursorPosition(0, 0); //Vị trí đặt khung
                 // Vẽ khung chứa tên và in điểm ra sau mỗi lần trả lời đúng
-                Console.WriteLine("╔════════════════════════════════╗");
-                Console.WriteLine($"   🌳||{YourName}||🌳                ");
-                Console.WriteLine("║                                ║");
-                Console.WriteLine("╚════════════════════════════════╝");
+                Console.WriteLine("╔═══════════════════════════════════════════════╗");
+                Console.WriteLine($"           🌳🌳||{YourName}||🌳🌳                 ");
+                Console.WriteLine("║                                               ║");
+                Console.WriteLine("╚═══════════════════════════════════════════════╝");
 
                 // Vẽ khung chứa trái tim và thùng rác, và mỗi lần trả lời sai sẽ có sự thay đổi giữa hai biểu tượng dựa vào biến health
                 GiaoDien.DrawHealthBar(health, MaxHealth);
