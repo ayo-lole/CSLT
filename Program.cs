@@ -473,7 +473,7 @@ new UehQuestion(
                         break;
                     }
                     //Hiện hình các cơ sở của UEH giới thiệu về trường
-                    if(score==1)
+                    if(score==5)
                     {
                         Console.Clear();
                         GiaoDien.printUEHBuilding1();
