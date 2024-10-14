@@ -115,6 +115,7 @@ new UehQuestion(
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
+	    //Xử lý ngoại lệ lỗi kích thước màn hình trò chơichơi	
             try
             {
                 if (Environment.OSVersion.Platform == PlatformID.Win32NT)
@@ -154,13 +155,11 @@ new UehQuestion(
             }
 	    Console.Clear();
 
-            // Giao diện bắt đầu
+            // Giao diện đầu vào trò chơi
             Console.CursorVisible = false;
-            GiaoDien intro = new GiaoDien();
-            intro.DisplayIntro();
-
-            // Wait for user input to continue
-            Console.ReadLine();
+            GiaoDien intro = new GiaoDien(); //Đoạn mã này tạo ra một đối tượng của lớp GiaoDien và sau đó gọi phương thức DisplayIntro() của đối tượng đó.
+            intro.DisplayIntro(); //Thực hiện chức năng
+            Console.ReadLine(); // Đợi ngời dùng nhập tiếp 
             Console.Clear();
 
             //Giao diện giới thiệu game  
@@ -168,7 +167,7 @@ new UehQuestion(
 
             //Bảng điền tên 
             string YourName = GiaoDien.InputPlayerName();
-
+            // Giao diện chuyển cảnh trước khi bắt đầu trò chơi hỏi xem người chơi có muốn xem lịch sử trước đó khôngkhông 
             string[] banner = new string[]
 {
             @"╔════════════════════════════╗                          ╔═══════════════════════════════╗",
@@ -179,9 +178,9 @@ new UehQuestion(
 
 };
             Console.ForegroundColor = ConsoleColor.Green;
-            GiaoDien.PrintEnterNFBanner(banner);
+            GiaoDien.PrintEnterNFBanner(banner); //Gọi hàm bên class Giao Diện, hàm này tính toán tính vị trí và màu sắc
             Console.ResetColor();
-            DisplayLeaderboard();
+            DisplayLeaderboard(); //Gọi hàm này để kiểm tra phím bấm vào F thì hiện lịch sử, Enter thì vào chơi 
             Console.Clear();
 
             string[] runningAnimation =
@@ -316,11 +315,11 @@ new UehQuestion(
               @"  ║♻️║ " + '\n' +
               @"  \__/   ";
             #endregion
-            int position = 0;
-            int? runningFrame = 0;
+            int position = 0; //Biến vị trí của nhân vật
+            int? runningFrame = 0; //
             int? jumpingFrame = null;
-            int hurdlePosition = 50;
-            bool isStopped = false;
+            int hurdlePosition = 50; //Biến vị trí (đầu tiên) của vật cản
+            bool isStopped = false; //
             const int stopDistance = 10; // Khoảng cách dừng lại trước vật cản
 
 
@@ -331,29 +330,30 @@ new UehQuestion(
             int score = 0;
             int wrongAnswers = 0;
 
-            int health = 3; // Số lượng cục máu tối đa
-            const int MaxHealth = 3;
-            Console.CursorVisible = false;
+            int health = 3; // Khai báo trái tim ban đầu mình có
+            const int Mtim
+            Console.CursorVisible = false; //Ẩn con trỏ chuột đi để giao diện trông đẹp hơn không bị rối
 
             while (true)
             {
-                Console.SetCursorPosition(0, 0);
-                // Vẽ khung
+                Console.SetCursorPosition(0, 0); //Vị trí đặt khung
+                // Vẽ khung chứa tên và in điểm ra sau mỗi lần trả lời đúng
                 Console.WriteLine("╔════════════════════════════════╗");
                 Console.WriteLine($"   🌳||{YourName}||🌳                ");
                 Console.WriteLine("║                                ║");
                 Console.WriteLine("╚════════════════════════════════╝");
 
-
+                // Vẽ khung chứa trái tim và thùng rác, và mỗi lần trả lời sai sẽ có sự thay đổi giữa hai biểu tượng dựa vào biến health
                 GiaoDien.DrawHealthBar(health, MaxHealth);
+		//    
                 string playerFrame =
                     jumpingFrame.HasValue ? jumpingAnimation[jumpingFrame.Value] :
                     runningAnimation[runningFrame.GetValueOrDefault()];
 
-                //Kiểm tra phím nhấn 
+                //Kiểm tra phím nhấn nếu bấm Esc sẽ thoát khỏi trò chơi
                 if (Console.KeyAvailable)
                 {
-                    var key = Console.ReadKey(true).Key;
+                    var key = Console.ReadKey(true).Key; //
                     if (key == ConsoleKey.Escape)
                     {
                         Console.Clear();
