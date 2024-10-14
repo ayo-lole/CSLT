@@ -450,12 +450,6 @@ new UehQuestion(
                         {
                             // Clear the previous question and answer text without clearing the whole screen
                             UehQuestionHandle.ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1); // Adjust +1 for the question
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
 
                             wrongAnswers++;
                             health--;
