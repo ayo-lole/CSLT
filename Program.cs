@@ -389,7 +389,7 @@ namespace UEHGreen
                         string userAnswer = "";
                         bool isValidAnswer = false; // Flag for valid input
 
-                        while (!isValidAnswer) // Continue until valid input is provided
+                        while (!isValidAnswer) // Tiếp tục ấn cho tới khi người chơi nhập đúng
                         {
                             try
                             {
@@ -397,35 +397,35 @@ namespace UEHGreen
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.Write("Điền A, B, C, hoặc D để trả lời: ");
                                 Console.ResetColor();
-                                // Get player input
+                                // Nhận nút của người chơi
                                 Console.ForegroundColor = ConsoleColor.Cyan;
                                 userAnswer = Console.ReadKey().KeyChar.ToString().ToUpper();
 
                                 Console.ResetColor();
-                                // Check if input is valid
+                                // Kiểm tra nút bấm
                                 if (!new[] { "A", "B", "C", "D" }.Contains(userAnswer))
                                 {
-                                    // If invalid input, throw an exception
+                                    // Nhập sai, tạo ra ngoại lệ
                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                     throw new InvalidOperationException("Phím không hợp lệ. Vui lòng nhập A, B, C, hoặc D.");
 
                                 }
 
-                                // If valid input, set the flag to true to exit the loop
+                                // Nhập đúng, thoát ra để tiếp tục mạch game
                                 isValidAnswer = true;
                             }
                             catch (InvalidOperationException ex)
                             {
-                                // Handle invalid input exception
+                                // Xử lý ngoại lệ khi nhập sai
                                 Console.WriteLine($"\n{ex.Message}");
 
-                                // Move cursor up to avoid clutter from repeated invalid input
+                                // Di chuyển trỏ chuột để tránh cấn dòng khi nhập sai
                                 Console.SetCursorPosition(0, Console.CursorTop - 2);
                             }
                         }
 
-                        ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1);  // Clear the entire screen
-                                                                                                 //Xử lí đáp án 
+                        ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1);  // Xóa toàn bộ màn hình
+                        //Xử lí đáp án 
                         if (userAnswer == question.CorrectAnswer)
                         {
                             score++;
@@ -721,11 +721,11 @@ namespace UEHGreen
             string filePath = "UEHer.txt";
             Console.CursorVisible = false;
 
-            while (true) // Loop until the user chooses to exit
+            while (true) // Lặp lại cho tới khi người chơi thoát
             {
                 var key = Console.ReadKey(true).Key;
 
-                if (key == ConsoleKey.F) // Press F to display the leaderboard
+                if (key == ConsoleKey.F) // Nhấn F để hiện bảng thành tích
                 {
                     if (!File.Exists(filePath))
                     {
