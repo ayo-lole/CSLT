@@ -378,7 +378,7 @@ new UehQuestion(
                         {
                             Console.Clear();
                             SaveAchievement(YourName, score);
-                            SaveGameRanking(YourName, score);
+                            GameRanking.SaveProgress(YourName, score);
                             DisplayLeaderboard();
                             Console.ReadKey();
                             return; // Exit the game
@@ -641,16 +641,7 @@ new UehQuestion(
                 }
             }
         }
-        static void SaveGameRanking(string YourName, int score)
-        {
-            // Gọi phương thức CalculateRank để lấy hạng
-            string rank = GameRanking.CalculateRank(score);
-
-            // Lưu điểm và hạng vào file
-            GameRanking.SaveProgress(YourName, score);
-
-        }
-                static void DisplayLeaderboard()
+        static void DisplayLeaderboard()
         {
             string filePath = "UEHer.txt";
             Console.CursorVisible = false;
