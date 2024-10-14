@@ -443,8 +443,8 @@ namespace UEHGreen
 
                         else
                         {
-                            // Clear the previous question and answer text without clearing the whole screen
-                            ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1); // Adjust +1 for the question
+                            // Xóa câu hỏi và câu trả lời, tránh xóa toàn bộ màn hình chơi
+                            ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1); // +1 câu hỏi
                             Console.WriteLine();
                             Console.WriteLine();
                             Console.WriteLine();
