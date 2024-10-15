@@ -11,35 +11,35 @@ namespace UEH_Green
     {
         public void DisplayIntro()
         {
-            
+
             string[] introArt = new string[]
             {
             @"╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗",
             @"║                                                                                                                      ║",
-            @"║                                                    @@@@@    @@                               @@@@   @                ║",
-            @"║                                                  @@@   @@@ @@                               @   @@@@                 ║",
+            @"║                                               /$$$$$       /$$                     /$$ /$                            ║",
+            @"║                                              /$$/ \$$     /$$/                    /$$ $ $                            ║",
+            @"║                                             |_/    \_/   |__/                    |__/\_/                             ║",
             @"║                                                                                                                      ║",
-            @"║                  @@@@@@@     @@@     @@@   @@@   @@@@@@@@@   @@@@    @@@          @@@@@@@@@    @@@                   ║",
-            @"║                 @@@@@@@@@    @@@     @@@   @@@   @@@         @@@@@   @@@         @@@@@@@@@@@   @@@                   ║",
-            @"║                @@@@      @   @@@     @@@   @@@   @@@         @@@@@@  @@@          @@@@    @@   @@@                   ║",
-            @"║                @@@@          @@@@@@@@@@@   @@@   @@@@@@@@@   @@@ @@@ @@@             @@@       @@@                   ║",
-            @"║                @@@@      @   @@@     @@@   @@@   @@@         @@@  @@@@@@         @@    @@@@    @@@                   ║",
-            @"║                 @@@@@@@@@    @@@     @@@   @@@   @@@         @@@   @@@@@         @@@@@@@@@@@   @@@                   ║",
-            @"║                  @@@@@@@     @@@     @@@   @@@   @@@@@@@@@   @@@    @@@@          @@@@@@@@@    @@@                   ║",
+            @"║                 / $$$$$$ / $$  / $$/ $$$$$$/ $$$$$$$$/ $$  / $$          /$$$$$$ / $$$$$$                            ║",
+            @"║                / $$__  $$| $$  | $$|_  $$_/| $$_____/| $$$ | $$         /$$__  $$|_  $$_/                            ║",
+            @"║                | $$  \__/| $$  | $$  | $$  | $$      | $$$$| $$        | $$  \__/  | $$                              ║",
+            @"║                | $$      | $$$$$$$$  | $$  | $$$$$   | $$ $$ $$        |  $$$$$$   | $$                              ║",
+            @"║                | $$      | $$__  $$  | $$  | $$__/   | $$  $$$$         \____  $$  | $$                              ║",
+            @"║                | $$    $$| $$  | $$  | $$  | $$      | $$\  $$$         /$$  \ $$  | $$                              ║",
+            @"║                |  $$$$$$/| $$  | $$ /$$$$$$| $$$$$$$$| $$ \  $$        |  $$$$$$/ /$$$$$$                            ║",
+            @"║                 \______/ |__/  |__/|______/|________/|__/  \__/         \______/ |______/                            ║",
             @"║                                                                                                                      ║",
-            @"║            @@@     @@@     @@@@@@@     @@@@    @@@   @@@     @@@                           ccc@@\                    ║",
-            @"║            @@@     @@@    @@@@@@@@@    @@@@@   @@@   @@@     @@@               cc@@@@@@\ /ccc@@@|                    ║",
-            @"║             @@@   @@@    @@@     @@@   @@@@@@  @@@   @@@     @@@              /ccccc@@@@@\@ccc@@/ccccc\              ║",
-            @"║               @@@@@      @@@@@@@@@@@   @@@ @@@ @@@   @@@@@@@@@@@              cccccccccc@@\@@@/cccc@@@@              ║",
-            @"║             @@@   @@@    @@@     @@@   @@@  @@@@@@   @@@     @@@              \cccccccccc@|cccccc@@@@@/              ║",
-            @"║            @@@     @@@   @@@     @@@   @@@   @@@@@   @@@     @@@                   \ccccc@ccc@@@@@@/                 ║",
-            @"║            @@@     @@@   @@@     @@@   @@@    @@@@   @@@     @@@                    cccccccccc@@                     ║",
-            @"║                                                                                     |          |                     ║",
-            @"║                                             ╔════════════════════════╗             /*  >    <  *\                    ║",
-            @"║                                             ║      >>> Enter <<<     ║            |***   0    ***|                   ║",
-            @"║                                             ╚════════════════════════╝            |**************|                   ║",
-            @"║                                                                                                                      ║",
-            @"║                                                                                                                      ║",
+            @"║                     / $$   /$$  /$$$$$$  / $$ / $$/ $$  / $$                   cccc@@@\   cc@@@@@@\                  ║",
+            @"║                     | $$  / $$ /$$__  $$| $$$ | $$| $$  | $$                  c@@@@@@@@\ /ccccc@@@|                  ║",
+            @"║                     |  $$/ $$/| $$  \ $$| $$$$| $$| $$  | $$                /cccccc@@@@@\@ccc@@/ccccccccc            ║",
+            @"║                      \  $$$$/ | $$$$$$$$| $$ $$ $$| $$$$$$$$               cccccccccccc@@\@@@/cccccccccc@\           ║",
+            @"║                       >$$  $$ | $$__  $$| $$  $$$$| $$__  $$               cccccccccccccc@|/ccccccccccc@@@           ║",
+            @"║                      /$$/\  $$| $$  | $$| $$\  $$$| $$  | $$                \ccccccccccccc@|ccccccc@@@@@@/           ║",
+            @"║                     | $$  \ $$| $$  | $$| $$ \  $$| $$  | $$                     \ccccccc@|ccc@@@@@@@@@/             ║",
+            @"║                     |__/  |__/|__/  |__/|__/  \__/|__/  |__/                       ccccccccccccc@@                   ║",
+            @"║                                                                                    |             |                   ║",
+            @"║                                              ╔═══════════════════════╗            /*   >     <   *\                  ║",
+            @"║                                              ║     >>> Enter <<<     ║           /**      0      **\                 ║",
             @"╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"
             };
 
@@ -212,11 +212,11 @@ namespace UEH_Green
             {
                 Console.WriteLine(line);
             }
-            Console.ResetColor ();
+            Console.ResetColor();
         }
         public static void printUEHBuilding2()
         {
-            
+
             Console.ForegroundColor = ConsoleColor.Blue;
             string[] truong2 = new string[]
                 {
@@ -253,7 +253,7 @@ namespace UEH_Green
         }
         public static void printUEHBuilding3()
         {
-            
+
             Console.ForegroundColor = ConsoleColor.DarkRed;
             string[] truong3 = new string[]
                 {
@@ -290,7 +290,7 @@ namespace UEH_Green
         }
         public static void printUEHBuilding4()
         {
-            Console.ForegroundColor= ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             string[] truong4 = new string[]
                 {
              "Nhấn Enter để tiếp tục...                                                                                            " + '\n' +
@@ -327,7 +327,7 @@ namespace UEH_Green
         }
         public static void printUEHBuilding5()
         {
-            
+
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             string[] truong5 = new string[]
                 {
@@ -460,33 +460,33 @@ namespace UEH_Green
             {
 
 
-            @"╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════╗",
-            @"║ccccccccccccccccc@@@@@@cccccccccccccccccc@@@@@@                                         ██╗                   ║",
-            @"║cccccccccccccccccc@@@@@@cccccccccccccccccc@@@@@                                        ██╔╝                   ║",
-            @"║ccccccccccccccccccc@@@@@@cccccccccccccccccc@@@@                                        ╚═╝                    ║",
-            @"║cccccccccccccccccccc@@@@@@cccccccccccccccccc@@                      ██████╗ ██╗  ██╗██╗   ██╗ ██████╗         ║",
-            @"║ccccccccccccccccccccc@@@@@cccccccccccccc@@@@@@@@@@@@@@@@@@         ██╔═══██╗██║  ██║██║   ██║██╔═══██╗        ║",
-            @"║cccccccccccccccccccccc@@@@@ccccccc@@@@@@ccccccccc@@@@@@@@@@        ██║      ███████║██║   ██║██║              ║",
-            @"║ccccccccccccccccccccccc@@@@cccc@@@ccccccccccccccccccc@@@@@@@       ██║   ██║██╔══██║██║   ██║██║   ██║        ║",
-            @"║@@@@@@@cccccccccccccccc@@@@c@@@ccccccccccccccccccccccc@@@@@@@      ╚██████╔╝██║  ██║╚██████╔╝╚██████╔╝        ║",
-            @"║       @@@cccccccccccccc@@@@ccccccccccccccccccccccccccc@@@@@@@      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝         ║",
-            @"║          @ccccccccccccc@@ccccccccccccccccccccccccccccccc@@@@@@                                               ║",
-            @"║          @cccccccccccc@@ccccccccccccccccccccccccccccccccc@@@@@                ██╗                            ║",
-            @"║          @cccccccccccc@cccccccccccccccccccccccccccccccccc@@@@@                ╚██║                           ║",
-            @"║       @@@@cccccccccccc@ccccccccccccccccccccccccccccccccccc@@@@                 ╚═╝                           ║",
-            @"║    @@@@ccc            @ccccccccccc@@cccccccccccccccccccccc@@@                      ██╗                       ║",
-            @"║ @@**                       cccccc@@  @@@cccccccccccccccccc@@     ███╗   ███╗██╗   ██╔╝███╗   ██╗ ██████╗     ║",
-            @"║@**                           cc@@       @@@ccccccccccc@@@@       ████╗ ████║██║   ██║ ████╗  ██║██╔═══██╗    ║",
-            @"║**                            c@            @@@@@@@@@@@           ██╔████╔██║██║   ██║ ██╔██╗ ██║██║  ███║    ║",
-            @"║*       @                    ***@                                 ██║╚██╔╝██║██║   ██║ ██║╚██╗██║██║   ██║    ║",
-            @"║         @                    ***@                                ██║ ╚═╝ ██║╚██████╔╝ ██║ ╚████║╚██████╔╝    ║",
-            @"║     @@@@@             @@      ***@                               ╚═╝     ╚═╝ ╚═════╝  ╚═╝  ╚═══╝ ╚═════╝     ║",
-            @"║                     @@@@       **@                                                                           ║",
-            @"║             @      @@@@         **@                             CHIẾN SĨ ĐÃ XUẤT SẮC VƯỢT QUA TRÒ CHƠI       ║",
-            @"║                    @@            *@                                 ════  VÌ MỘT TRÁI ĐẤT XANH ════          ║",
-            @"║                                  *@                                                                          ║",
-            @"║                                   @                                    >> Nhấn F để xem lịch sử <<           ║",
-            @"╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════╝",
+            @"╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗",
+            @"║ccccccccccccccccc@@@@@@cccccccccccccccccc@@@@@@                                             ██╗                       ║",
+            @"║cccccccccccccccccc@@@@@@cccccccccccccccccc@@@@@                                            ██╔╝                       ║",
+            @"║ccccccccccccccccccc@@@@@@cccccccccccccccccc@@@@                                            ╚═╝                        ║",
+            @"║cccccccccccccccccccc@@@@@@cccccccccccccccccc@@                           ██████╗ ██╗  ██╗██╗   ██╗ ██████╗            ║",
+            @"║ccccccccccccccccccccc@@@@@cccccccccccccc@@@@@@@@@@@@@@@@@@              ██╔═══██╗██║  ██║██║   ██║██╔═══██╗           ║",
+            @"║cccccccccccccccccccccc@@@@@ccccccc@@@@@@ccccccccc@@@@@@@@@@             ██║      ███████║██║   ██║██║                 ║",
+            @"║ccccccccccccccccccccccc@@@@cccc@@@ccccccccccccccccccc@@@@@@@            ██║   ██║██╔══██║██║   ██║██║   ██║           ║",
+            @"║@@@@@@@cccccccccccccccc@@@@c@@@ccccccccccccccccccccccc@@@@@@@           ╚██████╔╝██║  ██║╚██████╔╝╚██████╔╝           ║",
+            @"║       @@@cccccccccccccc@@@@ccccccccccccccccccccccccccc@@@@@@@           ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝            ║",
+            @"║          @ccccccccccccc@@ccccccccccccccccccccccccccccccc@@@@@@                                                       ║",
+            @"║          @cccccccccccc@@ccccccccccccccccccccccccccccccccc@@@@@                      ██╗                              ║",
+            @"║          @cccccccccccc@cccccccccccccccccccccccccccccccccc@@@@@                      ╚██║                             ║",
+            @"║       @@@@cccccccccccc@ccccccccccccccccccccccccccccccccccc@@@@                       ╚═╝                             ║",
+            @"║    @@@@ccc            @ccccccccccc@@cccccccccccccccccccccc@@@                            ██╗                         ║",
+            @"║ @@**                       cccccc@@  @@@cccccccccccccccccc@@           ███╗   ███╗██╗   ██╔╝███╗   ██╗ ██████╗       ║",
+            @"║@**                           cc@@       @@@ccccccccccc@@@@             ████╗ ████║██║   ██║ ████╗  ██║██╔═══██╗      ║",
+            @"║**                            c@            @@@@@@@@@@@                 ██╔████╔██║██║   ██║ ██╔██╗ ██║██║  ███║      ║",
+            @"║*       @                    ***@                                       ██║╚██╔╝██║██║   ██║ ██║╚██╗██║██║   ██║      ║",
+            @"║         @                    ***@                                      ██║ ╚═╝ ██║╚██████╔╝ ██║ ╚████║╚██████╔╝      ║",
+            @"║     @@@@@             @@      ***@                                     ╚═╝     ╚═╝ ╚═════╝  ╚═╝  ╚═══╝ ╚═════╝       ║",
+            @"║                     @@@@       **@                                                                                   ║",
+            @"║             @      @@@@         **@                                    CHIẾN SĨ ĐÃ XUẤT SẮC VƯỢT QUA TRÒ CHƠI        ║",
+            @"║                    @@            *@                                         ════  VÌ MỘT TRÁI ĐẤT XANH ════          ║",
+            @"║                                  *@                                                                                  ║",
+            @"║                                   @                >> Nhấn F để xem lịch sử <<                                       ║",
+            @"╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝",
             };
 
 
