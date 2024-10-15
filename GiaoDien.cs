@@ -61,11 +61,15 @@ namespace UEH_Green
         }
         public static string[] Bangmota(int x, int y)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
             string[] bangmota = new string[]
             {
-                @"                              HÀNH TRÌNH TRỞ THÀNH CHIẾN SĨ XANH                                    ",
-                @"  |━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━|  ",
+                @"                                      ██████╗███████╗██╗  ██╗                                       ",
+                @"                                     ██╔════╝██╔════╝╚██╗██╔╝                                       ",
+                @"                                     ██║     ███████╗ ╚███╔╝                                        ",
+                @"                                     ██║     ╚════██║ ██╔██╗                                        ",
+                @"                                     ╚██████╗███████║██╔╝ ██╗                                       ",
+                @"                                      ╚═════╝╚══════╝╚═╝  ╚═╝                                       ",
+                @"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   ",
                 @"  |Bộ câu hỏi 1:   Chiến thắng khi bạn trả lời đúng 10 câu hỏi về phân loại rác                  |  ",
                 @"  |Bộ câu hỏi 2:   Chiến thắng khi bạn trả lời đúng 10 câu hỏi về UEH Green                      |  ",
                 @"  |                                                                                              |  ",
@@ -79,13 +83,23 @@ namespace UEH_Green
                 @"  |          CS4(15-19): Bạn đã tiến gần đến danh hiệu Chiến Sĩ Xanh!    *********************   |  ",
                 @"  |                                                                                              |  ",
                 @"  |   << Trong quá trình chơi các UEHer sẽ được cung cấp một số thông tin các cơ sở về UEH >>    |  ",
-                @"  |━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━|  ",
+                @"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   ",
             };
+
             for (int i = 0; i < bangmota.Length; i++)
             {
+                if (bangmota[i].Contains("█")) 
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else 
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                }
                 Console.SetCursorPosition(x, y + i);
                 Console.WriteLine(bangmota[i]);
             }
+
             Console.ResetColor();
             return bangmota;
         }
@@ -93,7 +107,7 @@ namespace UEH_Green
         {
             // Bảng điền tên 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.SetCursorPosition(Console.WindowWidth / 3, 19);
+            Console.SetCursorPosition(Console.WindowWidth / 3, 23);
             Console.WriteLine("CHÀO MỪNG BẠN ĐẾN VỚI CHIẾN SĨ XANH!");
             string YourName = "";
             bool validInput = false;
@@ -101,7 +115,7 @@ namespace UEH_Green
             // Kích thước khung (tăng chiều rộng)
             int frameWidth = 40;  // Kéo dài khung ra
             int frameX = Console.WindowWidth / 3 - 5;  // Dịch khung sang trái
-            int frameY = 19 + 1;
+            int frameY = 23 + 1;
 
             // Vẽ khung nhập (nằm ngay dưới thông điệp chào mừng)
             void DrawFrame()
