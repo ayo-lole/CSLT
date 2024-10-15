@@ -692,7 +692,7 @@ new UehQuestion(
                         // Chân trang: Hiển thị hướng dẫn điều hướng trang
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.SetCursorPosition(0, consoleHeight - 2);
-                        Console.WriteLine($"Trang {currentPage}/{totalPages} - Nhấn ← hoặc → để chuyển trang, Enter để thoát.");
+                        Console.WriteLine($"Trang {currentPage}/{totalPages} - Nhấn ← hoặc → để chuyển trang, Enter 2 lần để thoát.");
                         Console.ResetColor();
 
                         // Chờ người dùng nhập để điều hướng hoặc thoát
