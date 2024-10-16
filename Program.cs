@@ -172,7 +172,7 @@ new UehQuestion(
 {
             @"╔════════════════════════════╗                          ╔═══════════════════════════════╗",
             @"║                            ║                          ║                               ║",
-            @"║  >>Nhấn ENTER để CHƠI<<    ║                          ║   >>Nhấn F để XEM LỊCH SỬ<<   ║",
+            @"║   >>Nhấn ENTER để CHƠI<<   ║                          ║   >>Nhấn F để XEM LỊCH SỬ<<   ║",
             @"║                            ║                          ║                               ║",
             @"╚════════════════════════════╝                          ╚═══════════════════════════════╝",
 
@@ -335,6 +335,10 @@ new UehQuestion(
 
             while (true)
             {
+		// Vẽ con đường
+		GiaoDien.Road();
+		// Vẽ đám mây    
+		GiaoDien.Cloud();
                 // Vẽ khung chứa tên và in điểm ra sau mỗi lần trả lời đúng
                 GiaoDien.DrawFrame(YourName);
                 // Vẽ khung chứa trái tim và thùng rác, và mỗi lần trả lời sai sẽ có sự thay đổi giữa hai biểu tượng dựa vào biến health
@@ -509,19 +513,19 @@ new UehQuestion(
                 }
 
                 // Xác định khung hình 
-                Console.SetCursorPosition(4, 8);
+                Console.SetCursorPosition(4, 11);
                 Render(playerFrame, true);
                 RenderHurdles(true);
                 if (position % 50 < 3)
                 {
-                    Console.SetCursorPosition(4, 8);
+                    Console.SetCursorPosition(4, 11);
                     Render(playerFrame, false);
                     RenderHurdles(false);
                 }
                 else
                 {
                     RenderHurdles(false);
-                    Console.SetCursorPosition(4, 8);
+                    Console.SetCursorPosition(4, 11);
                     Render(playerFrame, false);
                 }
                 // Cập nhật trạng thái 
@@ -560,7 +564,7 @@ new UehQuestion(
             void RenderHurdles(bool renderEnter)
             {
                 // Xóa các vị trí cũ của vật cản trên màn hình
-                Console.SetCursorPosition(0, 10);
+                Console.SetCursorPosition(0, 13);
                 Console.Write(new string(' ', Console.WindowWidth));
 
                 // Vẽ vật cản ở các vị trí hiện tại
@@ -569,7 +573,7 @@ new UehQuestion(
                     int hurdleOffset = hurdlePosition - position;
                     // Đảm bảo hurdleOffset không âm và không vượt quá kích thước của cửa sổ
                     hurdleOffset = Math.Max(0, Math.Min(Console.WindowWidth - hurdleFrame.Length, hurdleOffset));
-                    Console.SetCursorPosition(hurdleOffset, 10);
+                    Console.SetCursorPosition(hurdleOffset, 13);
                     Render(hurdleFrame, renderEnter);
 
                 }
