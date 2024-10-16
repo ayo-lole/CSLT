@@ -317,16 +317,12 @@ new UehQuestion(
             #endregion
             int position = 0; //Biến vị trí của nhân vật
             int? runningFrame = 0; //
-            int? jumpingFrame = null;
+            int? jumpingFrame = null;//
             int hurdlePosition = 50; //Biến vị trí (đầu tiên) của vật cản
-            bool isStopped = false; //
+            bool isStopped = false; // 
             const int stopDistance = 10; // Khoảng cách dừng lại trước vật cản
-
-
-            Console.CursorVisible = false;
-
-            // Dùng thuật toán Fisher-Yates để trộn câu hỏi
-            Shuffle(questions);
+            
+            Shuffle(questions); // Dùng thuật toán Fisher-Yates để trộn câu hỏi
             int score = 0;
             int wrongAnswers = 0;
             int health = 3; // Khai báo trái tim ban đầu mình có
@@ -343,7 +339,11 @@ new UehQuestion(
                 GiaoDien.DrawFrame(YourName);
                 // Vẽ khung chứa trái tim và thùng rác, và mỗi lần trả lời sai sẽ có sự thay đổi giữa hai biểu tượng dựa vào biến health
                 GiaoDien.DrawHealthBar(health, MaxHealth);
-		//    
+		/* Sử dụng toán tử điều kiện (?:) để chọn một chuỗi hoạt ảnh dựa trên trạng thái của biến jumpingFrame và runningFrame.
+              jumpingFrame.HasValue: Kiểm tra xem jumpingFrame có giá trị hay không (biến jumpingFrame là kiểu nullable, tức là có thể chứa giá trị null hoặc một giá trị số nguyên).
+               + Nếu jumpingFrame có giá trị (có nghĩa là nhân vật đang trong trạng thái nhảy): jumpingAnimation[jumpingFrame.Value]: Sẽ lấy khung (frame) tương ứng từ mảng jumpingAnimation dựa trên giá trị của jumpingFrame.
+               + Nếu jumpingFrame không có giá trị (tức là không phải trạng thái nhảy):runningAnimation[runningFrame.GetValueOrDefault()]: Sẽ lấy khung từ mảng runningAnimation, dựa trên giá trị của runningFrame. 
+		     Nếu runningFrame là null, thì GetValueOrDefault() sẽ trả về giá trị mặc định (thường là 0 cho kiểu số nguyên). */ 
                 string playerFrame =
                     jumpingFrame.HasValue ? jumpingAnimation[jumpingFrame.Value] :
                     runningAnimation[runningFrame.GetValueOrDefault()];
@@ -351,8 +351,8 @@ new UehQuestion(
                 //Kiểm tra phím nhấn nếu bấm Esc sẽ thoát khỏi trò chơi
                 if (Console.KeyAvailable)
                 {
-                    var key = Console.ReadKey(true).Key; //
-                    if (key == ConsoleKey.Escape)
+                    var key = Console.ReadKey(true).Key; // Kiểm tra phím đầu vào
+                    if (key == ConsoleKey.Escape) 
                     {
                         Console.Clear();
                         Console.Write("TRÒ CHƠI KẾT THÚC!");
@@ -364,20 +364,18 @@ new UehQuestion(
                 //Dừng lại trước vật cản 
                 if (position >= hurdlePosition - stopDistance && position < hurdlePosition)
                 {
-                    runningFrame = 7;
                     isStopped = true;
-                    position = hurdlePosition - stopDistance;
+                    position = hurdlePosition - stopDistance; // Vị trí của nhân vật = vị trí của vật cản - khoảng cách dừng
 
                     // Lượt qua các câu hỏi  
-
                     foreach (var question in questions.ToList())
                     {
                         if (wrongAnswers == 3)// Thua trò chơi
                         {
                             Console.Clear();
-                            SaveAchievement(YourName, score);
-                            GameRanking.SaveProgress(YourName, score);
-                            DisplayLeaderboard();
+                            SaveAchievement(YourName, score); // Sau khi thua thì lưu tên và điểm vào file
+                            GameRanking.SaveProgress(YourName, score); // Hiện điểm và rank 
+                            DisplayLeaderboard(); //Xem lịch sử sau khi thua
                             Console.ReadKey();
                             return; // Thoát trò chơi
                         }
@@ -390,10 +388,8 @@ new UehQuestion(
                         Console.ResetColor();
                         foreach (var choice in question.Choices)
                         {
-
                             Console.WriteLine(choice);
                         }
-
                         int questionCursorTop = Console.CursorTop - (question.Choices.Length + 1);
 
                         string userAnswer = "";
@@ -418,14 +414,12 @@ new UehQuestion(
                                     // If invalid input, throw an exception
                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                     throw new InvalidOperationException("Phím không hợp lệ. Vui lòng nhập A, B, C, hoặc D.");
-
                                 }
-
                                 // If valid input, set the flag to true to exit the loop
                                 isValidAnswer = true;
-                            }
-                            catch (InvalidOperationException ex)
-                            {
+                             }
+                             catch (InvalidOperationException ex)
+                             {
                                 // Handle invalid input exception
                                 Console.WriteLine($"\n{ex.Message}");
 
@@ -435,7 +429,7 @@ new UehQuestion(
                         }
 
                         UehQuestionHandle.ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1);  // Clear the entire screen
-                                                                                                 //Xử lí đáp án 
+                         //Xử lí đáp án 
                         if (userAnswer == question.CorrectAnswer)
                         {
                             score++;
@@ -609,7 +603,7 @@ new UehQuestion(
                 }
                 if (!ContainName)
                 {
-                    string newEntry = $"Tên người chơi: {Name,-22} || Điểm: {score,-5} || Thời gian: {DateTime.Now:HH:mm dd/MM/yyyy}\n";
+                    string newEntry = $"Tên người chơi: {Name,-22} || Điểm: {score,-5} || Thời gian: {DateTime.Now:HH:mm dd/MM/yyyy}\n"; // Cài vị trí sẽ in ra trong filefile
                     File.AppendAllText(filePath, newEntry);
                 }
                 else
