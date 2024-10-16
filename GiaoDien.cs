@@ -37,9 +37,9 @@ namespace UEH_Green
             @"║                      /$$/\  $$| $$  | $$| $$\  $$$| $$  | $$                \ccccccccccccc@|ccccccc@@@@@@/           ║",
             @"║                     | $$  \ $$| $$  | $$| $$ \  $$| $$  | $$                     \ccccccc@|ccc@@@@@@@@@/             ║",
             @"║                     |__/  |__/|__/  |__/|__/  \__/|__/  |__/                       ccccccccccccc@@                   ║",
-            @"║                                                                                    |             |                   ║",
-            @"║                                              ╔═══════════════════════╗            /*   >     <   *\                  ║",
-            @"║                                              ║     >>> Enter <<<     ║           /**      0      **\                 ║",
+            @"║                                             ╔═══════════════════════╗              |             |                   ║",
+            @"║                                             ║     >>> Enter <<<     ║             /*   >     <   *\                  ║",
+            @"║                                             ╚═══════════════════════╝            /**      0      **\                 ║",
             @"╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"
             };
 
@@ -88,11 +88,11 @@ namespace UEH_Green
 
             for (int i = 0; i < bangmota.Length; i++)
             {
-                if (bangmota[i].Contains("█")) 
+                if (bangmota[i].Contains("█"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                 }
-                else 
+                else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
@@ -564,6 +564,75 @@ namespace UEH_Green
                 }
                 Console.WriteLine();
             }
+        }
+
+        public static void Cloud()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            int width = 120;
+            int height = 6;
+            string[,] frame = new string[height, width];
+
+            // Cloud design
+            string[] cloud = new string[]
+            {
+        "      ___   ",
+        "   __(   )  ",
+        "  (____)__) "
+            };
+
+            Random random = new Random();
+            int cloudCount = 2; // Adjust the number of clouds you want
+
+            // Place clouds randomly above the road
+            for (int i = 0; i < cloudCount; i++)
+            {
+                int cloudRow = random.Next(0, 4); 
+                int cloudStartCol = random.Next(0, width - cloud[0].Length); // Random column
+
+                // Loop through each line of the cloud
+                for (int k = 0; k < cloud.Length; k++) // Iterate through cloud lines (rows of the cloud)
+                {
+                    for (int j = 0; j < cloud[k].Length; j++) // Iterate through the characters in each line (columns of the cloud)
+                    {
+                        frame[cloudRow + k, cloudStartCol + j] = cloud[k][j].ToString(); // Các đám mây in ra sẽ trong 7 dòng vì hàng random(0 đến 4) + k(3) = 7 
+                    }
+                }
+                
+            }
+            // Print the frame to console
+            Console.SetCursorPosition(0, 5); // Đặt tại y = 5
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    Console.Write(frame[i, j] ?? " "); // Safeguard for null spaces
+                }
+                Console.WriteLine(); // Move to the next line after each row
+            }
+            Console.ResetColor();
+        }
+        public static void Road()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            int width = 120;
+            int height = 2;
+            string[,] frame = new string[height, width];
+            // Set the bottom border
+            for (int i = 0; i < width; i++)
+            {
+                frame[height - 1, i] = "=";
+            }
+            Console.SetCursorPosition(0, 16);
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    Console.Write(frame[i, j]);
+                }
+                Console.WriteLine();
+            }
+            Console.ResetColor ();
         }
     }
 }
