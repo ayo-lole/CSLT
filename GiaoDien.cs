@@ -568,7 +568,7 @@ namespace UEH_Green
 
         public static void Cloud()
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             int width = 120;
             int height = 6;
             string[,] frame = new string[height, width];
