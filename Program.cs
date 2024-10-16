@@ -183,61 +183,60 @@ new UehQuestion(
             DisplayLeaderboard(); //Gọi hàm này để kiểm tra phím bấm vào F thì hiện lịch sử, Enter thì vào chơi 
             Console.Clear();
 
-            string[] runningAnimation =
-                {
-	#region Frames
-	// 0
-	@"       " + '\n' +
-    @"   UEH " + '\n' +
-    @"  __O  " + '\n' +
-    @" / /\_," + '\n' +
-    @"__/\   " + '\n' +
-    @"    \  ",
-	// 1
-	@"       " + '\n' +
-    @"   UEH  " + '\n' +
-    @"   _O  " + '\n' +
-    @"  |/|_ " + '\n' +
-    @"  /\   " + '\n' +
-    @" /  |  ",
-	// 2
-	@"       " + '\n' +
-    @"   UEH " + '\n' +
-    @"    O  " + '\n' +
-    @"  </L  " + '\n' +
-    @"   \   " + '\n' +
-    @"   /|  ",
-	// 3
-	@"       " + '\n' +
-    @"   UEH " + '\n' +
-    @"   O   " + '\n' +
-    @"   |_  " + '\n' +
-    @"   |>  " + '\n' +
-    @"  /|   ",
-	// 4
-	@"       " + '\n' +
-    @"   UEH " + '\n' +
-    @"   O   " + '\n' +
-    @"  <|L  " + '\n' +
-    @"   |_  " + '\n' +
-    @"   |/  ",
-	// 5
-	@"       " + '\n' +
-    @"   UEH " + '\n' +
-    @"   O   " + '\n' +
-    @"  L|L  " + '\n' +
-    @"   |_  " + '\n' +
-    @"  /  | ",
-	// 6
-	@"       " + '\n' +
-    @"   UEH " + '\n' +
-    @"  _O   " + '\n' +
-    @" | |L  " + '\n' +
-    @"   /-- " + '\n' +
-    @"  /   |",
-                #endregion
-            };
-
+                    string[] runningAnimation =
+            {
+#region Frames
+// 0
+@"       " + '\n' +
+@"  UEHer" + '\n' +
+@"  __O  " + '\n' +
+@" / /\_," + '\n' +
+@"__/\   " + '\n' +
+@"    \  ",
+// 1
+@"       " + '\n' +
+@"  UEHer" + '\n' +
+@"   _O  " + '\n' +
+@"  |/|_ " + '\n' +
+@"  /\   " + '\n' +
+@" /  |  ",
+// 2
+@"       " + '\n' +
+@"  UEHer" + '\n' +
+@"    O  " + '\n' +
+@"  </L  " + '\n' +
+@"   \   " + '\n' +
+@"   /|  ",
+// 3
+@"       " + '\n' +
+@"  UEHer" + '\n' +
+@"   O   " + '\n' +
+@"   |_  " + '\n' +
+@"   |>  " + '\n' +
+@"  /|   ",
+// 4
+@"       " + '\n' +
+@"  UEHer" + '\n' +
+@"   O   " + '\n' +
+@"  <|L  " + '\n' +
+@"   |_  " + '\n' +
+@"   |/  ",
+// 5
+@"       " + '\n' +
+@"  UEHer" + '\n' +
+@"   O   " + '\n' +
+@"  L|L  " + '\n' +
+@"   |_  " + '\n' +
+@"  /  | ",
+// 6
+@"       " + '\n' +
+@"  UEHer" + '\n' +
+@"  _O   " + '\n' +
+@" | |L  " + '\n' +
+@"   /-- " + '\n' +
+@"  /   |",
+            #endregion
+        };
 
             string[] jumpingAnimation =
             {
@@ -541,7 +540,7 @@ new UehQuestion(
                 {
                     position++;
                 }
-                Thread.Sleep(TimeSpan.FromMilliseconds(80));
+                Thread.Sleep(TimeSpan.FromMilliseconds(15));
             }
             void Render(string @string, bool renderEnter)
             {
