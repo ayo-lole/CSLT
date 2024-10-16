@@ -319,7 +319,7 @@ namespace UEH_Green
              "                   |___|||||║     ║═════|                  | Được đánh giá là cơ sở yên tĩnh nhất, gây ấn tượng   |  " + '\n' +
              "                   |        ║     ║_____|                  |   với quầy tự quản và thư viện chuyên ngành hiện đại.|  " + '\n' +
              "                   |   _____║ UEH ║||||||                  |                                                      |  " + '\n' +
-             "                   |___|||||║.....║═════|                  | Sinh viên năm nhất khả năng cao sẽ học tiếng anh tổng|  " + '\n' +
+             "                   |___|||||║.....║═════|                  | Sinh viên năm nhất khả năng cao sẽ học tiếng Anh tổng|  " + '\n' +
              "                   |        ║.....║_____|                  |   quát tại đây.                                      |  " + '\n' +
              "                   |   _____║     ║||||||                  |                                                      |  " + '\n' +
              "                   |___|||||║     ║═════|                  | Fun fact: Đứng ở ban công cở sở này có thể mang lại  |  " + '\n' +
