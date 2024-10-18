@@ -167,19 +167,9 @@ new UehQuestion(
 
             //Bảng điền tên 
             string YourName = GiaoDien.InputPlayerName();
-            // Giao diện chuyển cảnh trước khi bắt đầu trò chơi hỏi xem người chơi có muốn xem lịch sử trước đó không
-            string[] banner = new string[]
-{
-            @"╔════════════════════════════╗                          ╔═══════════════════════════════╗",
-            @"║                            ║                          ║                               ║",
-            @"║   >>Nhấn ENTER để CHƠI<<   ║                          ║   >>Nhấn F để XEM LỊCH SỬ<<   ║",
-            @"║                            ║                          ║                               ║",
-            @"╚════════════════════════════╝                          ╚═══════════════════════════════╝",
 
-};
-            Console.ForegroundColor = ConsoleColor.Green;
-            GiaoDien.PrintEnterNFBanner(banner); //Gọi hàm bên class Giao Diện, hàm này tính toán tính vị trí và màu sắc
-            Console.ResetColor();
+            // Giao diện chuyển cảnh trước khi bắt đầu trò chơi hỏi xem người chơi có muốn xem lịch sử trước đó không          
+            GiaoDien.PrintEnterNFBanner();
             DisplayLeaderboard(); //Gọi hàm này để kiểm tra phím bấm vào F thì hiện lịch sử, Enter thì vào chơi 
             Console.Clear();
 
@@ -310,7 +300,7 @@ new UehQuestion(
             #region Frame
 
 
-              @"  bin  " + '\n' +
+              @"       " + '\n' +
               @" ____  " + '\n' +
               @" ║♻️║  " + '\n' +
               @" \__/  ";
@@ -329,6 +319,7 @@ new UehQuestion(
 
             while (true)
             {
+                GiaoDien.esc();
                 // Vẽ con đường
                 GiaoDien.Road();
                 // Vẽ đám mây    
@@ -351,6 +342,8 @@ new UehQuestion(
                     if (key == ConsoleKey.Escape)
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.SetCursorPosition(120 / 3, 27 / 2);
                         Console.Write("TRÒ CHƠI KẾT THÚC!");
                         Console.ReadKey();
                         return;
@@ -384,7 +377,7 @@ new UehQuestion(
                         {
                             Console.WriteLine(choice);
                         }
-                        int questionCursorTop = Console.CursorTop - (question.Choices.Length + 1);
+                        int questionCursorTop = Console.CursorTop - (question.Choices.Length + 1); //Đặt vị trí con trỏ bắt đầu xóa
 
                         string userAnswer = "";
                         bool isValidAnswer = false; // Flag for valid input
@@ -397,19 +390,19 @@ new UehQuestion(
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.Write("Điền A, B, C, hoặc D để trả lời: ");
                                 Console.ResetColor();
-                                // Get player input
+                                // Đợi người chơi nhập đáp án                 
                                 Console.ForegroundColor = ConsoleColor.Cyan;
                                 userAnswer = Console.ReadKey().KeyChar.ToString().ToUpper();
 
                                 Console.ResetColor();
-                                // Check if input is valid
+                                // Kiểm tra giá trị nhập vào 
                                 if (!new[] { "A", "B", "C", "D" }.Contains(userAnswer))
                                 {
                                     // If invalid input, throw an exception
                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                     throw new InvalidOperationException("Phím không hợp lệ. Vui lòng nhập A, B, C, hoặc D.");
                                 }
-                                // If valid input, set the flag to true to exit the loop
+                                // Nếu nhập đúng A B C D thì thoát ra khỏi vòng lặp 
                                 isValidAnswer = true;
                             }
                             catch (InvalidOperationException ex)
@@ -430,21 +423,17 @@ new UehQuestion(
                             jumpingFrame = 0;
                             runningFrame = null;
                             isStopped = false;
-                            targetPosition += 50; // tăng vị trí sau mỗi lần trả lời đúng 
+                            targetPosition += 50; // tăng vị trí sẽ dừng lại sau mỗi lần trả lời đúng 
                             questions.Remove(question);
                         }
-
                         else
-                        {
-                            // Clear the previous question and answer text without clearing the whole screen
-                            UehQuestionHandle.ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1); // Adjust +1 for the question
+                        { 
                             position--; //trừ lại vị trí nhân vật sau mỗi lần trả lời sai để không bị trùng vị trị vật cản
                             wrongAnswers++;
                             health--;
                             questions.Remove(question);
                         }
-                        UehQuestionHandle.ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1);
-
+                        UehQuestionHandle.ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1); // Trả lời đúng hoặc thì xóa đi để hiện câu khác 
                         break;
                     }
                     //Hiện hình các cơ sở của UEH giới thiệu về trường
@@ -492,9 +481,7 @@ new UehQuestion(
                 else
                 {
                     isStopped = false;
-                }
-
-                
+                }            
                 // Cập nhật trạng thái 
                 runningFrame = runningFrame.HasValue
                     ? (runningFrame + 1) % runningAnimation.Length
