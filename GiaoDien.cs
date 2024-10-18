@@ -171,6 +171,22 @@ namespace UEH_Green
         }
         public static void PrintEnterNFBanner(string[] banner)
         {
+            // Giao diện chuyển cảnh trước khi bắt đầu trò chơi hỏi xem người chơi có muốn xem lịch sử trước đó không
+            string[] banner = new string[]
+{
+            @"╔════════════════════════════╗                          ╔═══════════════════════════════╗",
+            @"║                            ║                          ║                               ║",
+            @"║   >>Nhấn ENTER để CHƠI<<   ║                          ║   >>Nhấn F để XEM LỊCH SỬ<<   ║",
+            @"║                            ║                          ║                               ║",
+            @"╚════════════════════════════╝                          ╚═══════════════════════════════╝",
+
+};
+            Console.ForegroundColor = ConsoleColor.Green;
+            GiaoDien.PrintEnterNFBanner(banner); //Gọi hàm bên class Giao Diện, hàm này tính toán tính vị trí và màu sắc
+            Console.ResetColor();
+            DisplayLeaderboard(); //Gọi hàm này để kiểm tra phím bấm vào F thì hiện lịch sử, Enter thì vào chơi 
+            Console.Clear();
+            //Tô màu
             Console.ForegroundColor = ConsoleColor.Green;
             int consoleWidth = Console.WindowWidth;
             int consoleHeight = Console.WindowHeight;
