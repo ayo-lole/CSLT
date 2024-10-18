@@ -107,14 +107,14 @@ namespace UEH_Green
         {
             // Bảng điền tên 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.SetCursorPosition(Console.WindowWidth / 3, 23);
+            Console.SetCursorPosition(40, 23);
             Console.WriteLine("CHÀO MỪNG BẠN ĐẾN VỚI CHIẾN SĨ XANH!");
             string YourName = "";
             bool validInput = false;
 
             // Kích thước khung (tăng chiều rộng)
             int frameWidth = 40;  // Kéo dài khung ra
-            int frameX = Console.WindowWidth / 3 - 5;  // Dịch khung sang trái
+            int frameX = 40 - 5;  // Dịch khung sang trái
             int frameY = 23 + 1;
 
             // Vẽ khung nhập (nằm ngay dưới thông điệp chào mừng)
@@ -166,13 +166,33 @@ namespace UEH_Green
             // Xóa thông tin khung và khôi phục màu nền sau khi nhập
             Console.ResetColor();
             Console.Clear();
-
             return YourName;
         }
-        public static void PrintEnterNFBanner(string[] banner)
+        public static void PrintEnterNFBanner()
         {
-           
-            //Tô màu
+            string[] ueher = new string[] {
+            @"                           " + '\n' +
+            @"  UEHer                 " + '\n' +
+            @"   O /         " + '\n' +
+            @"  <|   " + '\n' +
+            @"  /\   " + '\n' +
+            @" |  |  ",
+            };
+            int y = 15;
+            for (int i = 0; i < ueher.Length; i++)
+            {
+                Console.SetCursorPosition(0, y + i);
+                Console.WriteLine(ueher[i]);
+            }
+            string[] banner = new string[]
+            {
+            @"╔════════════════════════════╗                          ╔═══════════════════════════════╗",
+            @"║                            ║                          ║                               ║",
+            @"║   >>Nhấn ENTER để CHƠI<<   ║                          ║   >>Nhấn F để XEM LỊCH SỬ<<   ║",
+            @"║                            ║                          ║                               ║",
+            @"╚════════════════════════════╝                          ╚═══════════════════════════════╝",
+
+             };
             Console.ForegroundColor = ConsoleColor.Green;
             int consoleWidth = Console.WindowWidth;
             int consoleHeight = Console.WindowHeight;
@@ -221,7 +241,7 @@ namespace UEH_Green
             "|          ║  ║  ║  ║  ║  ║  ║__║__║__║___║   ║   ║   ║   ║   ║   ║  |    | Là địa điểm quen thuộc khi sinh viên có vấn|" + '\n' +
             "|          ║  ║  ║  ║  ║  ║  ║  ║  ║  ║   ║   ║   ║   ║   ║   ║   ║  |    |    đề, thủ tục liên quan đến hồ sơ giấy tờ |" + '\n' +
             "|__________║__║__║__║__║__║__║  ║  ║  ║   ║___║___║___║___║___║___║__|    |    như cấp giấy chứng nhận sinh viên,...   |" + '\n' +
-            "                                                                           --------------------------------------------  " + '\n' +
+            "                                                                           -------------------------------------------- " + '\n' +
             "                          << CƠ SỞ A >>                                                                                 "
                 };
             foreach (var line in truong1)
@@ -321,7 +341,7 @@ namespace UEH_Green
              "                   |___|||||║     ║═════|                  | Được đánh giá là cơ sở yên tĩnh nhất, gây ấn tượng   |  " + '\n' +
              "                   |        ║     ║_____|                  |   với quầy tự quản và thư viện chuyên ngành hiện đại.|  " + '\n' +
              "                   |   _____║ UEH ║||||||                  |                                                      |  " + '\n' +
-             "                   |___|||||║.....║═════|                  | Sinh viên năm nhất khả năng cao sẽ học tiếng Anh tổng|  " + '\n' +
+             "                   |___|||||║.....║═════|                  | Sinh viên năm nhất khả năng cao sẽ học tiếng anh tổng|  " + '\n' +
              "                   |        ║.....║_____|                  |   quát tại đây.                                      |  " + '\n' +
              "                   |   _____║     ║||||||                  |                                                      |  " + '\n' +
              "                   |___|||||║     ║═════|                  | Fun fact: Đứng ở ban công cở sở này có thể mang lại  |  " + '\n' +
@@ -380,15 +400,12 @@ namespace UEH_Green
         }
         public static void TinhDiem(int score)
         {
-
             // Hiển thị điểm
             Console.SetCursorPosition(2, 2); // Đặt vị trí con trỏ cho điểm
             for (int i = 0; i < score; i++)
             {
                 Console.Write("🌳 ");
             }
-
-            Thread.Sleep(1000); // Tạm dừng một giây
         }
         public static void DrawHealthBar(int health, int maxHealth)
         {
@@ -544,7 +561,7 @@ namespace UEH_Green
             frame[height - 1, width - 1] = '╝'; // Góc dưới phải
 
             // Đặt tên vào giữa khung (trong dòng thứ 2)
-            string displayName = $"              🌳🌳 || {name} || 🌳🌳";
+            string displayName = $"    🌳🌳|| {name} ||🌳🌳";
             int nameStart = (width - displayName.Length) / 2;
 
             // Kiểm tra để tránh truy cập ngoài giới hạn mảng
@@ -574,7 +591,7 @@ namespace UEH_Green
             int width = 120;
             int height = 6;
             string[,] frame = new string[height, width];
-
+            
             // Cloud design
             string[] cloud = new string[]
             {
@@ -597,13 +614,13 @@ namespace UEH_Green
                 {
                     for (int j = 0; j < cloud[k].Length; j++) // Iterate through the characters in each line (columns of the cloud)
                     {
-                        frame[cloudRow + k, cloudStartCol + j] = cloud[k][j].ToString(); // Các đám mây in ra sẽ trong 7 dòng vì hàng random(0 đến 4) + k(3) = 7 
+                        frame[cloudRow + k, cloudStartCol + j] = cloud[k][j].ToString(); // Add cloud to frame at appropriate position
                     }
                 }
                 
             }
             // Print the frame to console
-            Console.SetCursorPosition(0, 5); // Đặt tại y = 5
+            Console.SetCursorPosition(0, 5); // Print frame starting at position (
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
@@ -612,6 +629,7 @@ namespace UEH_Green
                 }
                 Console.WriteLine(); // Move to the next line after each row
             }
+ 
             Console.ResetColor();
         }
         public static void Road()
@@ -620,11 +638,13 @@ namespace UEH_Green
             int width = 120;
             int height = 2;
             string[,] frame = new string[height, width];
+
             // Set the bottom border
             for (int i = 0; i < width; i++)
             {
                 frame[height - 1, i] = "=";
             }
+
             Console.SetCursorPosition(0, 16);
             for (int i = 0; i < height; i++)
             {
@@ -635,6 +655,13 @@ namespace UEH_Green
                 Console.WriteLine();
             }
             Console.ResetColor ();
+        }
+        public static void esc()
+        {
+            Console.SetCursorPosition (108, 26);
+            Console.ForegroundColor= ConsoleColor.DarkGray;
+            Console.WriteLine ("Ecs để thoát");
+            Console.ResetColor();
         }
     }
 }
