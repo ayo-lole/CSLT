@@ -69,7 +69,7 @@ namespace UEH_Green
             "A) UEH Green Community", "B) Rethink & Be Green", "C) Reduce - Reuse - Recycle", "D) Keep The Earth Green" }, "B"),
         new UehQuestion(
             "Dự án \"UEH Zero Waste Campus\" đang trong giai đoạn thứ mấy?",
-    new string[] { "A) 4", "B) 5", "C) 3", "D) 6" }, "A"),
+        new string[] { "A) 4", "B) 5", "C) 3", "D) 6" }, "A"),
 new UehQuestion(
     "Loại rác thải nào sau đây không có trong mô hình 7?",
     new string[] { "A) Đinh ốc", "B) Bìa Carton", "C) Pin", "D) Thực phẩm thừa" }, "C"),
@@ -170,7 +170,8 @@ new UehQuestion(
 
             // Giao diện chuyển cảnh trước khi bắt đầu trò chơi hỏi xem người chơi có muốn xem lịch sử trước đó không          
             GiaoDien.PrintEnterNFBanner();
-            DisplayLeaderboard(); //Gọi hàm này để kiểm tra phím bấm vào F thì hiện lịch sử, Enter thì vào chơi 
+            GiaoDien lan1 = new GiaoDien();
+            lan1.DisplayLeaderboard(); //Gọi hàm này để kiểm tra phím bấm vào F thì hiện lịch sử, Enter thì vào chơi 
             Console.Clear();
 
             string[] runningAnimation =
@@ -306,9 +307,9 @@ new UehQuestion(
               @" \__/  ";
             #endregion
             int position = 4; //Biến vị trí của nhân vật
-            int? runningFrame = 0; //
-            int? jumpingFrame = null;//
-            bool isStopped = false; // 
+            int? runningFrame = 0; 
+            int? jumpingFrame = null;
+            bool isStopped = false; 
             int targetPosition = 100; //vị trí dừng lại trước vật cản ban đầu 
             Shuffle(questions); // Dùng thuật toán Fisher-Yates để trộn câu hỏi
             int score = 0;
@@ -328,12 +329,7 @@ new UehQuestion(
                 GiaoDien.DrawFrame(YourName);
                 // Vẽ khung chứa trái tim và thùng rác, và mỗi lần trả lời sai sẽ có sự thay đổi giữa hai biểu tượng dựa vào biến health
                 GiaoDien.DrawHealthBar(health, MaxHealth);
-                /* Sử dụng toán tử điều kiện (?:) để chọn một chuỗi hoạt ảnh dựa trên trạng thái của biến jumpingFrame và runningFrame.
-                      jumpingFrame.HasValue: Kiểm tra xem jumpingFrame có giá trị hay không (biến jumpingFrame là kiểu nullable, tức là có thể chứa giá trị null hoặc một giá trị số nguyên).
-                       + Nếu jumpingFrame có giá trị (có nghĩa là nhân vật đang trong trạng thái nhảy): jumpingAnimation[jumpingFrame.Value]: Sẽ lấy khung (frame) tương ứng từ mảng jumpingAnimation dựa trên giá trị của jumpingFrame.
-                       + Nếu jumpingFrame không có giá trị (tức là không phải trạng thái nhảy):runningAnimation[runningFrame.GetValueOrDefault()]: Sẽ lấy khung từ mảng runningAnimation, dựa trên giá trị của runningFrame. 
-                     Nếu runningFrame là null, thì GetValueOrDefault() sẽ trả về giá trị mặc định (thường là 0 cho kiểu số nguyên). */
-
+                //Cập nhật khung hình
                 UpdateFrame();
                 //Kiểm tra phím nhấn nếu bấm Esc sẽ thoát khỏi trò chơi
                 if (Console.KeyAvailable)
@@ -360,33 +356,32 @@ new UehQuestion(
                         if (wrongAnswers == 3)// Thua trò chơi
                         {
                             Console.Clear();
-                            SaveAchievement(YourName, score); // Sau khi thua thì lưu tên và điểm vào file
+                            GameRanking.SaveAchievement(YourName, score); // Sau khi thua thì lưu tên và điểm vào file
                             GameRanking.SaveProgress(YourName, score); // Hiện điểm và rank 
-                            DisplayLeaderboard(); //Xem lịch sử sau khi thua
-                            Console.ReadKey();
+
+                            GiaoDien lan2 = new GiaoDien();
+                            lan2.DisplayLeaderboard();//Xem lịch sử sau khi thua                           
                             return; // Thoát trò chơi
                         }
-
                         //Hiển thị câu hỏi và đáp án ở phía dưới màn hình
-                        UehQuestionHandle.PositionAtBottom();
+                        UehQuestionHandle.PositionAtBottom(); 
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine("\nQuestion: " + question.Question);
-
                         Console.ResetColor();
+
                         foreach (var choice in question.Choices)
                         {
                             Console.WriteLine(choice);
                         }
                         int questionCursorTop = Console.CursorTop - (question.Choices.Length + 1); //Đặt vị trí con trỏ bắt đầu xóa
 
-                        string userAnswer = "";
-                        bool isValidAnswer = false; // Flag for valid input
+                        string userAnswer = ""; // Để nhận từ người chơi chỉ 1 kí tự
+                        bool isValidAnswer = false; // Đánh dấu cho đầu vào hợp lệ
 
-                        while (!isValidAnswer) // Continue until valid input is provided
+                        while (!isValidAnswer) // Tạo vòng lặp trả lời đến khi người chơi nhập đúng ABCD
                         {
                             try
                             {
-                                // Ask the player to input their answer
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.Write("Điền A, B, C, hoặc D để trả lời: ");
                                 Console.ResetColor();
@@ -398,7 +393,7 @@ new UehQuestion(
                                 // Kiểm tra giá trị nhập vào 
                                 if (!new[] { "A", "B", "C", "D" }.Contains(userAnswer))
                                 {
-                                    // If invalid input, throw an exception
+                                    // Nếu nhập không đúng yêu cầu
                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                     throw new InvalidOperationException("Phím không hợp lệ. Vui lòng nhập A, B, C, hoặc D.");
                                 }
@@ -407,10 +402,10 @@ new UehQuestion(
                             }
                             catch (InvalidOperationException ex)
                             {
-                                // Handle invalid input exception
+                                // Xử lý ngoại lệ đầu vào không hợp lệ
                                 Console.WriteLine($"\n{ex.Message}");
 
-                                // Move cursor up to avoid clutter from repeated invalid input
+                                // Di chuyển con trỏ lên trên để tránh lộn xộn từ việc nhập dữ liệu không hợp lệ lặp lại
                                 Console.SetCursorPosition(0, Console.CursorTop - 2);
                             }
                         }
@@ -419,15 +414,15 @@ new UehQuestion(
                         if (userAnswer == question.CorrectAnswer)
                         {
                             score++;
-                            GiaoDien.TinhDiem(score);
-                            jumpingFrame = 0;
-                            runningFrame = null;
-                            isStopped = false;
+                            GiaoDien.TinhDiem(score); 
+                            jumpingFrame = 0; //Bắt đầu khung hình nhảy
+                            runningFrame = null; //Tắt trạng thái chạy
+                            isStopped = false; //Dừng đứng yên 
                             targetPosition += 50; // tăng vị trí sẽ dừng lại sau mỗi lần trả lời đúng 
-                            questions.Remove(question);
+                            questions.Remove(question); //Dù trả lời sai hay đúng thì câu hỏi đó cũng sẽ biến mất khỏi bộ câu hỏi
                         }
                         else
-                        { 
+                        {
                             position--; //trừ lại vị trí nhân vật sau mỗi lần trả lời sai để không bị trùng vị trị vật cản
                             wrongAnswers++;
                             health--;
@@ -435,53 +430,26 @@ new UehQuestion(
                         }
                         UehQuestionHandle.ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1); // Trả lời đúng hoặc thì xóa đi để hiện câu khác 
                         break;
-                    }
-                    //Hiện hình các cơ sở của UEH giới thiệu về trường
-                    if (score == 5)
-                    {
-                        ShowUEHBuilding(GiaoDien.printUEHBuilding1);
-                    }
-                    if (score == 8)
-                    {
-                        ShowUEHBuilding(GiaoDien.printUEHBuilding2);
-                    }
-                    if (score == 12)
-                    {
-                        ShowUEHBuilding(GiaoDien.printUEHBuilding3);
-                    }
-                    if (score == 15)
-                    {
-                        ShowUEHBuilding(GiaoDien.printUEHBuilding4);
-                    }
-                    if (score == 18)
-                    {
-                        ShowUEHBuilding(GiaoDien.printUEHBuilding5);
-                    }
-                    // Chiến thắng round1
-                    if (score == 10)
+                    }                    
+ 
+                    if (score == 20) //Chiến thắng round 1
                     {
                         Console.Clear();
-                        GiaoDien.PrintArt(Console.WindowWidth / 3, Console.WindowHeight / 7);
-                        Console.ReadKey();
+                        GameRanking.SaveAchievement(YourName, score); //Lưu lại điểm chiến thắng của người chơi
+                        GiaoDien.PrintArt(Console.WindowWidth / 3, Console.WindowHeight / 7); //In màn hình thắng round 1
+                        GiaoDien lan3 = new GiaoDien(); //Sử dụng phím F hoặc Enter 
+                        lan3.DisplayLeaderboard();
+
                         Console.Clear();
-                        continue;
-                    }
-                    //Kết thúc toàn game
-                    if (score == 20)
-                    {
-                        Console.Clear();
-                        SaveAchievement(YourName, score);
-                        GiaoDien win = new GiaoDien();
-                        win.DisplayPrintWinArt();
-                        DisplayLeaderboard();
-                        Console.ReadKey();
+                        Round2.Round_2(); //Chuyển qua round 2
                         return;
                     }
                 }
                 else
                 {
-                    isStopped = false;
-                }            
+                    isStopped = false; //Nếu không gặp vật cản thì đi tiếp
+                }
+                
                 // Cập nhật trạng thái 
                 runningFrame = runningFrame.HasValue
                     ? (runningFrame + 1) % runningAnimation.Length
@@ -496,15 +464,21 @@ new UehQuestion(
                     jumpingFrame = null;
                     runningFrame = 2;
                 }
-                // Move the character if not stopped
+                // Nếu đang không dừng lại thì biến vị trí nhân vật tăng lên
                 if (!isStopped)
                 {
                     position++;
                 }
-                Thread.Sleep(TimeSpan.FromMilliseconds(80));
+                Thread.Sleep(TimeSpan.FromMilliseconds(20)); //Tốc độ di chuyển của nhân vật
             }
-            void UpdateFrame()
+            //Cập nhật khung hình 
+            void UpdateFrame() 
             {
+                /* Sử dụng toán tử điều kiện (?:) để chọn một chuỗi hoạt ảnh dựa trên trạng thái của biến jumpingFrame và runningFrame.
+                  jumpingFrame.HasValue: Kiểm tra xem jumpingFrame có giá trị hay không (biến jumpingFrame là kiểu nullable, tức là có thể chứa giá trị null hoặc một giá trị số nguyên).
+                    + Nếu jumpingFrame có giá trị (có nghĩa là nhân vật đang trong trạng thái nhảy): jumpingAnimation[jumpingFrame.Value]: Sẽ lấy khung (frame) tương ứng từ mảng jumpingAnimation dựa trên giá trị của jumpingFrame.
+                    + Nếu jumpingFrame không có giá trị (tức là không phải trạng thái nhảy):runningAnimation[runningFrame.GetValueOrDefault()]: Sẽ lấy khung từ mảng runningAnimation, dựa trên giá trị của runningFrame. 
+                      Nếu runningFrame là null, thì GetValueOrDefault() sẽ trả về giá trị mặc định (thường là 0 cho kiểu số nguyên). */
                 string playerFrame =
                    jumpingFrame.HasValue ? jumpingAnimation[jumpingFrame.Value] :
                    runningAnimation[runningFrame.GetValueOrDefault()];
@@ -545,7 +519,8 @@ new UehQuestion(
                     Render(playerFrame, false);  // Vẽ lại khung hình của người chơi.
                 }
             }
-            void Render(string @string, bool renderSpace)
+            //dùng để vẽ và xóa các hàm kiểu @string như là nhân vật và vật cản
+            void Render(string @string, bool renderSpace) 
             {
                 int x = Console.CursorLeft;
                 int y = Console.CursorTop;
@@ -554,8 +529,8 @@ new UehQuestion(
                     else if (c != ' ' || renderSpace) Console.Write(c);
                     else Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
             }
-
-            void RenderHurdles(bool renderSpace, int targetPositio)
+            //dùng để hiện các vật cản
+            void RenderHurdles(bool renderSpace, int targetPositio) 
             {
                 for (int i = 5; i < Console.WindowWidth - 5 && position < targetPosition - 6; i++)
                 {
@@ -567,149 +542,8 @@ new UehQuestion(
                 }
             }
         }
-        static void SaveAchievement(string Name, int score)
-        {
-            if (Name != "" && !String.IsNullOrWhiteSpace(Name))
-            {
-                bool ContainName = false;
-                string filePath = "UEHer.txt";
-
-                // Tạo file nếu chưa tồn tại
-                if (!File.Exists(filePath))
-                {
-                    File.Create(filePath).Close(); // Tạo và đóng file
-                }
-                string[] OpenSaveFile = File.ReadAllLines(filePath);
-
-                for (int i = 0; i < OpenSaveFile.Length / 3; i += 3)
-                {
-                    if (OpenSaveFile[i * 3].Contains(Name))
-                    {
-                        if (score > int.Parse(OpenSaveFile[i + 1]))
-                        {
-
-                            OpenSaveFile[i * 3 + 1] = score.ToString();
-                            OpenSaveFile[i * 3 + 2] = DateTime.Now.ToString("HH:mm dd/MM/yyyy");
-                        }
-                        ContainName = true;
-                    }
-                    if (ContainName) break;
-                }
-                if (!ContainName)
-                {
-                    string newEntry = $"Tên người chơi: {Name,-22} || Điểm: {score,-5} || Thời gian: {DateTime.Now:HH:mm dd/MM/yyyy}\n"; // Cài vị trí sẽ in ra trong filefile
-                    File.AppendAllText(filePath, newEntry);
-                }
-                else
-                {
-                    File.WriteAllLines(filePath, OpenSaveFile);
-                }
-            }
-        }
-        static void DisplayLeaderboard()
-        {
-            string filePath = "UEHer.txt";
-            Console.CursorVisible = false;
-            int consoleWidth = 120;
-            int consoleHeight = 27;
-            int linesPerPage = consoleHeight - 5; // Trừ đi 5 dòng dành cho tiêu đề và chân trang
-
-            // Thiết lập kích thước console
-            Console.SetWindowSize(consoleWidth, consoleHeight);
-            Console.SetBufferSize(consoleWidth, consoleHeight);
-
-            while (true) // Vòng lặp cho đến khi người dùng chọn thoát
-            {
-                var key = Console.ReadKey(true).Key;
-
-                if (key == ConsoleKey.F) // Nhấn phím F để hiển thị bảng xếp hạng
-                {
-                    if (!File.Exists(filePath))
-                    {
-                        Console.WriteLine("Chưa có người chơi nào."); // Chưa có người chơi nào
-                        continue; // Tiếp tục chờ đầu vào
-                    }
-
-                    Console.Clear();
-
-                    // Định nghĩa các dòng khung trong mảng
-                    string[] boxLines = new string[]
-                    {
-                "╔════════════════════════════════════════╗",
-                "║ LỊCH SỬ CHINH PHỤC UEH GREEN CỦA UEHer ║",
-                "╚════════════════════════════════════════╝"
-                    };
-                    // Tính toán vị trí bắt đầu để in khung
-                    int startPositionX = consoleWidth / 4; // Vị trí X bắt đầu
-                    int startPositionY = 0; // Vị trí Y bắt đầu
-
-                    // In từng dòng của khung
-                    for (int i = 0; i < boxLines.Length; i++)
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.SetCursorPosition(startPositionX, startPositionY + i); // Đặt vị trí con trỏ
-                        Console.WriteLine(boxLines[i]); // In dòng
-                        Console.ResetColor();
-                    }
-
-                    // Đọc nội dung từ file
-                    string[] lines = File.ReadAllLines(filePath);
-                    int totalPages = (int)Math.Ceiling((double)lines.Length / linesPerPage);
-                    int currentPage = 1;
-
-                    while (true)
-                    {
-                        Console.Clear();
-
-                        // In lại khung
-                        for (int i = 0; i < boxLines.Length; i++)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.SetCursorPosition(startPositionX, startPositionY + i);
-                            Console.WriteLine(boxLines[i]);
-                            Console.ResetColor();
-                        }
-
-                        // Tính toán dòng bắt đầu và kết thúc cho trang hiện tại
-                        int startLine = (currentPage - 1) * linesPerPage;
-                        int endLine = Math.Min(startLine + linesPerPage, lines.Length);
-
-                        // In trang hiện tại của bảng xếp hạng
-                        for (int i = startLine; i < endLine; i++)
-                        {
-                            Console.SetCursorPosition(0, startPositionY + boxLines.Length + (i - startLine));
-                            Console.WriteLine(lines[i]);
-                        }
-
-                        // Chân trang: Hiển thị hướng dẫn điều hướng trang
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.SetCursorPosition(0, consoleHeight - 2);
-                        Console.WriteLine($"Trang {currentPage}/{totalPages} - Nhấn ← hoặc → để chuyển trang, Enter 2 lần để thoát.");
-                        Console.ResetColor();
-
-                        // Chờ người dùng nhập để điều hướng hoặc thoát
-                        key = Console.ReadKey(true).Key;
-                        if (key == ConsoleKey.RightArrow && currentPage < totalPages)
-                        {
-                            currentPage++;
-                        }
-                        else if (key == ConsoleKey.LeftArrow && currentPage > 1)
-                        {
-                            currentPage--;
-                        }
-                        else if (key == ConsoleKey.Enter)
-                        {
-                            break; // Thoát hiển thị bảng xếp hạng
-                        }
-                    }
-                }
-                else if (key == ConsoleKey.Enter) // Thoát chương trình
-                {
-                    break;
-                }
-            }
-        }
-        public static void Shuffle(List<UehQuestion> list)
+        //Trộn câu hỏi
+        public static void Shuffle(List<UehQuestion> list) 
         {
             Random random = new Random();
             int n = list.Count;
@@ -722,15 +556,9 @@ new UehQuestion(
                 list[k] = temp;
             }
         }
-        static void ShowUEHBuilding(Action printBuilding)
-        {
-            Console.Clear();
-            printBuilding(); // Call the passed-in method to print the building
-            Console.ReadKey(); // Wait for a key press
-            Console.Clear(); // Clear the console again
-        }
     }
-    public class UehQuestion
+    //Tạo class về câu hỏi chứa câu hỏi, câu trả lời, và đáp án đúng
+    public class UehQuestion 
     {
         public string Question { get; set; }
         public string[] Choices { get; set; }
