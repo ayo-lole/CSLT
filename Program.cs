@@ -355,6 +355,13 @@ new UehQuestion(
                     {
                         if (wrongAnswers == 3)// Thua trò chơi
                         {
+
+                            // Khởi tạo đối tượng MusicPlayer với đường dẫn tới file WAV
+                            string filePath = @"C:\Users\ADMIN\source\repos\FINAL\FINAL\GameOver.wav";
+                            MusicPlayer musicPlayer = new MusicPlayer(filePath);
+
+                            // Phát nhạc chiến thắng trong một luồng mới
+                            musicPlayer.PlayMusicInNewThread();
                             Console.Clear();
                             GameRanking.SaveAchievement(YourName, score); // Sau khi thua thì lưu tên và điểm vào file
                             GameRanking.SaveProgress(YourName, score); // Hiện điểm và rank 
@@ -424,6 +431,7 @@ new UehQuestion(
                         else
                         {
                             position--; //trừ lại vị trí nhân vật sau mỗi lần trả lời sai để không bị trùng vị trị vật cản
+
                             wrongAnswers++;
                             health--;
                             questions.Remove(question);
@@ -432,8 +440,15 @@ new UehQuestion(
                         break;
                     }                    
  
-                    if (score == 20) //Chiến thắng round 1
+                    if (score == 1) //Chiến thắng round 1
                     {
+
+                        // Khởi tạo đối tượng MusicPlayer với đường dẫn tới file WAV
+                        string filePath = @"C:\Users\ADMIN\source\repos\FINAL\FINAL\Victory.wav";
+                        MusicPlayer musicPlayer = new MusicPlayer(filePath);
+
+                        // Phát nhạc chiến thắng trong một luồng mới
+                        musicPlayer.PlayMusicInNewThread();
                         Console.Clear();
                         GameRanking.SaveAchievement(YourName, score); //Lưu lại điểm chiến thắng của người chơi
                         GiaoDien.PrintArt(Console.WindowWidth / 3, Console.WindowHeight / 7); //In màn hình thắng round 1
