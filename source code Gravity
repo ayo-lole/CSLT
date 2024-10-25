@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading;
 
-// vẽ các level trong game
+// Vẽ các level trong game
 char[][][] levels =
 [
 	// '@': vị trí bắt đầu của người chơi
@@ -462,6 +462,7 @@ while (!closeRequested)
 // xóa chương trình sau khi thao tác
 Console.Clear();
 
+// Hàm tạo khoảng dừng ngắn sau hiển thị
 void SleepAfterRender()
 {
   /* Tính thời gian ngủ (sleep time) cần thiết để đạt tốc độ khung hình (frame rate) mong muốn
@@ -499,6 +500,7 @@ void SleepAfterRender()
 	throw new Exception($"Level {level} has no starting position.");
 }
 
+// Hàm cập nhật trạng thái
 void Update()
 {
   // Kiểm tra các phím bấm của người dùng. Nếu có, vòng lặp tiếp tục xử lý từng phím
@@ -856,6 +858,9 @@ void Update()
 	}
 }
 
+/* Kiểm tra các vị trí trong phạm vi phía trên người chơi.
+Nếu bất kỳ vị trí nào trong vùng [Y - 2, X - 2] đến [Y - 2, X + 2] có chứa '█' hoặc '#', hàm trả về true
+Có tường ở phía trên */
 bool WallUp() =>
 	levels[level][PlayerPosition.Y - 2][PlayerPosition.X - 2] is '█' or '#' ||
 	levels[level][PlayerPosition.Y - 2][PlayerPosition.X - 1] is '█' or '#' ||
@@ -863,6 +868,9 @@ bool WallUp() =>
 	levels[level][PlayerPosition.Y - 2][PlayerPosition.X + 1] is '█' or '#' ||
 	levels[level][PlayerPosition.Y - 2][PlayerPosition.X + 2] is '█' or '#';
 
+/* Kiểm tra các vị trí trong phạm vi phía dưới người chơi.
+Nếu bất kỳ vị trí nào trong vùng [Y + 2, X - 2] đến [Y + 2, X + 2] có chứa '█' hoặc '#', hàm trả về true
+Có tường ở phía dưới */
 bool WallDown() =>
 	levels[level][PlayerPosition.Y + 2][PlayerPosition.X - 2] is '█' or '#' ||
 	levels[level][PlayerPosition.Y + 2][PlayerPosition.X - 1] is '█' or '#' ||
@@ -870,55 +878,89 @@ bool WallDown() =>
 	levels[level][PlayerPosition.Y + 2][PlayerPosition.X + 1] is '█' or '#' ||
 	levels[level][PlayerPosition.Y + 2][PlayerPosition.X + 2] is '█' or '#';
 
+/* Kiểm tra các vị trí ở phía bên trái người chơi.
+Nếu bất kỳ vị trí nào trong vùng [Y - 1, X - 3] đến [Y + 1, X - 3] có chứa '█' hoặc '#', hàm trả về true
+Có tường ở bên trái */
 bool WallLeft() =>
 	levels[level][PlayerPosition.Y - 1][PlayerPosition.X - 3] is '█' or '#' ||
 	levels[level][PlayerPosition.Y][PlayerPosition.X - 3]     is '█' or '#' ||
 	levels[level][PlayerPosition.Y + 1][PlayerPosition.X - 3] is '█' or '#';
 
+/* Kiểm tra các vị trí ở phía bên phải người chơi.
+Nếu bất kỳ vị trí nào trong vùng [Y - 1, X + 3] đến [Y + 1, X + 3] có chứa '█' hoặc '#', hàm trả về true
+Có tường ở bên phải */
 bool WallRight() =>
 	levels[level][PlayerPosition.Y - 1][PlayerPosition.X + 3] is '█' or '#' ||
 	levels[level][PlayerPosition.Y][PlayerPosition.X + 3]     is '█' or '#' ||
 	levels[level][PlayerPosition.Y + 1][PlayerPosition.X + 3] is '█' or '#';
 
+// Hàm cập nhật giao diện
 void Render()
 {
+	// Tạo ra hình ảnh của nhân vật người chơi dưới dạng mảng chuỗi, dựa trên trạng thái hiện tại.
 	string[] playerSprite = RenderPlayerState();
+
+	// Khởi tạo StringBuilder để tối ưu hiệu suất khi xây dựng chuỗi đầu ra.
 	StringBuilder render = new();
+
+	// Hoàn thành từng dòng
 	render.AppendLine();
+
+	Vòng lặp for duyệt qua từng hàng i trong levels[level]
 	for (int i = 0; i < levels[level].Length; i++)
 	{
+		// Thêm 2 khoảng trắng ở mỗi dòng để tăng khoảng cách trong giao diện
 		render.Append(' ');
 		render.Append(' ');
+
+		// Duyệt qua từng hàng trong hàng hiện tại của cấp độ
 		for (int j = 0; j < levels[level][i].Length; j++)
 		{
+			// Lấy ký tự `c` đại diện cho phần tử ở vị trí `[i, j]` trong cấp độ hiện tại
 			char c = levels[level][i][j];
+			// Nếu ký tự là '@', thay thế bằng khoảng trắng để không hiển thị
 			if (c is '@')
 			{
 				c = ' ';
 			}
+			// - `c` không phải là 'X' và không phải là '●' 
 			if (c is not 'X' and not '●' &&
+				// - Cột `j` phải nằm trong khoảng từ `PlayerPosition.X - 2` đến `PlayerPosition.X + 2`
 				PlayerPosition.X - 2 <= j &&
 				PlayerPosition.X + 2 >= j &&
+				// - Hàng `i` phải nằm trong khoảng từ `PlayerPosition.Y - 1` đến `PlayerPosition.Y + 1`
 				PlayerPosition.Y - 1 <= i &&
 				PlayerPosition.Y + 1 >= i)
 			{
+				/* Nếu các điều kiện trên đúng, thay thế `c` bằng ký tự tương ứng từ `playerSprite`, 
+				 để hiển thị hình ảnh của người chơi tại vị trí `[i, j]` */
 				c = playerSprite[i - PlayerPosition.Y + 1][j - PlayerPosition.X + 2];
 			}
+			// Thêm ký tự `c`
 			render.Append(c);
 		}
+		// Kết thúc mỗi dòng bằng xuống dòng
 		render.AppendLine();
 	}
+	// Thêm một dòng trống vào
 	render.AppendLine();
+	// Thêm thông tin cấp độ và trọng lực hiện tại vào 'render', sử dụng hàm RenderGravityIdentifier() để xác định trọng lực
 	render.AppendLine($"Level: {level}    Gravity: {RenderGravityIdentifier()}");
+	// Đặt vị trí con trỏ ở góc trên bên trái màn hình (vị trí 0, 0)
 	Console.SetCursorPosition(0, 0);
+	// In chuỗi render ra
 	Console.Write(render);
+	// Ẩn con trỏ nhấp nháy
 	Console.CursorVisible = false;
 }
 
+// Hàm trả về mảng chuỗi biểu diễn trạng thái của người chơi
 string[] RenderPlayerState()
 {
+ 	// Dựa vào playerState, hàm trả về trạng thái khối hình
 	return (playerState) switch
 	{
+		// Trạng thái trượt theo hướng chéo lên phải hoặc xuống trái
 		(PlayerState.Sliding | PlayerState.Up | PlayerState.Right) or
 		(PlayerState.Sliding | PlayerState.Down | PlayerState.Left) =>
 			[
@@ -926,6 +968,8 @@ string[] RenderPlayerState()
 				"╰╮ ╰╮",
 				" ╰──╯",
 			],
+
+		// Trạng thái trượt theo hướng chéo xuống phải hoặc lên trái
 		(PlayerState.Sliding | PlayerState.Down | PlayerState.Right) or
 		(PlayerState.Sliding | PlayerState.Up | PlayerState.Left) =>
 			[
@@ -933,48 +977,64 @@ string[] RenderPlayerState()
 				"╭╯ ╭╯",
 				"╰──╯ ",
 			],
+
+		// Trạng thái ép theo hướng lên phải
 		(PlayerState.Squash | PlayerState.Up | PlayerState.Right) =>
 			[
 				"╭───╮",
 				"╰─╮ │",
 				"  ╰─╯",
 			],
+
+		// Trạng thái ép theo hướng xuống phải
 		(PlayerState.Squash | PlayerState.Down | PlayerState.Right) =>
 			[
 				"  ╭─╮",
 				"╭─╯ │",
 				"╰───╯",
 			],
+
+		// Trạng thái ép theo hướng lên trái
 		(PlayerState.Squash | PlayerState.Up | PlayerState.Left) =>
 			[
 				"╭───╮",
 				"│ ╭─╯",
 				"╰─╯  ",
 			],
+
+		// Trạng thái ép theo hướng xuống trái
 		(PlayerState.Squash | PlayerState.Down | PlayerState.Left) =>
 			[
 				"╭─╮  ",
 				"│ ╰─╮",
 				"╰───╯",
 			],
+
+		// Trạng thái ép hoàn toàn theo hướng lên
 		(PlayerState.Squash | PlayerState.Up) =>
 			[
 				"╭───╮",
 				"╰───╯",
 				"     ",
 			],
+
+		// Trạng thái ép hoàn toàn theo hướng xuống
 		(PlayerState.Squash | PlayerState.Down) =>
 			[
 				"     ",
 				"╭───╮",
 				"╰───╯",
 			],
+
+		// Trạng thái ép hoàn toàn theo hướng phải
 		(PlayerState.Squash | PlayerState.Right) =>
 			[
 				"  ╭─╮",
 				"  │ │",
 				"  ╰─╯",
 			],
+
+		// Trạng thái ép hoàn toàn theo hướng trái
 		(PlayerState.Squash | PlayerState.Left) =>
 			[
 				"╭─╮  ",
@@ -982,6 +1042,7 @@ string[] RenderPlayerState()
 				"╰─╯  ",
 			],
 		_ =>
+			// Trạng thái mặc định
 			[
 				"╭───╮",
 				"│   │",
@@ -990,56 +1051,88 @@ string[] RenderPlayerState()
 	};
 }
 
+// Hàm RenderGravityIdentifier trả về ký tự đại diện cho hướng trọng lực hiện tại
 char RenderGravityIdentifier()
 {
 	return gravity switch
 	{
+		// Khi không có trọng lực, ký hiệu là '○'
 		Direction.None  => '○',
+		// Khi trọng lực hướng lên trên, ký hiệu là '^'
 		Direction.Up    => '^',
+		// Khi trọng lực hướng xuống dưới, ký hiệu là 'v'
 		Direction.Down  => 'v',
+		// Khi trọng lực hướng sang trái, ký hiệu là '<'
 		Direction.Left  => '<',
+		// Khi trọng lực hướng sang phải, ký hiệu là '>'
 		Direction.Right => '>',
+
+		// Xử lý lỗi nếu gặp giá trị không xác định cho 'gravity'
 		_ => throw new NotImplementedException(),
 	};
 }
 
+// Hàm PressToContinue chờ người dùng nhấn phím Enter để tiếp tục
 void PressToContinue(ConsoleKey key = ConsoleKey.Enter)
 {
+	// Khởi tạo biến 'input' với giá trị mặc định
 	ConsoleKey input = default;
+	// Vòng lặp sẽ chạy cho đến khi người dùng nhấn đúng phím Enter
 	while (input != key && !closeRequested)
 	{
+		// Đọc phím từ người dùng 
 		input = Console.ReadKey(true).Key;
 		if (input is ConsoleKey.Escape)
 		{
+			// Nếu người dùng nhấn phím Escape, đặt 'closeRequested' là true để dừng game
 			closeRequested = true;
+			// Thoát khỏi hàm ngay khi yêu cầu đóng
 			return;
 		}
 	}
 }
 
+// Enum Direction định nghĩa các hướng di chuyển với giá trị kiểu bitwise
 internal enum Direction
 {
+	// Không có hướng nào (giá trị mặc định 0)
 	None  =      0,
+	// Hướng lên trên, giá trị 1 (1 << 0, giá trị nhị phân 0001 là 1)
 	Up    = 1 << 0,
+	// Hướng xuống dưới, giá trị 2 (0010)
 	Down  = 1 << 1,
+	// Hướng sang trái, giá trị 4 (0100)
 	Left  = 1 << 2,
+	// Hướng sang phải, giá trị 8 (1000)
 	Right = 1 << 3,
 }
 
+// Định nghĩa các trạng thái của trò chơi
 internal enum GameState
 {
+	// Trạng thái mặc định của trò chơi
 	Default =      0,
+	// Trạng thái khi người chơi đã chết
 	Died    = 1 << 0,
+	// Trạng thái khi người chơi chiến thắng
 	Won     = 1 << 1,
 }
 
+// Enum PlayerState định nghĩa các trạng thái của người chơi
 internal enum PlayerState
 {
+	// Trạng thái trung lập
 	Neutral   =      0,
-	Up        = 1 << 0,
-	Down      = 1 << 1,
-	Left      = 1 << 2,
-	Right     = 1 << 3,
-	Sliding   = 1 << 4,
-	Squash    = 1 << 5,
+	// Người chơi di chuyển lên
+	Up        = 1 << 0, // ( 0001 - 1)
+	// Người chơi di chuyển xuống
+	Down      = 1 << 1, // (0010 - 2)
+	// Người chơi di chuyển sang trái
+	Left      = 1 << 2, // (0100 - 4)
+	// Người chơi di chuyển sang phải
+	Right     = 1 << 3, // (1000 - 8)
+	// Người chơi đang trượt
+	Sliding   = 1 << 4, // (10000 - 16)
+	// Người chơi bị ép lại
+	Squash    = 1 << 5, // (100000 -32)
 }
