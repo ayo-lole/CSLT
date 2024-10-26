@@ -457,7 +457,7 @@ new UehQuestion(
                         break;
                     }
 
-                    if (score == 1) //Chiến thắng round 1
+                    if (score == 20) //Chiến thắng round 1
                     {
 
                         // Khởi tạo đối tượng MusicPlayer với đường dẫn tới file WAV
