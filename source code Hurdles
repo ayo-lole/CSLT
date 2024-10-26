@@ -228,4 +228,4 @@ while (position < int.MaxValue) // Chạy đến khi điểm số đạt tới g
 }
 
 Console.Clear(); // Xóa màn hình
-Console.Write("You Win."); // Thông báo chiến
+Console.Write("You Win."); // Thông báo chiến thắng
