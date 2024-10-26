@@ -11,6 +11,7 @@ using System.Net;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Xml.Schema;
+using System.Numerics;
 
 namespace UEH_Green
 {
@@ -154,8 +155,11 @@ new UehQuestion(
                 // Log lỗi chi tiết nếu cần
             }
             Console.Clear();
-
             // Giao diện đầu vào trò chơi
+            // Khởi tạo đối tượng MusicPlayer với đường dẫn tới file WAV
+            // Phát nhạc nền ban đầu
+            MusicManager.PlayMusic("C:\\Users\\ASUS\\source\\repos\\test test nè he\\FIFIFINAL\\BGMround1.wav");
+
             Console.CursorVisible = false; //Không hiện con trỏ chuột
             GiaoDien intro = new GiaoDien(); //Đoạn mã này tạo ra một đối tượng của lớp GiaoDien và sau đó gọi phương thức DisplayIntro() của đối tượng đó.
             intro.DisplayIntro(); //Thực hiện chức năng
@@ -307,9 +311,9 @@ new UehQuestion(
               @" \__/  ";
             #endregion
             int position = 4; //Biến vị trí của nhân vật
-            int? runningFrame = 0; 
+            int? runningFrame = 0;
             int? jumpingFrame = null;
-            bool isStopped = false; 
+            bool isStopped = false;
             int targetPosition = 100; //vị trí dừng lại trước vật cản ban đầu 
             Shuffle(questions); // Dùng thuật toán Fisher-Yates để trộn câu hỏi
             int score = 0;
@@ -331,6 +335,8 @@ new UehQuestion(
                 GiaoDien.DrawHealthBar(health, MaxHealth);
                 //Cập nhật khung hình
                 UpdateFrame();
+
+                
                 //Kiểm tra phím nhấn nếu bấm Esc sẽ thoát khỏi trò chơi
                 if (Console.KeyAvailable)
                 {
@@ -357,11 +363,9 @@ new UehQuestion(
                         {
 
                             // Khởi tạo đối tượng MusicPlayer với đường dẫn tới file WAV
-                            string filePath = @"C:\Users\ADMIN\source\repos\FINAL\FINAL\GameOver.wav";
-                            MusicPlayer musicPlayer = new MusicPlayer(filePath);
+                            Thread.Sleep(500); // Mô phỏng thời gian
+                            MusicManager.PlayMusic("C:\\Users\\ASUS\\source\\repos\\test test nè he\\FIFIFINAL\\GameOver.wav");
 
-                            // Phát nhạc chiến thắng trong một luồng mới
-                            musicPlayer.PlayMusicInNewThread();
                             Console.Clear();
                             GameRanking.SaveAchievement(YourName, score); // Sau khi thua thì lưu tên và điểm vào file
                             GameRanking.SaveProgress(YourName, score); // Hiện điểm và rank 
@@ -371,7 +375,7 @@ new UehQuestion(
                             return; // Thoát trò chơi
                         }
                         //Hiển thị câu hỏi và đáp án ở phía dưới màn hình
-                        UehQuestionHandle.PositionAtBottom(); 
+                        UehQuestionHandle.PositionAtBottom();
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine("\nQuestion: " + question.Question);
                         Console.ResetColor();
@@ -420,35 +424,46 @@ new UehQuestion(
                         //Xử lí đáp án 
                         if (userAnswer == question.CorrectAnswer)
                         {
+                            string filePath = @"C:\Users\ASUS\source\repos\test test nè he\FIFIFINAL\Correct.wav";
+                            MusicPlayer musicPlayer = new MusicPlayer(filePath);
+
+                            // Phát nhạc chiến thắng trong một luồng mới
+                            musicPlayer.PlayMusicInNewThread();
+
                             score++;
-                            GiaoDien.TinhDiem(score); 
+                            GiaoDien.TinhDiem(score);
                             jumpingFrame = 0; //Bắt đầu khung hình nhảy
                             runningFrame = null; //Tắt trạng thái chạy
                             isStopped = false; //Dừng đứng yên 
                             targetPosition += 50; // tăng vị trí sẽ dừng lại sau mỗi lần trả lời đúng 
                             questions.Remove(question); //Dù trả lời sai hay đúng thì câu hỏi đó cũng sẽ biến mất khỏi bộ câu hỏi
+                            MusicManager.PlayMusic("C:\\Users\\ASUS\\source\\repos\\test test nè he\\FIFIFINAL\\BGMround1.wav");
                         }
+
                         else
                         {
-                            position--; //trừ lại vị trí nhân vật sau mỗi lần trả lời sai để không bị trùng vị trị vật cản
+                            string filePath = @"C:\Users\ASUS\source\repos\test test nè he\FIFIFINAL\Wrong.wav";
+                            MusicPlayer musicPlayer = new MusicPlayer(filePath);
 
+                            // Phát nhạc chiến thắng trong một luồng mới
+                            musicPlayer.PlayMusicInNewThread();
+                            position--; //trừ lại vị trí nhân vật sau mỗi lần trả lời sai để không bị trùng vị trị vật cản
                             wrongAnswers++;
                             health--;
                             questions.Remove(question);
+                            MusicManager.PlayMusic("C:\\Users\\ASUS\\source\\repos\\test test nè he\\FIFIFINAL\\BGMround1.wav");
                         }
                         UehQuestionHandle.ClearQuestionAndAnswer(questionCursorTop, question.Choices.Length + 1); // Trả lời đúng hoặc thì xóa đi để hiện câu khác 
                         break;
-                    }                    
- 
-                    if (score == 20) //Chiến thắng round 1
+                    }
+
+                    if (score == 1) //Chiến thắng round 1
                     {
 
                         // Khởi tạo đối tượng MusicPlayer với đường dẫn tới file WAV
-                        string filePath = @"C:\Users\ADMIN\source\repos\FINAL\FINAL\Victory.wav";
-                        MusicPlayer musicPlayer = new MusicPlayer(filePath);
+                        Thread.Sleep(500); // Mô phỏng thời gian
+                        MusicManager.PlayMusic("C:\\Users\\ASUS\\source\\repos\\test test nè he\\FIFIFINAL\\Victory.wav");
 
-                        // Phát nhạc chiến thắng trong một luồng mới
-                        musicPlayer.PlayMusicInNewThread();
                         Console.Clear();
                         GameRanking.SaveAchievement(YourName, score); //Lưu lại điểm chiến thắng của người chơi
                         GiaoDien.PrintArt(Console.WindowWidth / 3, Console.WindowHeight / 7); //In màn hình thắng round 1
@@ -464,7 +479,7 @@ new UehQuestion(
                 {
                     isStopped = false; //Nếu không gặp vật cản thì đi tiếp
                 }
-                
+
                 // Cập nhật trạng thái 
                 runningFrame = runningFrame.HasValue
                     ? (runningFrame + 1) % runningAnimation.Length
@@ -487,7 +502,7 @@ new UehQuestion(
                 Thread.Sleep(TimeSpan.FromMilliseconds(20)); //Tốc độ di chuyển của nhân vật
             }
             //Cập nhật khung hình 
-            void UpdateFrame() 
+            void UpdateFrame()
             {
                 /* Sử dụng toán tử điều kiện (?:) để chọn một chuỗi hoạt ảnh dựa trên trạng thái của biến jumpingFrame và runningFrame.
                   jumpingFrame.HasValue: Kiểm tra xem jumpingFrame có giá trị hay không (biến jumpingFrame là kiểu nullable, tức là có thể chứa giá trị null hoặc một giá trị số nguyên).
@@ -535,7 +550,7 @@ new UehQuestion(
                 }
             }
             //dùng để vẽ và xóa các hàm kiểu @string như là nhân vật và vật cản
-            void Render(string @string, bool renderSpace) 
+            void Render(string @string, bool renderSpace)
             {
                 int x = Console.CursorLeft;
                 int y = Console.CursorTop;
@@ -545,7 +560,7 @@ new UehQuestion(
                     else Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
             }
             //dùng để hiện các vật cản
-            void RenderHurdles(bool renderSpace, int targetPositio) 
+            void RenderHurdles(bool renderSpace, int targetPositio)
             {
                 for (int i = 5; i < Console.WindowWidth - 5 && position < targetPosition - 6; i++)
                 {
@@ -558,7 +573,7 @@ new UehQuestion(
             }
         }
         //Trộn câu hỏi
-        public static void Shuffle(List<UehQuestion> list) 
+        public static void Shuffle(List<UehQuestion> list)
         {
             Random random = new Random();
             int n = list.Count;
@@ -573,7 +588,7 @@ new UehQuestion(
         }
     }
     //Tạo class về câu hỏi chứa câu hỏi, câu trả lời, và đáp án đúng
-    public class UehQuestion 
+    public class UehQuestion
     {
         public string Question { get; set; }
         public string[] Choices { get; set; }
