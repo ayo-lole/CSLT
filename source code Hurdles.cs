@@ -229,3 +229,30 @@ while (position < int.MaxValue) // Chạy đến khi điểm số đạt tới g
 
 Console.Clear(); // Xóa màn hình
 Console.Write("You Win."); // Thông báo chiến thắng
+
+void Render(string @string, bool renderSpace)
+{
+	int x = Console.CursorLeft;  // Lưu vị trí cột hiện tại của con trỏ trên console
+	int y = Console.CursorTop;   // Lưu vị trí dòng hiện tại của con trỏ trên console
+	
+	foreach (char c in @string)  // Duyệt qua từng ký tự trong chuỗi đầu vào
+		if (c is '\n')           // Nếu ký tự là xuống dòng
+			Console.SetCursorPosition(x, ++y);  // Di chuyển con trỏ xuống dòng mới và về lại vị trí cột ban đầu (x)
+		else if (c is not ' ' || renderSpace)  // Nếu ký tự không phải là khoảng trắng hoặc cờ renderSpace là true
+			Console.Write(c);  // Hiển thị ký tự lên console
+		else  // Nếu ký tự là khoảng trắng và renderSpace là false
+			Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);  // Di chuyển con trỏ sang phải một cột mà không hiển thị gì
+}
+
+void RenderHurdles(bool renderSpace)
+{
+	for (int i = 5; i < Console.WindowWidth - 5; i++)  // Duyệt từ cột thứ 5 đến gần cuối màn hình console
+	{
+		if (position + i >= 100 && (position + i - 7) % 50 == 0)  // Kiểm tra nếu vị trí thỏa mãn khoảng cách để hiển thị chướng ngại vật
+		{
+			Console.SetCursorPosition(i - 3, 13);  // Di chuyển con trỏ đến vị trí để bắt đầu vẽ chướng ngại vật ở dòng 13
+			Render(hurdleFrame, renderSpace);  // Gọi phương thức Render để vẽ khung chướng ngại vật
+		}
+	}
+}
+
