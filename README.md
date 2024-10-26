@@ -4,7 +4,7 @@
 ĐỀ TÀI: CHIẾN SĨ XANH UEH
 
 NHÓM 7 - K49:
-Hà Phương Quỳnh
+// Hà Phương Quỳnh
 Đặng Vũ Sơn
 Lê Trọng Hiếu
 Đặng Vũ Quỳnh Hương
