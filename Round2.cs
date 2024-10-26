@@ -1,20 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection.Emit;
 using System.Text;
-using System.Threading.Tasks;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace UEH_Green
 {
     internal class Round2
     {
 
-  
+
         public static void Round_2()
         {
+            
             char[][][] scores =
     [
         // '@': starting player position
@@ -25,7 +20,7 @@ namespace UEH_Green
         // 'X': spikey death
         // '●': goal
         
-        [ 
+        [
         "██████████████████████████████████████████                                                                      ".ToCharArray(),
         "█            <> CƠ SỞ I <●>              █            _____________________________________________________     ".ToCharArray(),
         "█               __________               █           | Để đáp ứng được yêu cầu và chất lượng học thuật khắt|    ".ToCharArray(),
@@ -50,7 +45,7 @@ namespace UEH_Green
         "█                                                                                                @@@@@         █".ToCharArray(),
         "████████████████████████████████████████████████████████████████████████████████████████████████████████████████".ToCharArray(),
     ],
-    [  
+    [
         "████████████████████████████████████████████████████████████████████████                                              ".ToCharArray(),
         "█                                       █        <> CƠ SỞ B <●>        █                                              ".ToCharArray(),
         "█                                       █       _________________      █                                              ".ToCharArray(),
@@ -148,9 +143,9 @@ namespace UEH_Green
         "█      @@@@@                                     #             ~X█                                              ".ToCharArray(),
         "██████████████████████████████████████████████████████████████████                                              ".ToCharArray(),
     ],
-]; 
-
-            
+];
+            // Nhạc nền round 2
+            MusicManager.PlayMusic("C:\\Users\\ASUS\\source\\repos\\test test nè he\\FIFIFINAL\\BGMround2.wav");
             Stopwatch stopwatch = Stopwatch.StartNew(); //Lớp Stopwatch được sử dụng để đo khoảng thời gian và việc bắt đầu nó ở đầu vòng lặp trò chơi (hoặc một giai đoạn trò chơi khác) cho phép theo dõi thời gian đã trôi qua
             bool closeRequested = false;
             int score = 0; //Khai báo biến điểm để tính cơ sở
@@ -456,12 +451,18 @@ namespace UEH_Green
                     }
                 }
 
-                if (gameState.HasFlag(GameState.Died))
+                if (gameState.HasFlag(GameState.Died)) //Khi thua
                 {
+                    string filePath = @"C:\Users\ASUS\source\repos\test test nè he\FIFIFINAL\Wrong.wav";
+                    MusicPlayer musicPlayer = new MusicPlayer(filePath);
+
+                    // Phát nhạc chiến thắng trong một luồng mới
+                    musicPlayer.PlayMusicInNewThread();
                     Render();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Đã đến giờ vào học nhưng bạn vẫn chưa đến trường.          Nhấn Enter để quay ngược thời gian");
                     Console.ResetColor();
+                    MusicManager.PlayMusic("C:\\Users\\ASUS\\source\\repos\\test test nè he\\FIFIFINAL\\BGMround2.wav");
 
                     PressToContinue();
                     Console.Clear();
@@ -487,7 +488,14 @@ namespace UEH_Green
                         closeRequested = true;
                         return;
                     }
-                    Console.ForegroundColor= ConsoleColor.Blue;
+                    string filePath = @"C:\Users\ASUS\source\repos\test test nè he\FIFIFINAL\Correct.wav";
+                    MusicPlayer musicPlayer = new MusicPlayer(filePath);
+
+                    // Phát nhạc chiến thắng trong một luồng mới
+                    musicPlayer.PlayMusicInNewThread();
+                    MusicManager.PlayMusic("C:\\Users\\ASUS\\source\\repos\\test test nè he\\FIFIFINAL\\BGMround2.wav");
+
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("Bạn đã chinh phục thành công cơ sở này.                    Nhấn enter để đến cơ sở tiếp theo.");
                     Console.ResetColor();
 
