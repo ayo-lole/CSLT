@@ -1,19 +1,29 @@
-using System; 
-using System.Threading.Tasks; 
-using System.IO; 
-using System.Media; 
+using System;
+using System.IO;
+using System.Media;
 
-public class MusicPlayer // Định nghĩa lớp MusicPlayer
+public class MusicPlayer
 {
-    private string filePath; // Biến để lưu đường dẫn tới file âm thanh
+    private string filePath;
+    private SoundPlayer player;
 
-    // Constructor để khởi tạo đường dẫn tới file WAV
     public MusicPlayer(string filePath)
     {
-        this.filePath = filePath; // Gán đường dẫn file từ tham số
+        this.filePath = filePath;
+        this.player = new SoundPlayer(filePath);
     }
 
-    // Phương thức để phát nhạc không đồng bộ trong một luồng mới
+    public void Play()
+    {
+        if (File.Exists(filePath))
+        {
+            player.PlayLooping();
+        }
+        else
+        {
+            Console.WriteLine("File không tồn tại hoặc đường dẫn không đúng.");
+        }
+    }
     public void PlayMusicInNewThread()
     {
         Task.Run(() => // Tạo một task để chạy phát nhạc trong luồng khác
@@ -44,5 +54,10 @@ public class MusicPlayer // Định nghĩa lớp MusicPlayer
                 Console.WriteLine($"Lỗi phát nhạc: {ex.Message}");
             }
         });
+    }
+
+        public void Stop()
+    {
+        player.Stop();
     }
 }
