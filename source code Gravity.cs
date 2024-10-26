@@ -840,7 +840,7 @@ void Update()
       // Kết thúc hàm hiện tại, không thực hiện bất kỳ hành động nào khác
 			return;
 		}
-    // Nếu không pahir là màn cuối, thông báo chiến thắng level hiện tại và nhấn Enter để chuyển sang level mới
+    // Nếu không phải là màn cuối, thông báo chiến thắng level hiện tại và nhấn Enter để chuyển sang level mới
 		Console.WriteLine("You Won. Press enter to move to the next level.");
 		PressToContinue();
     // Xóa màn hình level vừa thắng
